@@ -3,5 +3,5 @@
 
 # Discord Link : https://discord.gg/TY4JYZzE
 
-# Note: Presentation pushed to Wednesday
-# Todo: Meet with sponsor asap
+# Note: Kanban board to github due Monday
+# Note: Use case diagrams due Wednesday
