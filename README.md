@@ -8,7 +8,7 @@
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
   - [Web](#web)
-  - [Conttributing](#contributing)
+  - [Contributing](#contributing)
 
 
 ### Prerequisites
