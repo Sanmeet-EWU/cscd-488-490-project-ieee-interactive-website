@@ -1,6 +1,8 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/ixLrLXsm)
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=16360174)
 
+Note: I will put the models, pdfs, figma in a separate folder
+
 # Project IEEE Interactive Website
 
 ## Table of Contents
@@ -30,15 +32,22 @@ git clone https://github.com/Sanmeet-EWU/cscd-488-490-project-ieee-interactive-w
 ```powershell
 cd ~/cscd-488-490-project-ieee-interactive-website\website
 React (version 10.9.0): npm -v
-Node (version v20.10.0): node -v
+Node (version 20.10.0): node -v
 ```
 
 ### Web
+Make sure you have installed the react-scripts package before running it:
+```powershell
+npm install
+```
+
 To run web page application, navigate to the project directory and run:
 
 ```powershell
 npm start
 ```
+
+You can exit application by ctlr c
 
 Saving the file will update the webpage of what you did
 
