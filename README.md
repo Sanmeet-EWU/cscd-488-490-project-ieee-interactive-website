@@ -1,7 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/ixLrLXsm)
 [![Open in Codespaces](https://classroom.github.com/assets/launch-codespace-2972f46106e565e64193e422d61a12cf1da4916b45550586e14ef0a7c637dd04.svg)](https://classroom.github.com/open-in-codespaces?assignment_repo_id=16360174)
 
-Note: I will put the models, pdfs, figma in a separate folder
+Note: I will put the models, pdfs, figma in a separate folder on our branches
 
 # Project IEEE Interactive Website
 
@@ -52,6 +52,11 @@ You can exit application by ctlr c
 Saving the file will update the webpage of what you did
 
 ## Contributing
+1. **Switching to your branch**: Avoid pushing it to the main branch, switch to your branch:
+```powershell
+git checkout <branch-name>
+Or use VS code bottom left theres main, click and change it to your branch
+```
 1. **Make Your Changes**: Push your changes to your forked repository
 ```powershell
 git commit -m "<commit-message>"
