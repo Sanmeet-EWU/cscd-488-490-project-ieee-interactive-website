@@ -30,7 +30,7 @@ git clone https://github.com/Sanmeet-EWU/cscd-488-490-project-ieee-interactive-w
 
 4. Navigate to the project directory website and check if react and node are up to date
 ```powershell
-cd ~/cscd-488-490-project-ieee-interactive-website\website
+cd ~/cscd-488-490-project-ieee-interactive-website/website
 React (version 10.9.0): npm -v
 Node (version 20.10.0): node -v
 ```
