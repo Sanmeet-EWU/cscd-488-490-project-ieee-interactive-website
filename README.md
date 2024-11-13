@@ -36,12 +36,12 @@ Node (version 20.10.0): node -v
 ```
 
 ### Web
-Make sure you have installed the react-scripts package before running it:
+1. Make sure you have installed the react-scripts package before running it:
 ```powershell
 npm install
 ```
 
-To run web page application, navigate to the project directory and run:
+2. **Running webpage**: To run web page application, navigate to the project directory and run:
 
 ```powershell
 npm start
@@ -49,7 +49,7 @@ npm start
 
 You can exit application by ctlr c
 
-Saving the file will update the webpage of what you did
+Note: Saving the file will update the webpage of what you did
 
 ## Contributing
 1. **Switching to your branch**: Avoid pushing it to the main branch, switch to your branch:
@@ -57,18 +57,18 @@ Saving the file will update the webpage of what you did
 git checkout <branch-name>
 Or use VS code bottom left theres main, click and change it to your branch
 ```
-1. **Make Your Changes**: Push your changes to your forked repository
+2. **Make Your Changes**: Push your changes to your forked repository
 ```powershell
 git commit -m "<commit-message>"
 Or use VS code source
 ```
 
-2. **Push Your Changes**: Push your changes to your forked repository
+3. **Push Your Changes**: Push your changes to your forked repository
 ```powershell
 git push origin <branch-name> # name format for your branch: development_firstName_lastName
 Or use VS code source
 ```
 
-3. **Create a Pull Request**: Go to your forked repository on GitHub and create a new pull request from your branch.
+4. **Create a Pull Request**: Go to your forked repository on GitHub and create a new pull request from your branch.
 
 If the pull request is approved, it will be merged into the main codebase. Please ensure that your code passes your tests and works properly before submitting a pull request
