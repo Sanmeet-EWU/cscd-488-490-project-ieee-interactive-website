@@ -1,4 +1,5 @@
-import logo from './logo.svg';
+//import logo from './logo.svg'; // What it was originally
+import logo from './Assets/twitter.svg'; // Example of file path you'll be putting pictures/logos in
 import './App.css';
 
 function App() {
