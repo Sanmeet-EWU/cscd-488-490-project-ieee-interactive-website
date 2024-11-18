@@ -16,6 +16,7 @@
 - React
 - TailWindCSS
 - Node
+- MySQL Database
 
 ### Installation
 
