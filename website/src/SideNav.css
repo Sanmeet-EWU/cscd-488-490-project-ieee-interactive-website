@@ -1,0 +1,37 @@
+.sidenav {
+    height: 100vh; /* Full height */
+    width: 250px; /* Set the width */
+    position: fixed; /* Fix on the left */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Dark background */
+    padding-top: 20px;
+  }
+  
+  .sidenav h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .sidenav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .sidenav ul li {
+    padding: 10px 20px;
+  }
+  
+  .sidenav ul li .nav-link {
+    text-decoration: none;
+    color: white;
+    display: block;
+  }
+  
+  .sidenav ul li .nav-link:hover,
+  .sidenav ul li .nav-link.active {
+    background-color: #575757;
+    color: white;
+  }
+  
