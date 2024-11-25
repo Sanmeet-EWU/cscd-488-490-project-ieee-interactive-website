@@ -37,10 +37,10 @@ ReactDOM.render(
 );*/
 
 
-//import Home from "./Pages/Home";
-/*ReactDOM.render(
+/*import Home from "./Pages/Home";
+ReactDOM.render(
   <BrowserRouter>
-    <Test />
+    <Home />
   </BrowserRouter>,
   document.getElementById("root")
 );*/

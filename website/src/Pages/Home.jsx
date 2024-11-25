@@ -1,22 +1,25 @@
-import React from "react";
+//import React from "react";
 //import LHS_Nav from "./LHS_Nav";
 
 
-/*const links = [
-    {
-        name: "Home", path: "/"},
-]
+import React from "react";
+//import LHSNav from "./Components/Javascript/LHS_Nav";
 
-const Home = () => {
-    return (
-        <div>
-            <h1>Home</h1>
-            <LHS_Nav links={links} />
-        </div>
-    );
+
+/*const Home = () => {
+  return (
+    <div style={{ display: "flex" }}>
+      <Home />
+      <div style={{ marginLeft: "220px", padding: "20px" }}>
+        <h1>Welcome to My App</h1>
+        <p>This is the main content area.</p>
+      </div>
+    </div>
+  );
 };
 
-export default Home;(/)*/
+export default Home;*/
+
 function Home() {
   return <div>hi</div>;
 }

@@ -1,20 +1,13 @@
 import React from "react";
-import SideNav from "./SideNav";
-
-const links = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Contact", path: "/contact" },
-];
+import LHSNav from "./LHSNav";
 
 const Test = () => {
   return (
     <div style={{ display: "flex" }}>
-      <SideNav links={links} />
-      <div style={{ marginLeft: "260px", padding: "20px" }}>
-        <h1>Welcome to My Website</h1>
-        <p>Content goes here...</p>
+      <LHSNav />
+      <div style={{ marginLeft: "220px", padding: "20px" }}>
+        <h1>Welcome to My App</h1>
+        <p>This is the main content area.</p>
       </div>
     </div>
   );
