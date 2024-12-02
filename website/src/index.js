@@ -1,8 +1,12 @@
-/*import React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+//import ReactDom from 'react-dom';
 import reportWebVitals from './reportWebVitals';
+//import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+// This is the main file that will be run when you start the website
+// This automatically starts at the App.jsx file that defaults to home page (home.jsx)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -14,32 +18,20 @@ root.render(
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();*/
+reportWebVitals();
 
 
-
-
-// This is the main file that will be run when you start the website
-// This automatically starts at the Home.jsx file
 // Note: Use React.Strict mode for intentionally running extra checks, Browser Router for routing and rendering
-// You may also change the import and < /> tags to test other pages
+// Note: Going to specified file will not render the components folder, it will only render the jsx and css file of the specified folder
+// Comment uncomment the following 7 lines of code to render the specified page, the file pathing is done for you
 
-import React from "react";
+/*import React from "react";
 import ReactDOM from "react-dom";
-//import reportWebVitals from './reportWebVitals';
-//import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";*/
 
-// This defaults to the Home page
-import App from "./App.jsx";
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById("root")
-);
 
 //Home Page
-/*import Home from "./Pages/Home";
+/*import Home from "./Pages/Home/Home";
 ReactDOM.render(
   <React.StrictMode>
     <Home />
@@ -48,7 +40,7 @@ ReactDOM.render(
 );*/
 
 
-/*import Home from "./Home";
+/*import Home from "./Pages/Home/Home";
 ReactDOM.render(
   <BrowserRouter>
     <Home />
@@ -57,7 +49,7 @@ ReactDOM.render(
 );*/
 
 //Officers Page
-/*import Officers from "./Pages/Officers";
+/*import Officers from "./Pages/Officers/Officers";
 ReactDOM.render(
   <React.StrictMode>
     <Officers />
@@ -66,7 +58,7 @@ ReactDOM.render(
 );*/
 
 
-/*import Officers from "./Pages/Officers";
+/*import Officers from "./Pages/Officers/Officers";
 ReactDOM.render(
   <BrowserRouter>
     <Officers />
@@ -75,7 +67,7 @@ ReactDOM.render(
 );*/
 
 //FormerOfficers Page
-/*import FormerOfficers from "./Pages/FormerOfficers";
+/*import FormerOfficers from "./Pages/FormerOfficers/FormerOfficers";
 ReactDOM.render(
   <React.StrictMode>
     <FormerOfficers />
@@ -84,7 +76,7 @@ ReactDOM.render(
 );*/
 
 
-/*import FormerOfficers from "./Pages/FormerOfficers";
+/*import FormerOfficers from "./Pages/FormerOfficers/FormerOfficers";
 ReactDOM.render(
   <BrowserRouter>
     <FormerOfficers />
@@ -93,7 +85,7 @@ ReactDOM.render(
 );*/
 
 //Contact Form Page
-/*import ContactForm from "./Pages/ContactForm";
+/*import ContactForm from "./Pages/ContactForm/ContactForm";
 ReactDOM.render(
   <React.StrictMode>
     <ContactForm />
@@ -102,7 +94,7 @@ ReactDOM.render(
 );*/
 
 
-/*import ContactForm from "./Pages/ContactForm";
+/*import ContactForm from "./Pages/ContactForm/ContactForm";
 ReactDOM.render(
   <BrowserRouter>
     <ContactForm />
@@ -111,7 +103,7 @@ ReactDOM.render(
 );*/
 
 //Employment Page
-/*import Employment from "./Pages/Employment";
+/*import Employment from "./Pages/Employment/Employment";
 ReactDOM.render(
   <React.StrictMode>
     <Employment />
@@ -120,7 +112,7 @@ ReactDOM.render(
 );*/
 
 
-/*import Employment from "./Pages/Employment";
+/*import Employment from "./Pages/Employment/Employment";
 ReactDOM.render(
   <BrowserRouter>
     <Employment />
@@ -129,7 +121,7 @@ ReactDOM.render(
 );*/
 
 //Events Page
-/*import Employment from "./Pages/Events";
+/*import Employment from "./Pages/Events/Events";
 ReactDOM.render(
   <React.StrictMode>
     <Events />
@@ -138,19 +130,10 @@ ReactDOM.render(
 );*/
 
 
-/*import Events from "./Pages/Events";
+/*import Events from "./Pages/Events/Events";
 ReactDOM.render(
   <BrowserRouter>
     <Events />
   </BrowserRouter>,
-  document.getElementById("root")
-);*/
-
-/*//Test
-import Test from "./Test";
-ReactDOM.render(
-  <React.StrictMode>
-    <Test />
-  </React.StrictMode>,
   document.getElementById("root")
 );*/
