@@ -24,39 +24,50 @@ const LHSNav = () => {
         <button className="toggle-button" onClick={toggleMenu}>
           ☰ Menu
         </button>
-       
+
         {isOpen && (
           <div className="dropdown-menu">
             <Link to="/">Home</Link> {/* Default */}
-            <Link to="/Events"> 
-            <img src=" https://img.icons8.com/forma-regular/24/planner.png"
+            <Link to="/Events">
+              <img
+                src=" https://img.icons8.com/forma-regular/24/planner.png"
                 alt="Events Icon"
-                style={{ marginRight: '10px' }}
-            />Events</Link>
-
+                style={{ marginRight: "10px" }}
+              />
+              Events
+            </Link>
             <Link to="/Officers">
-            <img src="https://img.icons8.com/forma-regular/24/user-male-circle.png"
+              <img
+                src="https://img.icons8.com/forma-regular/24/user-male-circle.png"
                 alt="Officers Icon"
-                style={{ marginRight: '10px' }}
-            />Officers</Link>
-
+                style={{ marginRight: "10px" }}
+              />
+              Officers
+            </Link>
             <Link to="/FormerOfficers">
-            <img src="https://img.icons8.com/forma-regular/24/guest-male.png"
+              <img
+                src="https://img.icons8.com/forma-regular/24/guest-male.png"
                 alt="Former Officers Icon"
-                style={{ marginRight: '10px' }}
-            />Former Officers</Link>
-
+                style={{ marginRight: "10px" }}
+              />
+              Former Officers
+            </Link>
             <Link to="/ContactForm">
-            <img src="https://img.icons8.com/forma-regular/24/new-post.png"
+              <img
+                src="https://img.icons8.com/forma-regular/24/new-post.png"
                 alt="Contact Form Icon"
-                style={{ marginRight: '10px' }}
-            />Contact Form</Link>
-            
+                style={{ marginRight: "10px" }}
+              />
+              Contact Form
+            </Link>
             <Link to="/Employment">
-            <img src="https://img.icons8.com/forma-regular/24/briefcase.png"
+              <img
+                src="https://img.icons8.com/forma-regular/24/briefcase.png"
                 alt="Contact Form Icon"
-                style={{ marginRight: '10px' }}
-            />Employment</Link>
+                style={{ marginRight: "10px" }}
+              />
+              Employment
+            </Link>
           </div>
         )}
       </div>
