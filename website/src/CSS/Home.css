@@ -1,0 +1,7 @@
+/* Home.css */
+.home-container {
+  display: grid;
+  place-items: center; /* Centers both horizontally and vertically */
+  height: 0vh; /* Full viewport height */
+  text-align: center; /* Centers text inside the container */
+}

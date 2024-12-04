@@ -1,0 +1,102 @@
+/* Officer Card Container Styles (for multiple cards) */
+.officer-card-container {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping to the next row if there's not enough space */
+    justify-content: space-evenly; /* Distribute the cards evenly */
+    gap: 16px; /* Space between cards */
+    padding: 20px;
+    margin: auto;
+  }
+
+/* Container Styles */
+.officer-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribute space between the content and the button */
+    position: relative; /* Ensure relative positioning for button */
+    border: 2px solid #003366;
+    border-radius: 8px;
+    padding: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    margin: auto;
+    height: 130px; /* Fixed height to contain the button */
+  }
+  
+  /* Header Section */
+  .officer-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .officer-card-details {
+    flex: 1;
+  }
+  
+  .officer-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003366;
+    margin: 0;
+  }
+  
+  .officer-title {
+    font-size: 14px;
+    color: #666666;
+    margin: 4px 0;
+  }
+  
+  .officer-divider {
+    border: none;
+    border-top: 2px solid #0055a5;
+    width: 40px;
+    margin: 8px 0;
+  }
+  
+  .officer-email {
+    color: #0055a5;
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+  
+  .officer-email:hover {
+    text-decoration: underline;
+  }
+  
+  .officer-image {
+    width: 80px; /* Increased image size */
+    height: 80px; /* Increased image size */
+    border-radius: 50%;
+    border: 2px solid #003366;
+    object-fit: cover;
+  }
+  
+  /* Footer Section with About Button Positioned at Bottom Right */
+  .officer-card-footer {
+    display: flex;
+    justify-content: flex-end; /* Align the button to the right */
+    margin-top: auto; /* Pushes the button to the bottom */
+  }
+  
+  .officer-about-button {
+    background-color: #003366;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 14px;
+    padding: 8px 24px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .officer-about-button:hover {
+    background-color: #0055a5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
