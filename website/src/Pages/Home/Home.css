@@ -1,6 +1,5 @@
-/* Home.css */
 .home-container {
-  background: url("../Assets/Spokane.jpeg") no-repeat center center fixed;
+  background: url("../../Assets/Spokane.jpeg") no-repeat center center fixed;
   background-size: cover;
   min-height: 100vh; /* Full viewport height */
   display: flex;

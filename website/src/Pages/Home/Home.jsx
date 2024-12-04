@@ -1,6 +1,6 @@
 import React from "react";
-import "../../CSS/Home.css"; //This is to learn file pathing for CSS folder
-// import ./Home.css;
+//import "../../CSS/Home.css"; //This is to learn file pathing for CSS folder
+import '../Home/Home.css';
 
 const Home = () => {
   return (
