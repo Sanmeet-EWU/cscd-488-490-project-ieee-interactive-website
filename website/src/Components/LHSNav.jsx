@@ -81,7 +81,7 @@ const LHSNav = () => {
 
       {/* Routes all of the web pages */}
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/Home" element={<Home />} />
         <Route path="/Events" element={<Events />} />
         <Route path="/Officers" element={<Officers />} />
         <Route path="/FormerOfficers" element={<FormerOfficers />} />
