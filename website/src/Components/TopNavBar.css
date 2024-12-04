@@ -1,0 +1,44 @@
+html,
+body {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Parent container for the top navigation bar */
+.nav-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  background: rgb(229, 239, 245);
+  color: rgb(14, 110, 158);
+  padding: 10px 0;
+  font: 100 1rem "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: bold;
+  border-bottom: 0.5px solid rgb(14, 110, 158);
+}
+
+
+/* Top navigation bar styles */
+.top-nav-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-nav-bar a {
+  color: rgb(14, 110, 158);
+  text-decoration: none;
+  padding: 0 15px;
+  position: relative;
+}
+
+.top-nav-bar a:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  margin: 0 8px;
+  color: rgb(14, 110, 158);
+}

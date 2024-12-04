@@ -27,7 +27,6 @@ const LHSNav = () => {
 
         {isOpen && (
           <div className="dropdown-menu">
-            <Link to="/">Home</Link> {/* Default */}
             <Link to="/Events">
               <img
                 src=" https://img.icons8.com/forma-regular/24/planner.png"
@@ -67,6 +66,14 @@ const LHSNav = () => {
                 style={{ marginRight: "10px" }}
               />
               Employment
+            </Link>
+            <Link to="/Home">
+            <img
+               src="https://img.icons8.com/ios-filled/24/long-arrow-left.png"
+               style={{ marginRight: "10px" }}
+               alt="Return Home Icon"
+              />
+              Home
             </Link>
           </div>
         )}
