@@ -45,7 +45,8 @@ const TopNavBar = () => {
         <span className="divider">|</span>
         <a
           key="more-sites"
-          href="https://www.ieee.org/more-sites"
+          //href="https://www.ieee.org/more-sites" //What Earl had
+          href="https://www.ieee.org/sitemap.html" // What IEEE San Franscisco has
           target="_blank"
           rel="noopener noreferrer"
           className="hover:underline"
