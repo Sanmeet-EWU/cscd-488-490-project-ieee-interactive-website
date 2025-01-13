@@ -52,7 +52,7 @@ const TopNavBar = () => {
         >
           More Sites
         </a>
-      </div>
+        </div>
     </div>
   );
 };
