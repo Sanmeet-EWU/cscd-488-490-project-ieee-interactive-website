@@ -2,7 +2,9 @@
 
 /* Style for the navigation container */
 .lhs-nav {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 200px;
   display: inline-block;
 }
