@@ -79,6 +79,8 @@ const LHSNav = () => {
         )}
       </div>
 
+      
+
       {/* Routes all of the web pages */}
       <Routes>
         <Route path="/Home" element={<Home />} />
@@ -92,4 +94,5 @@ const LHSNav = () => {
   );
 };
 
+// Note: Ensure that there is a route for admin only
 export default LHSNav;

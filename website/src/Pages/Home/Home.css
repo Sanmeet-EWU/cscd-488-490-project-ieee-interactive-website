@@ -1,14 +1,15 @@
+.slick-slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
 .home-container {
-  background: url("../../Assets/Spokane.jpeg") no-repeat center center fixed;
-  /*background: url("../../Assets/Kurkuru.gif") no-repeat center center fixed;*/
-  background-size: cover;
-  min-height: 100vh; /* Full viewport height */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: white; /* Adjust text color for visibility */
   text-align: center;
   padding: 20px;
+}
+
+.slick-dots li {
+  margin: 0 10px; /* Add spacing between dots */
 }
 
