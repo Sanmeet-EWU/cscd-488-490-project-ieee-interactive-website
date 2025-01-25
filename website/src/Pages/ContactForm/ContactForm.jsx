@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './ContactForm.css';
 import { FaUser, FaEnvelope, FaPhone, FaComment } from 'react-icons/fa';
+import Spokane from '../../Assets/Spokane.jpeg';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -25,7 +26,16 @@ const ContactForm = () => {
   };
 
   return (
-    <div className="contact-page">
+    <div className="contact-page" style={{
+        backgroundImage: `url(${Spokane})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '20px'
+    }}>
       <div className="contact-container">
         <div className="contact-info">
           <h2>Get in Touch</h2>
