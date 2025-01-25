@@ -34,6 +34,14 @@ const TopNavBar = () => {
           IEEE Standards
         </a>
         <a 
+          href="https://spectrum.ieee.org/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="nav-link"
+        >
+          <FaGlobe style={{ marginRight: '5px' }} /> IEEE Spectrum
+        </a>
+        <a 
           href="https://www.ieee.org/sitemap.html"
           target="_blank"
           rel="noopener noreferrer"
