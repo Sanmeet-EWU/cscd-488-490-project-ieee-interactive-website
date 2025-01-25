@@ -57,7 +57,7 @@ const Admin = () => {
           {error && <div className="error-message">{error}</div>}
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="username">Username</label>
+              <label htmlFor="username"></label>
               <div className="input-icon">
                 <FaUser size={14} />
               </div>
@@ -69,10 +69,11 @@ const Admin = () => {
                 onChange={handleChange}
                 disabled={isLoading}
                 required
+                placeholder="Username"
               />
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password"></label>
               <div className="input-icon">
                 <FaLock size={14} />
               </div>
@@ -84,6 +85,7 @@ const Admin = () => {
                 onChange={handleChange}
                 disabled={isLoading}
                 required
+                placeholder="Password"
               />
             </div>
             <button 
