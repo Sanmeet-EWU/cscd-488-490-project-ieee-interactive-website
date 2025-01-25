@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { FaGraduationCap, FaUsers, FaBriefcase, FaCalendarAlt, FaLightbulb, FaHandshake, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { FaGraduationCap, FaUsers, FaBriefcase, FaCalendarAlt, FaLightbulb, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import Spokane from "../../Assets/Spokane.jpeg";
 
 const features = [
@@ -21,20 +21,10 @@ const features = [
     description: "Discover internships and job opportunities in engineering."
   },
   {
-    icon: <FaCalendarAlt />,
-    title: "Weekly Events",
-    description: "Participate in workshops, seminars, and networking events."
-  },
-  {
     icon: <FaLightbulb />,
     title: "Innovation Hub",
     description: "Stay updated with the latest technological advancements."
   },
-  {
-    icon: <FaHandshake />,
-    title: "Community Support",
-    description: "Join a supportive community of engineering enthusiasts."
-  }
 ];
 
 const upcomingEvent = {
