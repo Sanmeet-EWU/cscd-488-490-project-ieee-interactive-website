@@ -1,60 +1,49 @@
 import React from "react";
 import "./TopNavBar.css";
+import { FaGlobe, FaBook, FaRocket, FaEllipsisH } from 'react-icons/fa';
 
 const TopNavBar = () => {
   return (
-    <div className="nav-container">
-      <div className="top-nav-bar">
-        <a
-          href="https://www.ieee.org"
-          target="_blank"
+    <nav className="top-nav">
+      <div className="nav-links">
+        <a 
+          href="https://www.ieee.org/" 
+          target="_blank" 
           rel="noopener noreferrer"
-          className="hover:underline text-sm font-medium"
+          className="nav-link"
         >
+          <FaGlobe className="nav-link-icon" />
           IEEE.org
         </a>
-        <span className="divider">|</span>
-        <a
-          href="https://ieeexplore.ieee.org"
+        <a 
+          href="https://ieeexplore.ieee.org/Xplore/home.jsp"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline text-sm font-medium"
+          className="nav-link special"
         >
+          <FaBook className="nav-link-icon" />
           IEEE Xplore Digital Library
         </a>
-        <span className="divider">|</span>
-        <a
-          key="ieee-standards"
-          href="https://standards.ieee.org"
+        <a 
+          href="https://standards.ieee.org/"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline"
+          className="nav-link"
         >
+          <FaRocket className="nav-link-icon" />
           IEEE Standards
         </a>
-        <span className="divider">|</span>
-        <a
-          key="ieee-spectrum"
-          href="https://spectrum.ieee.org"
+        <a 
+          href="https://www.ieee.org/sitemap.html"
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:underline"
+          className="nav-link"
         >
-          IEEE Spectrum
-        </a>
-        <span className="divider">|</span>
-        <a
-          key="more-sites"
-          //href="https://www.ieee.org/more-sites" //What Earl had
-          href="https://www.ieee.org/sitemap.html" // What IEEE San Franscisco has
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:underline"
-        >
+          <FaEllipsisH className="nav-link-icon" />
           More Sites
         </a>
-        </div>
-    </div>
+      </div>
+    </nav>
   );
 };
 

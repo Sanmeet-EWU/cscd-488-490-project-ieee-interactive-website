@@ -1,25 +1,18 @@
 import React from 'react';
-import './OfficersCard.css'; // Import the CSS file
+import './OfficersCard.css';
 
-const OfficersCard = ({ name, title, email, image, onAboutClick }) => {
+const OfficersCard = ({ name, title, email, icon, onAboutClick }) => {
   return (
-    <div className="officer-card" title={`Officer: ${name}`}>
-      <div className="officer-card-header">
-        <div className="officer-card-details">
-          <h3 className="officer-name" title={title}>{name}</h3>
-          <p className="officer-title">{title}</p>
-          <hr className="officer-divider" />
-          <a href={`mailto:${email}`} className="officer-email">{email}</a>
-        </div>
-        <img
-          src={image}
-          alt={`${name}'s profile`}
-          className="officer-image"
-        />
+    <div className="officer-card">
+      <div className="officer-image">
+        {icon}
       </div>
-      <div className="officer-card-footer">
-        <button className="officer-about-button" onClick={onAboutClick}>
-          About
+      <div className="officer-info">
+        <h3 className="officer-name">{name}</h3>
+        <p className="officer-title">{title}</p>
+        <p className="officer-email">{email}</p>
+        <button className="about-button" onClick={onAboutClick}>
+          About Me
         </button>
       </div>
     </div>

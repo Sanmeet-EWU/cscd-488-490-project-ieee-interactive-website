@@ -1,125 +1,77 @@
 import React from "react";
-import "../Events/Events.css";
+import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from 'react-icons/fa';
+import eventBanner from "../../Assets/rising-stars-2025-banner.jpg";
+import "./Events.css";
 
-const events = [
-  {
-    title: "Event #1",
-    description: "Description for Event #1",
-    date: "2023-12-25",
-    time: "10:00 AM",
-    location: "Location #1",
-    image: "https://example.com/image1.jpg",
-  },
-  {
-    title: "Event #2",
-    description: "Description for Event #2",
-    date: "2023-11-15",
-    time: "2:00 PM",
-    location: "Location #2",
-    image: "https://example.com/image2.jpg",
-  },
-  {
-    title: "Event #3",
-    description: "Description for Event #3",
-    date: "2023-10-01",
-    time: "6:00 PM",
-    location: "Location #3",
-    image: "https://example.com/image3.jpg",
-  },
-  {
-    title: "Event #4",
-    description: "Description for Event #4",
-    date: "2023-09-15",
-    time: "1:00 PM",
-    location: "Location #4",
-    image: "https://example.com/image4.jpg",
-  },
-  {
-    title: "Event #5",
-    description: "Description for Event #5",
-    date: "2023-08-20",
-    time: "3:00 PM",
-    location: "Location #5",
-    image: "https://example.com/image5.jpg",
-  },
-  {
-    title: "Event #6",
-    description: "Description for Event #6",
-    date: "2023-07-10",
-    time: "4:00 PM",
-    location: "Location #6",
-    image: "https://example.com/image6.jpg",
-  },
-  {
-    title: "Event #7",
-    description: "Description for Event #7",
-    date: "2023-06-05",
-    time: "5:00 PM",
-    location: "Location #7",
-    image: "https://example.com/image7.jpg",
-  },
-  {
-    title: "Event #8",
-    description: "Description for Event #8",
-    date: "2023-05-25",
-    time: "6:00 PM",
-    location: "Location #8",
-    image: "https://example.com/image8.jpg",
-  },
-];
+const upcomingEvent = {
+  title: "Student Presentations: Rising Stars 2025",
+  description: "Join us for an exciting evening of student presentations! STEM Students Welcome! Free Pizza provided.",
+  date: "2025-01-30",
+  time: "5:00 PM - 6:30 PM",
+  location: "EWU Catalyst Building, 601 E Riverside Ave, Room CAT 304",
+  type: "Student Event",
+  registration: "https://events.vtools.ieee.org/m/462092",
+  banner: eventBanner
+};
 
-const currentDate = new Date();
-
-const upcomingEvents = events.filter(event => new Date(event.date) >= currentDate);
-const pastEvents = events.filter(event => new Date(event.date) < currentDate);
-
-const EventCard = ({ event }) => (
-    <div className="event-card">
-      <img src={event.image} alt={event.title} className="event-image" />
-      <div className="event-details">
-        <h2>{event.title}</h2>
-        <p>{event.description}</p>
-        <p className="event-meta">
-          <strong>Date:</strong> {event.date} <br />
-          <strong>Time:</strong> {event.time} <br />
-          <strong>Location:</strong> {event.location}
-        </p>
-      </div>
-    </div>
-);
-
-const UpcomingEvents = ({ events }) => (
-    <section>
-      <h2>Upcoming Events</h2>
-      <div className="events-grid">
-        {events.map((event, index) => (
-            <EventCard key={index} event={event} />
-        ))}
-      </div>
-    </section>
-);
-
-const PastEvents = ({ events }) => (
-    <section>
-      <h2>Past Events</h2>
-      <div className="events-grid">
-        {events.map((event, index) => (
-            <EventCard key={index} event={event} />
-        ))}
-      </div>
-    </section>
-);
+const formatDate = (dateString) => {
+  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  return new Date(dateString).toLocaleDateString('en-US', options);
+};
 
 const Events = () => {
   return (
-      <div className="events-page">
-        <header className="events-header">
-          <h1>Events</h1>
-          <p>Check out some of our upcoming and past events! RSVP to get some food!</p>
-        </header>
-        <UpcomingEvents events={upcomingEvents} />
-        <PastEvents events={pastEvents} />
+    <div className="events-page">
+      <div className="events-header">
+        <h1>IEEE Events</h1>
+        <p>Join us for exciting events and opportunities!</p>
       </div>
+
+      <section className="upcoming-events-section">
+        <h2>Upcoming Event</h2>
+        <div className="event-card">
+          <div className="event-banner">
+            <img src={upcomingEvent.banner} alt={upcomingEvent.title} />
+          </div>
+          <div className="event-content">
+            <div className="event-type-badge">{upcomingEvent.type}</div>
+            <h3 className="event-title">{upcomingEvent.title}</h3>
+            <p className="event-description">{upcomingEvent.description}</p>
+            
+            <div className="event-meta">
+              <div className="meta-item">
+                <FaCalendarAlt className="meta-icon" />
+                <span>{formatDate(upcomingEvent.date)}</span>
+              </div>
+              <div className="meta-item">
+                <FaClock className="meta-icon" />
+                <span>{upcomingEvent.time}</span>
+              </div>
+              <div className="meta-item">
+                <FaMapMarkerAlt className="meta-icon" />
+                <span>{upcomingEvent.location}</span>
+              </div>
+            </div>
+
+            <div className="event-actions">
+              <a 
+                href={upcomingEvent.registration} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="register-button"
+              >
+                Register Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="past-events-section">
+        <h2>Past Events</h2>
+        <p className="no-events">No past events to display.</p>
+      </section>
+    </div>
   );
 };
 

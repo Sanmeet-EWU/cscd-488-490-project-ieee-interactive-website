@@ -1,78 +1,109 @@
-import React, { useState } from "react";
-import "../ContactForm/ContactForm.css"; // Ensure you have the correct path to your CSS file
+import React, { useState } from 'react';
+import './ContactForm.css';
+import { FaUser, FaEnvelope, FaPhone, FaComment } from 'react-icons/fa';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    subject: "",
-    message: ""
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData(prevState => ({
+      ...prevState,
       [name]: value
-    });
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Form submitted:", formData);
+    // Add form submission logic here
+    console.log('Form submitted:', formData);
   };
 
   return (
-    <div className="contact-form-page">
-      <div className="contact-form-container">
-        <h1>Contact Us</h1>
-        <form onSubmit={handleSubmit} className="contact-form">
-          <div className="form-group">
-            <label htmlFor="fullName">Full Name</label>
-            <input
-              type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-            />
+    <div className="contact-page">
+      <div className="contact-container">
+        <div className="contact-info">
+          <h2>Get in Touch</h2>
+          <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+          <div className="contact-details">
+            <div className="contact-item">
+              <FaEnvelope />
+              <span>XXXXXXXXX</span>
+            </div>
+            <div className="contact-item">
+              <FaPhone />
+              <span>(509) XXXXXXX</span>
+            </div>
           </div>
-          <div className="form-group">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="subject">Subject</label>
-            <input
-              type="text"
-              id="subject"
-              name="subject"
-              value={formData.subject}
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-group">
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              required
-            ></textarea>
-          </div>
-          <button type="submit" className="submit-button">Submit</button>
-        </form>
+        </div>
+        
+        <div className="contact-form">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <div className="input-icon">
+                <FaUser />
+              </div>
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <div className="input-icon">
+                <FaEnvelope />
+              </div>
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <div className="input-icon">
+                <FaPhone />
+              </div>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Your Phone (optional)"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </div>
+
+            <div className="form-group">
+              <div className="input-icon textarea-icon">
+                <FaComment />
+              </div>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+                rows="5"
+              ></textarea>
+            </div>
+
+            <button type="submit" className="submit-button">
+              Send Message
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
