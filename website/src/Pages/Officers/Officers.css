@@ -48,7 +48,7 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgb(230, 0, 0);
   padding: 2rem;
   border-radius: 8px;
   max-width: 600px;

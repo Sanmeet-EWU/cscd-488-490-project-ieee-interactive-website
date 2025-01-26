@@ -240,6 +240,12 @@
   resize: vertical;
 }
 
+select {
+  max-width: 200px;
+  font-size: 0.9rem;
+  padding: 5px;
+}
+
 .form-actions {
   display: flex;
   gap: 1rem;

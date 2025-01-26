@@ -104,9 +104,12 @@ const OfficerForm = ({ officer, onSubmit, onCancel }) => {
   });
 
   const chapters = [
-    { id: 'ieee', name: 'IEEE Main Chapter' },
-    { id: 'cs', name: 'Computer Society' },
-    { id: 'wie', name: 'Women in Engineering' }
+    { id: 'ieee', name: 'Spokane Section' },
+    { id: 'cs', name: 'Chapter: Power & Energy Society' },
+    { id: 'wie', name: 'Joint Chapter: Antennas and Propagation, Circuits and Systems, Electron Devices, Computer, and Control System Societies' },
+    { id: 'csie', name: 'Joint Chapter: Technology Management and Industry Application Societies' },
+    { id: 'cs', name: 'Affinity Group: Women In Engineering (WIE)' },
+    { id: 'cs', name: 'Affinity Group: Young Professionals (YP)' },
   ];
 
   const handleSubmit = (e) => {
