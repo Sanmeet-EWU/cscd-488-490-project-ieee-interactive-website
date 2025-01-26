@@ -13,13 +13,7 @@
     height: 80px; /* Adjust size */
     width: auto;
     display: block;
-    margin: 0 auto; /* Center the logo if needed */
+    margin-left: auto; /* Center the logo if needed */
+    margin-right: 0;  
   }
 
-  /* Mess around */
-  .kurukuru-logo {
-    height: 80px; /* Adjust size */
-    width: auto;
-    display: block;
-    margin: 0 auto; /* Center the logo if needed */
-  }

@@ -21,7 +21,7 @@ body {
   min-height: 100vh;
   padding: 2rem;
   background: transparent;
-  backdrop-filter: blur(3px);
+
 }
 
 .hero-section {
@@ -410,6 +410,7 @@ body {
 .view-all-events-button {
   background: transparent;
   color: white;
+  background: var(--ieee-blue);
   padding: 0.8rem 1.5rem;
   border-radius: 25px;
   text-decoration: none;
