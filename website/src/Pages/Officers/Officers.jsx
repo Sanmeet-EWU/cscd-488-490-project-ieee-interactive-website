@@ -133,7 +133,7 @@ const OfficersGrid = () => {
 
   return (
     <div className="officers-page">
-      <h1 className="page-title">IEEE EWU Officers</h1>
+      <h1 className="page-title">Officers</h1>
       
       {Object.entries(officerSections).map(([sectionKey, section]) => (
         <section key={sectionKey} className="officer-section">
