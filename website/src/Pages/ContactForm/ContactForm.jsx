@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import './ContactForm.css';
 import { FaUser, FaEnvelope, FaPhone, FaComment } from 'react-icons/fa';
 import Spokane from '../../Assets/Spokane.jpeg';

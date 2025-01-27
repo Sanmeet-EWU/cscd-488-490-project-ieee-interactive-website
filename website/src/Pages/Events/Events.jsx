@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from 'react-icons/fa';
 import eventBanner from "../../Assets/rising-stars-2025-banner.jpg";
 import "./Events.css";
