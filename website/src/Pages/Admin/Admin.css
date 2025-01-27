@@ -19,8 +19,8 @@ body {
 
 .login-box {
   background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 10px;
+  padding: 3rem;
+  border-radius: 30px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
@@ -46,8 +46,8 @@ body {
 
 .input-icon {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -35px;
+  bottom: 26px;
   color: #002855;
   z-index: 1;
   pointer-events: none;
