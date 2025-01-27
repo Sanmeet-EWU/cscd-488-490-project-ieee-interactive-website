@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 import { FaGraduationCap, FaUsers, FaBriefcase, FaCalendarAlt, FaLightbulb, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
@@ -116,3 +116,38 @@ const Home = () => {
 };
 
 export default Home;
+
+/*const Home = () => {
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+  };
+
+  return (
+    <div className="home-container">
+      <Slider {...settings}>
+  <div>
+    <img src={Spokane} alt="" />
+  </div>
+  <div>
+  <img src={AdobeStock_1} alt="" />
+  </div>
+  <div>
+  <img src={AdobeStock_2} alt="" />
+  </div>
+  <div>
+  <img src={AdobeStock_3} alt="" />
+  </div>
+  <div>
+  <img src={AdobeStock_4} alt="" />
+  </div>
+  <div>
+  <img src={AdobeStock_5} alt="" />
+  </div>
+
+      </Slider>*/

@@ -129,3 +129,57 @@
     font-size: 1.5rem;
   }
 }
+
+.social-media-links {
+  margin-top: 20px;
+}
+
+.social-media-links h4 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #002855;
+}
+
+.social-media-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.social-media-links ul li {
+  margin-bottom: 5px;
+}
+
+.social-media-links ul li a {
+  color: #0056b3;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-media-links ul li a:hover {
+  color: #002855;
+}
+
+.social-media-icons {
+  margin-top: 20px;
+}
+
+.social-media-icons h4 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #002855;
+}
+
+.icons-container {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icon {
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+}
+
