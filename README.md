@@ -8,6 +8,7 @@
 - [IEEE Interactive Website](#project)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
+  - [Server](#server)
   - [Web](#web)
   - [Contributing](#contributing)
 
@@ -34,6 +35,19 @@ cd ~/cscd-488-490-project-ieee-interactive-website/website
 React (version 10.9.0): npm -v
 Node (version 20.10.0): node -v
 ```
+
+### Server
+1. Make sure you are on the right directory before running it:
+```powershell
+cd ./server
+```
+
+2. **Running server**:
+```powershell
+npm run dev
+```
+
+3. **Localhost**: Link to the server is http://localhost:5000/api
 
 ### Web
 1. Make sure you have installed the react-scripts package before running it:
@@ -69,6 +83,11 @@ git push origin <branch-name> # name format for your branch: development_firstNa
 Or use VS code source
 ```
 
-4. **Create a Pull Request**: Go to your forked repository on GitHub and create a new pull request from your branch.
+4. **Pulling Someones Branch**: Pull someones change to your branch
+```powershell
+git fetch <branch-name>
+```
+
+5. **Create a Pull Request**: Go to your forked repository on GitHub and create a new pull request from your branch.
 
 If the pull request is approved, it will be merged into the main codebase. Please ensure that your code passes your tests and works properly before submitting a pull request
