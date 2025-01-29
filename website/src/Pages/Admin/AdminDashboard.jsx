@@ -11,7 +11,6 @@ const EventForm = ({ event, onSubmit, onCancel }) => {
     time: '',
     location: '',
     description: '',
-    type: '',
     banner: null
   });
 
@@ -63,15 +62,6 @@ const EventForm = ({ event, onSubmit, onCancel }) => {
         <textarea
           value={formData.description}
           onChange={(e) => setFormData({...formData, description: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Event Type</label>
-        <input
-          type="text"
-          value={formData.type}
-          onChange={(e) => setFormData({...formData, type: e.target.value})}
           required
         />
       </div>
