@@ -1,5 +1,5 @@
 -- Create event database
--- CREATE DATABASE IF NOT EXISTS EventsDB;
+CREATE DATABASE IF NOT EXISTS EventsDB;
 USE EventsDB;
 
 -- Create the main Events table (for upcoming events)
