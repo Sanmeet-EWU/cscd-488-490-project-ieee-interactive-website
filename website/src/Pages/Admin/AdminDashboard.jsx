@@ -100,8 +100,14 @@ const OfficerForm = ({ officer, onSubmit, onCancel }) => {
     name: '',
     position: '',
     email: '',
-    chapter: 'ieee'
+    chapter: 'ieee',
+    socialMediaAccounts: [],
+    bio: '',
+    profilePicture: null,
+    isFormerOfficer: false
   });
+
+  const [showSocialMedia, setShowSocialMedia] = useState(false);
 
   const chapters = [
     { id: 'ieee', name: 'Spokane Section' },
@@ -111,6 +117,41 @@ const OfficerForm = ({ officer, onSubmit, onCancel }) => {
     { id: 'cs', name: 'Affinity Group: Women In Engineering (WIE)' },
     { id: 'cs', name: 'Affinity Group: Young Professionals (YP)' },
   ];
+
+  const socialMediaPlatforms = [
+    'LinkedIn',
+    'Instagram',
+    'Snapchat',
+    'Youtube',
+    'Twitch',
+    'Twitter',
+    'Facebook'
+  ];
+
+  const handleAddSocialMedia = () => {
+    setFormData({
+      ...formData,
+      socialMediaAccounts: [...formData.socialMediaAccounts, { platform: '', url: '' }]
+    });
+  };
+
+  const handleRemoveSocialMedia = (index) => {
+    const updatedAccounts = formData.socialMediaAccounts.filter((_, i) => i !== index);
+    setFormData({
+      ...formData,
+      socialMediaAccounts: updatedAccounts
+    });
+  };
+
+  const handleSocialMediaChange = (index, field, value) => {
+    const updatedAccounts = formData.socialMediaAccounts.map((account, i) =>
+      i === index ? { ...account, [field]: value } : account
+    );
+    setFormData({
+      ...formData,
+      socialMediaAccounts: updatedAccounts
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -158,6 +199,54 @@ const OfficerForm = ({ officer, onSubmit, onCancel }) => {
           value={formData.email}
           onChange={(e) => setFormData({...formData, email: e.target.value})}
           required
+        />
+      </div>
+      <div className="form-group">
+        <label>Is Former Officer?</label>
+        <select
+          value={formData.isFormerOfficer ? 'Yes' : 'No'}
+          onChange={(e) => setFormData({...formData, isFormerOfficer: e.target.value === 'Yes'})}
+        >
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+      <div className="form-group">
+        <label>Social Media Accounts</label>
+        {formData.socialMediaAccounts.map((account, index) => (
+          <div key={index} className="social-media-entry">
+            <select
+              value={account.platform}
+              onChange={(e) => handleSocialMediaChange(index, 'platform', e.target.value)}
+            >
+              {socialMediaPlatforms.map(platform => (
+                <option key={platform} value={platform}>{platform}</option>
+              ))}
+            </select>
+            <input
+              type="url"
+              value={account.url}
+              onChange={(e) => handleSocialMediaChange(index, 'url', e.target.value)}
+              placeholder="Enter URL"
+            />
+            <button type="button" onClick={() => handleRemoveSocialMedia(index)}>Remove</button>
+          </div>
+        ))}
+        <button type="button" onClick={handleAddSocialMedia}>Add Social Media</button>
+      </div>
+      <div className="form-group">
+        <label>Bio</label>
+        <textarea
+          value={formData.bio}
+          onChange={(e) => setFormData({...formData, bio: e.target.value})}
+        />
+      </div>
+      <div className="form-group">
+        <label>Profile Picture</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setFormData({...formData, profilePicture: e.target.files[0]})}
         />
       </div>
       <div className="form-actions">
