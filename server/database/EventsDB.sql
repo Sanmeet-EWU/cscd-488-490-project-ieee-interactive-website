@@ -61,3 +61,6 @@ VALUES (
     'https://events.vtools.ieee.org/m/462092',
     'eventBanner.jpg'
 );*/
+
+-- Use to delete information but keep structure of table
+-- DELETE FROM Events

@@ -1,69 +1,100 @@
-/*import express from 'express';
-import mysql from 'mysql';
-
-const app = express();
-
-const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: '?',
-    database: 'EventsDB'
-});
-
-db.connect((err) => {
-    if (err) throw err;
-    console.log('MySQL Connected...');
-});
-
-app.get('/api', (req, res) => {
-    res.json({"users": ["user1", "user2", "user3"]})
-});
-
 /*app.get('/home', (req, res) => {
-    db.query('SELECT * FROM home', (err, result) => {
+    db.query('SELECT * FROM EVENTS', (err, result) => {
         if (err) throw err;
         res.json(result);
     });
 });
 
-app.get('/officers', (req, res) => {
-    db.query('SELECT * FROM officers', (err, result) => {
-        if (err) throw err;
-        res.json(result);
+  app.get('/officers', async (req, res) => {
+    try {
+      const [officers] = await db.execute('SELECT * FROM officers');
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(officers, null, 2));
+    } catch (err) {
+      console.error('Error fetching officers:', err);
+      res.status(500).json({ error: 'Failed to fetch officers' });
+    }
+  });
+
+  app.get('/formerofficers', async (req, res) => {
+    try {
+      const [events] = await db.execute('SELECT * FROM formerofficers');
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(formerofficers, null, 2));
+    } catch (err) {
+      console.error('Error fetching formerofficers:', err);
+      res.status(500).json({ error: 'Failed to fetch formerofficers' });
+    }
+  });
+
+
+  app.get('/admin-dashboard', async (req, res) => {
+    try {
+      const [admin-dashboard] = await db.execute('SELECT * FROM admin-dashboard');
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(admin-dashboard, null, 2));
+    } catch (err) {
+      console.error('Error fetching admin-dashboard:', err);
+      res.status(500).json({ error: 'Failed to fetch admin-dashboard' });
+    }
+  });*/
+
+// Fetch data from a specified table
+/*app.get('/admin-dashboard', async (req, res) => {
+  try {
+    const [events] = await db.execute('SELECT * FROM EventsDB');
+    const [officers] = await db.execute('SELECT * FROM OfficersDB');
+    
+    res.json({
+      events,
+      officers
     });
+  } catch (err) {
+    console.error('Error fetching data:', err);
+    res.status(500).json({ error: 'Failed to fetch data' });
+  }
 });
 
-app.get('/formerofficers', (req, res) => {
-    db.query('SELECT * FROM formerofficers', (err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
+// Insert new data into a table
+app.post('/admin-dashboard/:table', async (req, res) => {
+  const { table } = req.params;
+  const data = req.body;
+  try {
+    const columns = Object.keys(data).join(', ');
+    const values = Object.values(data);
+    const placeholders = values.map(() => '?').join(', ');
+
+    const sql = `INSERT INTO ?? (${columns}) VALUES (${placeholders})`;
+    await db.execute(sql, [table, ...values]);
+
+    res.json({ message: 'Data inserted successfully' });
+  } catch (err) {
+    console.error('Error inserting data:', err);
+    res.status(500).json({ error: 'Failed to insert data' });
+  }
 });
 
-app.get('/events', (req, res) => {
-    db.query('SELECT * FROM events', (err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
+// Delete data from a table by ID
+app.delete('/admin-dashboard/:table/:id', async (req, res) => {
+  const { table, id } = req.params;
+  try {
+    await db.execute(`DELETE FROM ?? WHERE id = ?`, [table, id]);
+    res.json({ message: 'Data deleted successfully' });
+  } catch (err) {
+    console.error('Error deleting data:', err);
+    res.status(500).json({ error: 'Failed to delete data' });
+  }
 });*/
-
-/*app.get('/admin-dashboard', (req, res) => {
-    db.query('SELECT * FROM events', (err, result) => {
-        if (err) throw err;
-        res.json(result);
-    });
-});
-
-app.listen(5000, () => {console.log('Server is running on port 5000')});*/
 
 
 
 import express from 'express';
-//import mysql from 'mysql';
 import mysql from 'mysql2/promise';
 import bodyParser from 'body-parser';
 
 const app = express();
+app.use(express.json());
+
 const port = 5000;
 
 // Set up body-parser middleware to handle POST data
@@ -88,10 +119,10 @@ app.post('/add-event', (req, res) => {
   const { title, description, date, time, location, type, registration_url, banner_url } = req.body;
 
   // SQL query to insert data into the Events table
-  const query = 'INSERT INTO Events (title, description, date, time, location, type, registration_url, banner_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-  const values = [title, description, date, time, location, type, registration_url, banner_url];
+  const eventQuery = 'INSERT INTO Events (title, description, date, time, location, type, registration_url, banner_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+  const eventValues = [title, description, date, time, location, type, registration_url, banner_url];
 
-  db.query(query, values, (err, result) => {
+  db.query(eventQuery, eventValues, (err, result) => {
     if (err) {
       console.error('Error inserting event:', err);
       return res.status(500).json({ error: 'Failed to add event' });
@@ -100,14 +131,11 @@ app.post('/add-event', (req, res) => {
   });
 });
 
-/*app.get('/', (req, res) => {
-    res.send('Server is running! 🚀');
-  });*/
-
   app.get('/events', async (req, res) => {
     try {
-      const [rows] = await db.execute('SELECT * FROM Events');
-      res.json(rows);
+      const [events] = await db.execute('SELECT * FROM Events');
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(events, null, 2));
     } catch (err) {
       console.error('Error fetching events:', err);
       res.status(500).json({ error: 'Failed to fetch events' });
