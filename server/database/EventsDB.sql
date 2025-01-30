@@ -5,27 +5,25 @@ USE EventsDB;
 -- Create the main Events table (for upcoming events)
 CREATE TABLE IF NOT EXISTS Events (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL,
+    title VARCHAR(500) NOT NULL,
     description TEXT NOT NULL,
     date DATE NOT NULL,
     time VARCHAR(50) NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    type VARCHAR(50) NOT NULL,
-    registration_url VARCHAR(255),
-    banner_url VARCHAR(255)
+    location VARCHAR(500) NOT NULL,
+    registration_url VARCHAR(500),
+    banner_url VARCHAR(500)
 );
 
 -- Create the PastEvents table (for old events)
 CREATE TABLE IF NOT EXISTS PastEvents (
     id INT PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+    title VARCHAR(500) NOT NULL,
     description TEXT NOT NULL,
     date DATE NOT NULL,
     time VARCHAR(50) NOT NULL,
-    location VARCHAR(255) NOT NULL,
-    type VARCHAR(50) NOT NULL,
-    registration_url VARCHAR(255),
-    banner_url VARCHAR(255),
+    location VARCHAR(500) NOT NULL,
+    registration_url VARCHAR(500),
+    banner_url VARCHAR(500),
     moved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -39,7 +37,7 @@ ON SCHEDULE EVERY 1 DAY
 DO
 BEGIN
     -- Move old events to PastEvents
-    INSERT INTO PastEvents (id, title, description, date, time, location, type, registration_url, banner_url)
+    INSERT INTO PastEvents (id, title, description, date, time, location, registration_url, banner_url)
     SELECT * FROM Events WHERE date < CURDATE();
 
     -- Delete moved events from Events table
@@ -52,15 +50,14 @@ DELIMITER ;
 SELECT DATABASE();
 SHOW TABLES;
 
-/*-- Insert an example event (optional)
-INSERT INTO Events (title, description, date, time, location, type, registration_url, banner_url)
+-- Insert an example event (optional)
+/*INSERT INTO Events (title, description, date, time, location, registration_url, banner_url)
 VALUES (
     'Student Presentations: Rising Stars 2025',
     'Join us for an exciting evening of student presentations! STEM Students Welcome! Free Pizza provided.',
     '2025-01-30',
     '5:00 PM - 6:30 PM',
     'EWU Catalyst Building, 601 E Riverside Ave, Room CAT 304',
-    'Student Event',
     'https://events.vtools.ieee.org/m/462092',
     'eventBanner.jpg'
 );*/
