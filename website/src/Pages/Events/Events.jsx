@@ -3,6 +3,16 @@ import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from 'react-icons/fa';
 import eventBanner from "../../Assets/rising-stars-2025-banner.jpg";
 import "./Events.css";
 
+
+// Fetches data from the database
+useEffect(() => {
+  fetch('http://localhost:5000/events')
+    .then((res) => res.json())
+    .then((data) => console.log(data)) // Replace with setState to display on UI
+    .catch((err) => console.error('Error fetching events:', err));
+}, []);
+
+
 const upcomingEvent = {
   title: "Student Presentations: Rising Stars 2025",
   description: "Join us for an exciting evening of student presentations! STEM Students Welcome! Free Pizza provided.",

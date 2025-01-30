@@ -442,3 +442,39 @@ const AdminDashboard = () => {
 };
 
 export default AdminDashboard;
+
+
+// Fetch events from servers
+
+/*const handleEventSubmit = async (eventData) => {
+  try {
+    const method = selectedEvent ? 'PUT' : 'POST';
+    const url = selectedEvent
+      ? `/admin-dashboard/events/${selectedEvent.id}`
+      : '/admin-dashboard/events';
+
+    const response = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(eventData),
+    });
+
+    if (!response.ok) throw new Error('Failed to save event');
+
+    fetchEvents(); // Refresh events after update
+    setShowEventForm(false);
+    setSelectedEvent(null);
+  } catch (error) {
+    console.error('Error saving event:', error);
+  }
+};
+
+const handleDeleteEvent = async (id) => {
+  try {
+    await fetch(`/admin-dashboard/events/${id}`, { method: 'DELETE' });
+    fetchEvents(); // Refresh events after deletion
+  } catch (error) {
+    console.error('Error deleting event:', error);
+  }
+};
+*/
