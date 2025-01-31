@@ -5,13 +5,6 @@ import "./Events.css";
 
 
 // Fetches data from the database
-useEffect(() => {
-  fetch('http://localhost:5000/events')
-    .then((res) => res.json())
-    .then((data) => console.log(data)) // Replace with setState to display on UI
-    .catch((err) => console.error('Error fetching events:', err));
-}, []);
-
 
 const upcomingEvent = {
   title: "Student Presentations: Rising Stars 2025",
@@ -30,6 +23,13 @@ const formatDate = (dateString) => {
 };
 
 const Events = () => {
+  useEffect(() => {
+    fetch('http://localhost:5000/events')
+      .then((res) => res.json())
+      .then((data) => console.log(data)) // Replace with setState to display on UI
+      .catch((err) => console.error('Error fetching events:', err));
+  }, []);
+
   return (
     <div className="events-page">
       <div className="events-header">
@@ -44,7 +44,6 @@ const Events = () => {
             <img src={upcomingEvent.banner} alt={upcomingEvent.title} />
           </div>
           <div className="event-content">
-            <div className="event-type-badge">{upcomingEvent.type}</div>
             <h3 className="event-title">{upcomingEvent.title}</h3>
             <p className="event-description">{upcomingEvent.description}</p>
             

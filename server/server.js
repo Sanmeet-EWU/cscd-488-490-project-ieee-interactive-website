@@ -104,7 +104,7 @@ app.use(bodyParser.json());
 const db = await mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: '?',
+  password: 'Sieee25!',
   database: 'EventsDB',
 });
 
