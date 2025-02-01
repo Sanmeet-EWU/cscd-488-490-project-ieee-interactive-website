@@ -444,7 +444,7 @@ const AdminDashboard = () => {
 export default AdminDashboard;
 
 
-// Fetch events from servers
+// Fetch events from servers (havent tried)
 
 /*const handleEventSubmit = async (eventData) => {
   try {
@@ -478,3 +478,27 @@ const handleDeleteEvent = async (id) => {
   }
 };
 */
+
+
+// For moving Officers to FormerOfficers
+
+/*const moveOfficerById = (officerId) => {
+  const moveQuery = `
+      INSERT INTO former_officers (chapter_id, name, title, email, icon_url, bio, date_ended)
+      SELECT chapter_id, name, title, email, icon_url, bio, CURDATE()
+      FROM officers WHERE id = ?;
+  `;
+  
+  const deleteQuery = "DELETE FROM officers WHERE id = ?;";
+
+  db.query(moveQuery, [officerId], (err, result) => {
+      if (err) throw err;
+      db.query(deleteQuery, [officerId], (err, result) => {
+          if (err) throw err;
+          console.log(`Moved officer with ID ${officerId} to former_officers`);
+      });
+  });
+};
+
+// Example: Move officer with ID 3
+moveOfficerById(3);*/
