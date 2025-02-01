@@ -362,7 +362,7 @@ const AdminDashboard = () => {
 export default AdminDashboard;
 
 
-// Fetch events from servers
+// Fetch events from servers (havent tried)
 
 /*const handleEventSubmit = async (eventData) => {
   try {

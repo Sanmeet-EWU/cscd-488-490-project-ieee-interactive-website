@@ -131,16 +131,49 @@ app.post('/add-event', (req, res) => {
   });
 });
 
+  /*app.get('/events', async (req, res) => {
+    try {
+      const [events] = await db.execute('SELECT * FROM Events');
+  
+      // Convert UTC to local time (adjust as needed)
+      const formattedEvents = events.map(event => ({
+        ...event,
+        date: new Date(event.date).toISOString().split('T')[0], // Keeps only YYYY-MM-DD
+      }));
+  
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(formattedEvents, null, 2));
+    } catch (err) {
+      console.error('Error fetching events:', err);
+      res.status(500).json({ error: 'Failed to fetch events' });
+    }
+  });*/
+  
+  //This event code is to test if the data is being stated as an upcoming or past event
   app.get('/events', async (req, res) => {
     try {
       const [events] = await db.execute('SELECT * FROM Events');
+      
+      // Get today's date without the time
+      const today = new Date().toISOString().split('T')[0];
+  
+      const categorizedEvents = events.map(event => {
+        const eventDate = new Date(event.date).toISOString().split('T')[0];
+        return {
+          ...event,
+          date: new Date(event.date).toISOString().split('T')[0], // Keeps only YYYY-MM-DD
+          eventStatus: eventDate >= today ? 'Upcoming' : 'Past'
+        };
+      });
+  
       res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(events, null, 2));
+      res.send(JSON.stringify(categorizedEvents, null, 2));
     } catch (err) {
       console.error('Error fetching events:', err);
       res.status(500).json({ error: 'Failed to fetch events' });
     }
   });
+  
   
   
 

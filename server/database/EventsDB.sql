@@ -1,9 +1,9 @@
 -- Create event database
-CREATE DATABASE IF NOT EXISTS EventsDB;
+-- CREATE DATABASE IF NOT EXISTS EventsDB;
 USE EventsDB;
 
 -- Create the main Events table (for upcoming events)
-CREATE TABLE IF NOT EXISTS Events (
+/*CREATE TABLE IF NOT EXISTS Events (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(500) NOT NULL,
     description TEXT NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS PastEvents (
     registration_url VARCHAR(500),
     banner_url VARCHAR(500),
     moved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
+);*/
 
 -- Enable automatic event scheduling
 SET GLOBAL event_scheduler = ON;
@@ -50,17 +50,36 @@ DELIMITER ;
 SELECT DATABASE();
 SHOW TABLES;
 
+set SQL_Safe_UPDATES = 0;
+   
+UPDATE Events 
+SET id = id + 1 
+ORDER BY id DESC;
+
 -- Insert an example event (optional)
-/*INSERT INTO Events (title, description, date, time, location, registration_url, banner_url)
+INSERT INTO Events (id, title, description, date, time, location, registration_url, banner_url)
 VALUES (
-    'Student Presentations: Rising Stars 2025',
+	1,
+    'IEEE 2025 Rising Star',
     'Join us for an exciting evening of student presentations! STEM Students Welcome! Free Pizza provided.',
     '2025-01-30',
     '5:00 PM - 6:30 PM',
     'EWU Catalyst Building, 601 E Riverside Ave, Room CAT 304',
     'https://events.vtools.ieee.org/m/462092',
     'eventBanner.jpg'
-);*/
+);
+
 
 -- Use to delete information but keep structure of table
--- DELETE FROM Events
+-- This will delete an event once the id increment reaches that threshhold
+	-- DELETE FROM Events WHERE id >= 4;
+
+-- Just to test
+DELETE FROM Events WHERE date < CURDATE() - INTERVAL 1 DAY;
+
+-- What Cait wants
+-- DELETE FROM Events WHERE date < CURDATE() - INTERVAL 5 YEAR;
+  
+set SQL_Safe_UPDATES = 1;
+
+  
