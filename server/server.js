@@ -94,25 +94,46 @@ import bodyParser from 'body-parser';
 
 const app = express();
 app.use(express.json());
-
-const port = 5000;
+const port = 3000;
 
 // Set up body-parser middleware to handle POST data
 app.use(bodyParser.json());
 
-// Create a MySQL connection
-const db = await mysql.createConnection({
+// Creates a MySQL connection to EventsDB
+const eventsDB = await mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: '?',
   database: 'EventsDB',
 });
 
-// Connect to MySQL
-db.connect((err) => {
+// Creates a MySQL connection to OfficersDB
+/*const officersDB = await mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'PHW#84#jeor',
+  database: 'OfficersDB',
+});*/
+
+// Connect to both MySQL databases
+/*eventsDB.connect((err) => {
   if (err) throw err;
-  console.log('Connected to MySQL!');
+  console.log('Connected to Events Database!');
 });
+
+officersDB.connect((err) => {
+  if (err) throw err;
+  console.log('Connected to Officers Database!');
+});*/
+
+// Connect to MySQL for both
+try {
+  await eventsDB.connect();
+  //await officersDB.connect(); //Uncomment when OfficersDB is created
+  console.log('Connected to both EventsDB and OfficersDB!');
+} catch (err) {
+  console.error('Error connecting to MySQL:', err);
+}
 
 // Endpoint to handle adding an event
 app.post('/add-event', (req, res) => {
@@ -122,7 +143,7 @@ app.post('/add-event', (req, res) => {
   const eventQuery = 'INSERT INTO Events (title, description, date, time, location, type, registration_url, banner_url) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
   const eventValues = [title, description, date, time, location, type, registration_url, banner_url];
 
-  db.query(eventQuery, eventValues, (err, result) => {
+  eventsDB.query(eventQuery, eventValues, (err, result) => {
     if (err) {
       console.error('Error inserting event:', err);
       return res.status(500).json({ error: 'Failed to add event' });
@@ -131,28 +152,11 @@ app.post('/add-event', (req, res) => {
   });
 });
 
-  /*app.get('/events', async (req, res) => {
-    try {
-      const [events] = await db.execute('SELECT * FROM Events');
-  
-      // Convert UTC to local time (adjust as needed)
-      const formattedEvents = events.map(event => ({
-        ...event,
-        date: new Date(event.date).toISOString().split('T')[0], // Keeps only YYYY-MM-DD
-      }));
-  
-      res.setHeader('Content-Type', 'application/json');
-      res.send(JSON.stringify(formattedEvents, null, 2));
-    } catch (err) {
-      console.error('Error fetching events:', err);
-      res.status(500).json({ error: 'Failed to fetch events' });
-    }
-  });*/
-  
+
   //This event code is to test if the data is being stated as an upcoming or past event
-  app.get('/events', async (req, res) => {
+  app.get('/api/events', async (req, res) => {
     try {
-      const [events] = await db.execute('SELECT * FROM Events');
+      const [events] = await eventsDB.execute('SELECT * FROM Events');
       
       // Get today's date without the time
       const today = new Date().toISOString().split('T')[0];
@@ -181,3 +185,22 @@ app.post('/add-event', (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
+
+  // Test Events
+  /*app.get('/events', async (req, res) => {
+    try {
+      const [events] = await db.execute('SELECT * FROM Events');
+  
+      // Convert UTC to local time (adjust as needed)
+      const formattedEvents = events.map(event => ({
+        ...event,
+        date: new Date(event.date).toISOString().split('T')[0], // Keeps only YYYY-MM-DD
+      }));
+  
+      res.setHeader('Content-Type', 'application/json');
+      res.send(JSON.stringify(formattedEvents, null, 2));
+    } catch (err) {
+      console.error('Error fetching events:', err);
+      res.status(500).json({ error: 'Failed to fetch events' });
+    }
+  });*/

@@ -1,8 +1,8 @@
--- Create event database
+-- Creates event database
 -- CREATE DATABASE IF NOT EXISTS EventsDB;
 USE EventsDB;
 
--- Create the main Events table (for upcoming events)
+-- Creates the main Events table (for upcoming events)
 /*CREATE TABLE IF NOT EXISTS Events (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(500) NOT NULL,
@@ -14,7 +14,7 @@ USE EventsDB;
     banner_url VARCHAR(500)
 );
 
--- Create the PastEvents table (for old events)
+-- Creates the PastEvents table (for old events)
 CREATE TABLE IF NOT EXISTS PastEvents (
     id INT PRIMARY KEY,
     title VARCHAR(500) NOT NULL,
@@ -27,20 +27,20 @@ CREATE TABLE IF NOT EXISTS PastEvents (
     moved_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );*/
 
--- Enable automatic event scheduling
+-- Enables automatic event scheduling
 SET GLOBAL event_scheduler = ON;
 
--- Create a scheduled event to move old events daily
+-- Creates a scheduled event to move old events daily
 DELIMITER //
 CREATE EVENT IF NOT EXISTS MoveOldEvents
 ON SCHEDULE EVERY 1 DAY
 DO
 BEGIN
-    -- Move old events to PastEvents
+    -- Moves old events to PastEvents
     INSERT INTO PastEvents (id, title, description, date, time, location, registration_url, banner_url)
     SELECT * FROM Events WHERE date < CURDATE();
 
-    -- Delete moved events from Events table
+    -- Deletes moved events from Events table
     DELETE FROM Events WHERE date < CURDATE();
 END;
 //
@@ -56,7 +56,7 @@ UPDATE Events
 SET id = id + 1 
 ORDER BY id DESC;
 
--- Insert an example event (optional)
+-- Inserts an example event (optional)
 INSERT INTO Events (id, title, description, date, time, location, registration_url, banner_url)
 VALUES (
 	1,
@@ -70,7 +70,6 @@ VALUES (
 );
 
 
--- Use to delete information but keep structure of table
 -- This will delete an event once the id increment reaches that threshhold
 	-- DELETE FROM Events WHERE id >= 4;
 
