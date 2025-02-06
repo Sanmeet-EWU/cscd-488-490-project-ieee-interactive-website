@@ -343,8 +343,9 @@ body {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
   box-shadow: var(--shadow-md);
-  overflow: hidden;
+  /* overflow: hidden; */
   transition: transform 0.3s ease;
+  /* max-height: 700px; */
 }
 
 .event-card-home:hover {
@@ -507,4 +508,10 @@ body {
   .event-actions-home {
     flex-direction: column;
   }
+}
+
+.upcoming-event-section .event-grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+  gap: 2rem; 
 }

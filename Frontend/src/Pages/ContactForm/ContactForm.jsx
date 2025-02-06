@@ -1,7 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import './ContactForm.css';
 import { FaUser, FaEnvelope, FaPhone, FaComment } from 'react-icons/fa';
 import Spokane from '../../Assets/Spokane.jpeg';
+import request from '../../api/axiosConfig';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,9 @@ const ContactForm = () => {
     message: '',
   });
 
+  const [isSending, setIsSending] = useState(false);
+  const [responseMessage, setResponseMessage] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
@@ -19,22 +23,45 @@ const ContactForm = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log('Form submitted:', formData);
+    setIsSending(true);
+    setResponseMessage('');
+
+    try {
+      request('post', '/send-email', {
+        email: formData.email,
+        subject: `Message from ${formData.name}`,
+        text: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'N/A'}\nMessage: ${formData.message}`,
+      })
+
+      // Handle successful response
+      setResponseMessage('Your message has been sent successfully!');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        message: '',
+      });
+    } catch (error) {
+      // Handle error
+      setResponseMessage('There was an error sending your message. Please try again later.');
+      console.error('Error sending email:', error);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
     <div className="contact-page" style={{
-        backgroundImage: `url(${Spokane})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '20px'
+      backgroundImage: `url(${Spokane})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      minHeight: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: '20px'
     }}>
       <div className="contact-container">
         <div className="contact-info">
@@ -51,7 +78,7 @@ const ContactForm = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="contact-form">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -109,10 +136,16 @@ const ContactForm = () => {
               ></textarea>
             </div>
 
-            <button type="submit" className="submit-button">
-              Send Message
+            <button type="submit" className="submit-button" disabled={isSending}>
+              {isSending ? 'Sending...' : 'Send Message'}
             </button>
           </form>
+
+          {responseMessage && (
+            <div className="response-message">
+              <p>{responseMessage}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
