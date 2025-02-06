@@ -5,12 +5,12 @@ import "./Events.css";
 
 
 // Fetches data from the database
-useEffect(() => {
+/*useEffect(() => {
   fetch('http://localhost:5000/events')
     .then((res) => res.json())
     .then((data) => console.log(data)) // Replace with setState to display on UI
     .catch((err) => console.error('Error fetching events:', err));
-}, []);
+}, []);*/
 
 
 const upcomingEvent = {
