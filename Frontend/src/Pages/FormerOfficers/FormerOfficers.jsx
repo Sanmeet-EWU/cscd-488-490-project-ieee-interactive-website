@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import OfficersCard from '../../Components/Officers_FormerOfficers';
 import './FormerOfficers.css';
-import { FaUserCircle, FaLinkedin, FaInstagram, FaSnapchat, FaYoutube, FaTwitch, FaTwitter, FaFacebook } from 'react-icons/fa';
+import { FaLinkedin, FaInstagram, FaSnapchat, FaYoutube, FaTwitch, FaTwitter, FaFacebook } from 'react-icons/fa';
+import request from '../../api/axiosConfig';
 
 const OfficersGrid = () => {
   const [selectedOfficer, setSelectedOfficer] = useState(null);
-
-  const [backendData, setBackendData] = useState([]);
+  const [officers, setOfficers] = useState([]);
 
   const getSocialMediaIcon = (platform) => {
     switch (platform) {
@@ -28,64 +28,19 @@ const OfficersGrid = () => {
         return null;
     }
   };
-  
-  //Test Fetch data from the backend, this is the basic of connecting frontend to backend
-  useEffect(() => {
-    fetch("/api")
-      .then(response => response.json())
-      .then(data => setBackendData(data));
-  }, []);
 
-  // Dynamically import all images from the photos directory
-  const images = require.context('../../Assets', false, /\.(png|jpe?g|svg)$/);
-
-  const photoMap = images.keys().reduce((map, path) => {
-    const fileName = path.replace('./', ''); // Remove './' from the path
-    map[fileName] = images(path); // Add to map
-    return map;
-  }, {});
-
-  const EmailLink = ({ email }) => (
-    <a href={`mailto:${email}`} style={{ color: '#002855', textDecoration: 'none' }}>
-      {email}
-    </a>
-  );
-  
-
-  const officerSections = {
-    chapter: {
-      title: "Former Officers",
-      officers: [
-        {
-          name: 'Jihoo Kim',
-          title: 'Former CEO',
-          email: '-',
-          icon: <FaUserCircle size={150} color="#002855" />,
-          bio: "Former CEO",
-          socialMedia: [
-            { platform: 'LinkedIn', url: 'https://www.linkedin.com' },
-          ]
-        },
-        {
-          name: 'Steven He',
-          title: 'CEO of Beijing Corn',
-          email: '-',
-          icon: <img 
-            src={photoMap['beijingcorn.jpg']}
-            alt="Travis Ho" 
-            style={{ width: 150, height: 150, borderRadius: '50%' }} 
-          />, 
-          bio: 'Buy 1 rice bag get 2 free for 60% discount',
-          socialMedia: [
-            { platform: 'Youtube', url: 'https://www.youtube.com/channel/UCP0_k4INXrwPS6HhIyYqsTg' },
-            { platform: 'Instagram', url: 'instagram.com/thestevenhe'},
-            { platform: 'Twitter', url: 'twitter.com/TheStevenHe'},
-            { platform: 'Facebook', url: 'facebook.com/profile.php?id=100080346755167'},
-          ]
-        },
-      ]
-    },
+  const fetchOfficers = async () => {
+    try {
+      const data = await request('get', '/officers');
+      setOfficers(data); 
+    } catch (error) {
+      console.error('Error fetching officers:', error);
+    }
   };
+
+  useEffect(() => {
+    fetchOfficers();
+  }, []);
 
   const handleBioClick = (officer) => {
     setSelectedOfficer(officer);
@@ -95,63 +50,92 @@ const OfficersGrid = () => {
     setSelectedOfficer(null);
   };
 
+  const formerOfficers = officers.filter(officer => officer.is_former_officer === 1);
+
+  const categorizedOfficers = formerOfficers.reduce((categories, officer) => {
+    const { chapter_group } = officer;
+    if (!categories[chapter_group]) {
+      categories[chapter_group] = [];
+    }
+    categories[chapter_group].push(officer);
+    return categories;
+  }, {});
+
+  const SECTION_MAPPING = {
+    sc: "Spokane Section",
+    power: "Chapter: Power & Energy Society",
+    comp: "Joint Chapter: Antennas and Propagation, Circuits and Systems, Electron Devices, Computer, and Control System Societies",
+    tech: "Joint Chapter: Technology Management and Industry Application Societies",
+    yp: "Affinity Group: Young Professionals (YP)",
+    wie: "Affinity Group: Women In Engineering (WIE)",
+  };
+
   return (
     <div className="officers-page">
-      <h1 className="page-title">IEEE EWU Officers</h1>
-      
-      {Object.entries(officerSections).map(([sectionKey, section]) => (
-        <section key={sectionKey} className="officer-section">
-          <h2 className="section-title">{section.title}</h2>
+      <h1 className="page-title">Former Officers</h1>
+
+      {Object.keys(categorizedOfficers).map((chapterGroup, index) => (
+        <div key={index} className="officer-category">
+          <h2 className="section-title">{SECTION_MAPPING[chapterGroup]}</h2>
           <div className="officers-grid">
-            {section.officers.map((officer, index) => (
+            {categorizedOfficers[chapterGroup].map((officer, idx) => (
               <OfficersCard
-                key={index}
+                key={idx}
                 name={officer.name}
-                title={officer.title}
+                title={officer.position}
                 email={officer.email}
-                icon={officer.icon}
+                icon={
+                  <img 
+                    src={`http://localhost:5000/${officer.profile}`} 
+                    alt={officer.name} 
+                    style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover' }} 
+                  />
+                }
                 onAboutClick={() => handleBioClick(officer)}
               />
             ))}
           </div>
-        </section>
+        </div>
       ))}
 
-      {/* Bio Model */}
       {selectedOfficer && (
         <div className="modal-overlay" onClick={handleClosemodal}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={handleClosemodal}>&times;</button>
             <div className="modal-header">
               <div className="modal-icon">
-                {selectedOfficer.icon}
+                <img 
+                  src={`http://localhost:5000/${selectedOfficer.profile}`} 
+                  alt={selectedOfficer.name} 
+                  style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover' }} 
+                />
               </div>
               <div className="modal-title">
                 <h3>{selectedOfficer.name}</h3>
-                <p>{selectedOfficer.title}</p>
+                <p>{selectedOfficer.position}</p>
                 <p className="modal-email">{selectedOfficer.email}</p>
               </div>
             </div>
             <div className="modal-body">
-            <p>{selectedOfficer.bio}</p>
-            {selectedOfficer.socialMedia && selectedOfficer.socialMedia.length > 0 && (
-              <div className="social-media-icons">
-                <h4>Socials:</h4>
-                <div className="icons-container">
-                  {selectedOfficer.socialMedia.map((social, index) => (
-                    <a
-                      key={index}
-                      href={social.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="social-icon"
-                    >
-                      {getSocialMediaIcon(social.platform)}
-                    </a>
-                  ))}
+              <p>{selectedOfficer.bio}</p>
+              {selectedOfficer.social_media && selectedOfficer.social_media.length > 0 && (
+                <div className="social-media-icons">
+                  <h4>Socials:</h4>
+                  <div className="icons-container">
+                    {selectedOfficer.social_media.map((social, idx) => (
+                      <a
+                        key={idx}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="social-icon"
+                      >
+                        {getSocialMediaIcon(social.platform)}
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
             </div>
           </div>
         </div>
