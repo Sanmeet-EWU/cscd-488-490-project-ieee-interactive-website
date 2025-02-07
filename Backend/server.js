@@ -94,7 +94,7 @@ import bodyParser from 'body-parser';
 
 const app = express();
 app.use(express.json());
-const port = 5000;
+const port = 3000;
 
 // Set up body-parser middleware to handle POST data
 app.use(bodyParser.json());
@@ -103,7 +103,7 @@ app.use(bodyParser.json());
 const eventsDB = await mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'PHW#84#jeor',
+  password: 'Sieee25!',
   database: 'EventsDB',
 });
 

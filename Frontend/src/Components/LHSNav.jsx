@@ -16,7 +16,7 @@ const LHSNav = () => {
     { 
       path: "https://jobs.ieee.org/jobs/?keywords=&pos_flt=0&location=Spokane%2C+WA%2C+United+States&location_completion=city%3DSpokane%24state%3DWashington%24country%3DUnited+States&location_type=city&location_text=Spokane%2C+WA%2C+United+States&location_autocomplete=true&radius=320",
       icon: <FaBriefcase className="nav-icon" />,
-      label: "IEEE Job Site",
+      label: "Employment",
       internal: false
     },
     { path: "/admin", icon: <FaLock className="nav-icon" />, label: "Admin", internal: true },

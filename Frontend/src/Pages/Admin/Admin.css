@@ -7,8 +7,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(rgba(0, 40, 85, 0.8), rgba(0, 40, 85, 0.8)),
-              url('../../Assets/Spokane.jpeg') center/cover no-repeat;
+  background: url('../../Assets/Spokane.jpeg') center/cover no-repeat;
 }
 
 .login-container {
@@ -19,10 +18,9 @@ body {
 
 .login-box {
   background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 10px;
+  padding: 3rem;
+  border-radius: 30px;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(10px);
 }
 
 .login-box h2 {
@@ -47,8 +45,8 @@ body {
 
 .input-icon {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -35px;
+  bottom: 26px;
   color: #002855;
   z-index: 1;
   pointer-events: none;
@@ -57,7 +55,7 @@ body {
   justify-content: center;
   width: 14px;
   height: 14px;
-  margin-right: 20px;
+  margin-right: 8px;
 }
 
 .form-group input {

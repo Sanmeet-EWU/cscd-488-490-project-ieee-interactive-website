@@ -6,10 +6,12 @@
 
 .page-title {
   text-align: center;
-  color: #002855;
-  font-size: 2.5rem;
+  color: #ffffff;
+  font-size: 5rem;
   margin-bottom: 2rem;
   font-weight: bold;
+  background-color: #002855
+
 }
 
 .officer-section {
@@ -46,7 +48,7 @@
 }
 
 .modal-content {
-  background-color: white;
+  background-color: rgb(230, 0, 0);
   padding: 2rem;
   border-radius: 8px;
   max-width: 600px;
