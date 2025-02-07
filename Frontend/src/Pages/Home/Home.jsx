@@ -9,22 +9,26 @@ const features = [
   {
     icon: <FaGraduationCap />,
     title: "Academic Excellence",
-    description: "Access resources and support for your academic journey in engineering."
+    description: "Access resources and support for your academic journey in engineering.",
+    url: "https://iln.ieee.org/public/TrainingCatalog.aspx"
   },
   {
     icon: <FaUsers />,
     title: "Professional Network",
-    description: "Connect with peers, professors, and industry professionals."
+    description: "Connect with peers, professors, and industry professionals.",
+    url: "https://yp.ieee.org/"
   },
   {
     icon: <FaBriefcase />,
     title: "Career Opportunities",
-    description: "Discover internships and job opportunities in engineering."
+    description: "Discover internships and job opportunities in engineering.",
+    url: "https://jobs.ieee.org/"
   },
   {
     icon: <FaLightbulb />,
     title: "Innovation Hub",
-    description: "Stay updated with the latest technological advancements."
+    description: "Stay updated with the latest technological advancements.",
+    url: "https://ieee-collabratec.ieee.org/"
   },
 ];
 
@@ -93,9 +97,9 @@ const Home = () => {
           <h1 className="hero-title">IEEE Spokane</h1>
           <p className="hero-subtitle">Where Engineering meets Social, Academic, and Professional Growth</p>
           <div className="cta-buttons">
-            <Link to="/contact" className="button-primary">
+            <a href="https://www.ieee.org/membership/join/index.html" className="button-primary" target="_blank" rel="noopener noreferrer">
               Join Us Today
-            </Link>
+            </a>
             <Link to="/officers" className="button-secondary">
               Meet Our Team
             </Link>
@@ -104,7 +108,12 @@ const Home = () => {
 
         <section className="features-grid">
           {features.map((feature, index) => (
-            <div key={index} className="feature-card animate-in" style={{ animationDelay: `${index * 0.1}s` }}>
+            <div 
+              key={index} 
+              onClick={() => window.open(feature.url, '_blank', 'noopener,noreferrer')} 
+              className="feature-card animate-in" 
+              style={{ animationDelay: `${index * 0.1}s`, cursor: 'pointer' }}
+            >
               <div className="feature-icon">{feature.icon}</div>
               <h3 className="feature-title">{feature.title}</h3>
               <p className="feature-description">{feature.description}</p>
