@@ -6,7 +6,7 @@ import officerRoute from './routes/OfficerRoute.js';
 import utilsRoute from './routes/utilsRoute.js';
 
 const app = express();
-const port = 5000;
+const port = 3001;
 
 app.use(cors());
 app.use(express.json()); 

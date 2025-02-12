@@ -41,7 +41,7 @@ const OfficersGrid = () => {
         acc[sectionTitle] = [];
       }
 
-      const profileImageUrl = officer.profile ? `http://localhost:5000/${officer.profile}` : null;
+      const profileImageUrl = officer.profile ? `http://localhost:3001/${officer.profile}` : null;
 
       acc[sectionTitle].push({
         name: officer.name,

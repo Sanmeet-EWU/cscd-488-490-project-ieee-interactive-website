@@ -84,7 +84,7 @@ const Events = () => {
             <div className="event-card" key={event.id}>
               <div className="event-banner">
                 <img
-                  src={`http://localhost:5000/${event.banner}` || eventBanner}
+                  src={`http://localhost:3001/${event.banner}` || eventBanner}
                   alt={event.title}
                 />
               </div>
@@ -134,7 +134,7 @@ const Events = () => {
                 <div className="event-card">
                   <div className="event-banner">
                     <img
-                      src={`http://localhost:5000/${event.banner}` || eventBanner}
+                      src={`http://localhost:3001/${event.banner}` || eventBanner}
                       alt={event.title}
                     />
                   </div>
