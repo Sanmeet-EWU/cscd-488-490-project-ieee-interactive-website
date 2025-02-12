@@ -128,7 +128,7 @@ const Home = () => {
               {upcomingEvents.map((event) => (
                 <div className="event-card-home" key={event.id}>
                   <div className="event-banner-home">
-                    <img src={`http://localhost:5000/${event.banner}`} alt={event.title} style={{ height: "400px", objectFit: "cover", width: "100%" }} />
+                    <img src={`http://localhost:3001/${event.banner}`} alt={event.title} style={{ height: "400px", objectFit: "cover", width: "100%" }} />
                   </div>
                   <div className="event-content-home">
                     <h3 className="event-title-home">{event.title}</h3>

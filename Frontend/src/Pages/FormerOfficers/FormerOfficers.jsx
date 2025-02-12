@@ -86,7 +86,7 @@ const OfficersGrid = () => {
                 email={officer.email}
                 icon={
                   <img 
-                    src={`http://localhost:5000/${officer.profile}`} 
+                    src={`http://localhost:3001/${officer.profile}`} 
                     alt={officer.name} 
                     style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover' }} 
                   />
@@ -105,7 +105,7 @@ const OfficersGrid = () => {
             <div className="modal-header">
               <div className="modal-icon">
                 <img 
-                  src={`http://localhost:5000/${selectedOfficer.profile}`} 
+                  src={`http://localhost:3001/${selectedOfficer.profile}`} 
                   alt={selectedOfficer.name} 
                   style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover' }} 
                 />
