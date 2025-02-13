@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./LHSNav.css";
-import { FaHome, FaUsers, FaHistory, FaEnvelope, FaBriefcase, FaLock, FaCalendarAlt } from 'react-icons/fa';
+import { FaHome, FaUsers, FaHistory, FaEnvelope, FaBriefcase, FaLock, FaCalendarAlt, FaRegImages } from 'react-icons/fa';
 
 const LHSNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,6 +12,7 @@ const LHSNav = () => {
     { path: "/events", icon: <FaCalendarAlt className="nav-icon" />, label: "Events", internal: true },
     { path: "/officers", icon: <FaUsers className="nav-icon" />, label: "Officers", internal: true },
     { path: "/former-officers", icon: <FaHistory className="nav-icon" />, label: "Former Officers", internal: true },
+    { path: "/photo-gallery", icon: <FaRegImages className="nav-icon" />, label: "Photo Gallery", internal: true },
     { path: "/contact", icon: <FaEnvelope className="nav-icon" />, label: "Contact Form", internal: true },
     { 
       path: "https://jobs.ieee.org/jobs/?keywords=&pos_flt=0&location=Spokane%2C+WA%2C+United+States&location_completion=city%3DSpokane%24state%3DWashington%24country%3DUnited+States&location_type=city&location_text=Spokane%2C+WA%2C+United+States&location_autocomplete=true&radius=320",
