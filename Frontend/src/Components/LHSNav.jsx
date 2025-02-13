@@ -70,7 +70,6 @@ const LHSNav = () => {
           <span className="line line3"></span>
         </div>
       </button>
-
       <div className={`menu-items ${isOpen ? 'show' : ''}`}>
         {menuItems.map((item, index) => renderMenuItem(item, index))}
       </div>

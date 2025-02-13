@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { FaGraduationCap, FaUsers, FaBriefcase, FaCalendarAlt, FaLightbulb, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { FaGraduationCap, FaUsers, FaBriefcase, FaCalendarAlt, FaLightbulb, FaMapMarkerAlt, FaClock, FaRocket, FaHandshake, FaLaptopCode, FaNetworkWired, FaCloud, FaGlobe, FaMobileAlt, FaRobot } from 'react-icons/fa';
 import Spokane from "../../Assets/Spokane.jpeg";
 import request from '../../api/axiosConfig';
 
 const features = [
   {
-    icon: <FaGraduationCap />,
+    icon: <FaGraduationCap style={{ fontSize: '2rem' }} />,
     title: "IEEE Learning Network",
     description: "Access resources and support for your academic journey in engineering.",
     url: "https://iln.ieee.org/public/TrainingCatalog.aspx"
   },
   {
-    icon: <FaUsers />,
+    icon: <FaUsers style={{ fontSize: '2rem' }} />,
     title: "Young Professional Network",
     description: "Connect with peers, professors, and industry professionals.",
     url: "https://yp.ieee.org/"
   },
   {
-    icon: <FaBriefcase />,
+    icon: <FaBriefcase style={{ fontSize: '2rem' }} />,
     title: "Career Opportunities",
     description: "Discover internships and job opportunities in engineering.",
     url: "https://jobs.ieee.org/"
   },
   {
-    icon: <FaLightbulb />,
+    icon: <FaLightbulb style={{ fontSize: '2rem' }} />,
     title: "Collaboratec",
     description: "Collaborate and connect with IEEE communities.",
     url: "https://ieee-collabratec.ieee.org/"
@@ -112,9 +112,9 @@ const Home = () => {
               key={index} 
               onClick={() => window.open(feature.url, '_blank', 'noopener,noreferrer')} 
               className="feature-card animate-in" 
-              style={{ animationDelay: `${index * 0.1}s`, cursor: 'pointer' }}
+              style={{ animationDelay: `${index * 0.1}s`, cursor: 'pointer', transition: 'transform 0.3s', ':hover': { transform: 'scale(1.05)' } }}
             >
-              <div className="feature-icon">{feature.icon}</div>
+              <div className="feature-icon floating">{feature.icon}</div>
               <h3 className="feature-title">{feature.title}</h3>
               <p className="feature-description">{feature.description}</p>
             </div>

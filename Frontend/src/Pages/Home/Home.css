@@ -169,6 +169,22 @@ body {
   box-shadow: 0 8px 16px rgba(0, 102, 153, 0.2);
 }
 
+.feature-icon.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-10px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}
+
 .feature-title {
   font-size: 1.5rem;
   color: var(--ieee-dark-blue);
