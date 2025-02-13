@@ -70,11 +70,7 @@ const ContactForm = () => {
           <div className="contact-details">
             <div className="contact-item">
               <FaEnvelope />
-              <span>XXXXXXXXX</span>
-            </div>
-            <div className="contact-item">
-              <FaPhone />
-              <span>(509) XXXXXXX</span>
+              <span>IEEESpokane@gmail.com</span>
             </div>
           </div>
         </div>

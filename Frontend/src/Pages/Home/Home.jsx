@@ -8,13 +8,13 @@ import request from '../../api/axiosConfig';
 const features = [
   {
     icon: <FaGraduationCap />,
-    title: "Academic Excellence",
+    title: "IEEE Learning Network",
     description: "Access resources and support for your academic journey in engineering.",
     url: "https://iln.ieee.org/public/TrainingCatalog.aspx"
   },
   {
     icon: <FaUsers />,
-    title: "Professional Network",
+    title: "Young Professional Network",
     description: "Connect with peers, professors, and industry professionals.",
     url: "https://yp.ieee.org/"
   },
@@ -26,8 +26,8 @@ const features = [
   },
   {
     icon: <FaLightbulb />,
-    title: "Innovation Hub",
-    description: "Stay updated with the latest technological advancements.",
+    title: "Collaboratec",
+    description: "Collaborate and connect with IEEE communities.",
     url: "https://ieee-collabratec.ieee.org/"
   },
 ];

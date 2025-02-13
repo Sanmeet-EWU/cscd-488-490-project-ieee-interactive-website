@@ -175,12 +175,15 @@
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  opacity: 0;
   gap: 10px;
   z-index: 1001;
 }
 
 .menu-items.show {
   left: 0;
+  display: block;
+  opacity: 1;
 }
 
 .menu-item {
