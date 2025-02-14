@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
-import eventBanner from "../../Assets/rising-stars-2025-banner.jpg"; // Default banner, can be updated based on fetched data
 import "./Events.css";
 import request from "../../api/axiosConfig";
 const convertTo12HourFormat = (time24) => {
@@ -87,7 +86,7 @@ const Events = () => {
             <div className="event-card" key={event.id}>
               <div className="event-banner">
                 <img
-                  src={`http://localhost:3001/${event.banner}` || eventBanner}
+                  src={`http://localhost:3001/${event.banner}`}
                   alt={event.title}
                 />
               </div>
@@ -141,9 +140,7 @@ const Events = () => {
                 <div className="event-card">
                   <div className="event-banner">
                     <img
-                      src={
-                        `http://localhost:3001/${event.banner}` || eventBanner
-                      }
+                      src={`http://localhost:3001/${event.banner}`}
                       alt={event.title}
                     />
                   </div>
