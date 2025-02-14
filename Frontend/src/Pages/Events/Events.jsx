@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
+import eventBanner from "../../Assets/rising-stars-2025-banner.jpg"; // Default banner, can be updated based on fetched data
 import "./Events.css";
 import request from "../../api/axiosConfig";
 const convertTo12HourFormat = (time24) => {
-  const [hours, minutes] = time24.split(':');
+  const [hours, minutes] = time24.split(":");
   let hour = parseInt(hours, 10);
-  const ampm = hour >= 12 ? 'PM' : 'AM';
+  const ampm = hour >= 12 ? "PM" : "AM";
 
   hour = hour % 12;
   if (hour === 0) hour = 12;
@@ -13,8 +14,13 @@ const convertTo12HourFormat = (time24) => {
   return `${hour}:${minutes} ${ampm}`;
 };
 const formatDate = (dateString) => {
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-  return new Date(dateString).toLocaleDateString('en-US', options);
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  return new Date(dateString).toLocaleDateString("en-US", options);
 };
 
 const Events = () => {
@@ -23,35 +29,34 @@ const Events = () => {
 
   const fetchEvents = async () => {
     try {
-      const data = await request('get', '/events');
+      const data = await request("get", "/events");
 
-      const now = new Date(); 
+      const now = new Date();
 
-      const futureEvents = data.filter(event => {
-        const eventDate = new Date(event.event_date); 
-        const [hours, minutes] = event.event_time.split(':');
+      const futureEvents = data.filter((event) => {
+        const eventDate = new Date(event.event_date);
+        const [hours, minutes] = event.event_time.split(":");
         eventDate.setHours(hours);
         eventDate.setMinutes(minutes);
         return eventDate >= now;
       });
 
-      const pastEventsData = data.filter(event => {
-        const eventDate = new Date(event.event_date); 
-        const [hours, minutes] = event.event_time.split(':');
+      const pastEventsData = data.filter((event) => {
+        const eventDate = new Date(event.event_date);
+        const [hours, minutes] = event.event_time.split(":");
         eventDate.setHours(hours);
         eventDate.setMinutes(minutes);
         return eventDate < now;
       });
 
-
       const sortedUpcomingEvents = futureEvents.sort((a, b) => {
         const dateA = new Date(a.event_date);
-        const [hoursA, minutesA] = a.event_time.split(':');
+        const [hoursA, minutesA] = a.event_time.split(":");
         dateA.setHours(hoursA);
         dateA.setMinutes(minutesA);
 
         const dateB = new Date(b.event_date);
-        const [hoursB, minutesB] = b.event_time.split(':');
+        const [hoursB, minutesB] = b.event_time.split(":");
         dateB.setHours(hoursB);
         dateB.setMinutes(minutesB);
         return dateA - dateB;
@@ -59,9 +64,8 @@ const Events = () => {
 
       setUpcomingEvents(sortedUpcomingEvents);
       setPastEvents(pastEventsData.reverse());
-
     } catch (error) {
-      console.error('Error fetching events:', error);
+      console.error("Error fetching events:", error);
     }
   };
 
@@ -77,13 +81,13 @@ const Events = () => {
       </div>
 
       <section className="upcoming-events-section">
-        <h2>Upcoming Event{upcomingEvents.length > 1 ? 's' : ''}</h2>
+        <h2>Upcoming Event{upcomingEvents.length > 1 ? "s" : ""}</h2>
         {upcomingEvents.length > 0 ? (
           upcomingEvents.map((event) => (
             <div className="event-card" key={event.id}>
               <div className="event-banner">
                 <img
-                  src={`http://localhost:3001/${event.banner}`}
+                  src={`http://localhost:3001/${event.banner}` || eventBanner}
                   alt={event.title}
                 />
               </div>
@@ -98,7 +102,9 @@ const Events = () => {
                   </div>
                   <div className="meta-item">
                     <FaClock className="meta-icon" />
-                    <span>{convertTo12HourFormat(event.event_time.substring(0, 5))}</span>
+                    <span>
+                      {convertTo12HourFormat(event.event_time.substring(0, 5))}
+                    </span>
                   </div>
                   <div className="meta-item">
                     <FaMapMarkerAlt className="meta-icon" />
@@ -120,7 +126,9 @@ const Events = () => {
             </div>
           ))
         ) : (
-          <p className="no-events">No upcoming events scheduled yet. Check back later!</p>
+          <p className="no-events">
+            No upcoming events scheduled yet. Check back later!
+          </p>
         )}
       </section>
 
@@ -133,7 +141,9 @@ const Events = () => {
                 <div className="event-card">
                   <div className="event-banner">
                     <img
-                      src={`http://localhost:3001/${event.banner}`}
+                      src={
+                        `http://localhost:3001/${event.banner}` || eventBanner
+                      }
                       alt={event.title}
                     />
                   </div>
@@ -148,7 +158,11 @@ const Events = () => {
                       </div>
                       <div className="meta-item">
                         <FaClock className="meta-icon" />
-                        <span>{convertTo12HourFormat(event.event_time.substring(0, 5))}</span>
+                        <span>
+                          {convertTo12HourFormat(
+                            event.event_time.substring(0, 5),
+                          )}
+                        </span>
                       </div>
                       <div className="meta-item">
                         <FaMapMarkerAlt className="meta-icon" />
