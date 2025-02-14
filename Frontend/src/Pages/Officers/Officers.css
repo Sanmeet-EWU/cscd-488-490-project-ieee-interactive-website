@@ -1,0 +1,183 @@
+.officers-page {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-title {
+  text-align: center;
+  color: #ffffff;
+  font-size: 5rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+  background-color: #002855;
+}
+
+.officer-section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  color: #002855;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #002855;
+}
+
+.officers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: rgb(230, 0, 0);
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+.modal-close:hover {
+  color: #002855;
+}
+
+.modal-header {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.modal-title {
+  flex: 1;
+}
+
+.modal-title h3 {
+  color: #002855;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.modal-title p {
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.modal-email {
+  color: #002855;
+  font-weight: 500;
+}
+
+.modal-body {
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modal-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .modal-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+  }
+}
+
+.social-media-links {
+  margin-top: 20px;
+}
+
+.social-media-links h4 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #002855;
+}
+
+.social-media-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.social-media-links ul li {
+  margin-bottom: 5px;
+}
+
+.social-media-links ul li a {
+  color: #0056b3;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-media-links ul li a:hover {
+  color: #002855;
+}
+
+.social-media-icons {
+  margin-top: 20px;
+}
+
+.social-media-icons h4 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #002855;
+}
+
+.icons-container {
+  display: flex;
+  gap: 10px;
+}
+
+.social-icon {
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: scale(1.2);
+}
