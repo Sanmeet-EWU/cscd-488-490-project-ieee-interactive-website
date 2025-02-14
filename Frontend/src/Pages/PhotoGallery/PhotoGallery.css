@@ -1,0 +1,11 @@
+.photo-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white; /* Ensure it's visible */
+    color: black; /* Make sure text is visible */
+    position: relative; /* In case parent has absolute positioning */
+    z-index: 10; /* Bring it above other elements */
+  }
+  
