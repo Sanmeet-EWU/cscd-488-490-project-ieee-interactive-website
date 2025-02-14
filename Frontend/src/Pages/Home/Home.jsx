@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
-import { FaGraduationCap, FaUsers, FaBriefcase, FaCalendarAlt, FaLightbulb, FaMapMarkerAlt, FaClock, FaRocket, FaHandshake, FaLaptopCode, FaNetworkWired, FaCloud, FaGlobe, FaMobileAlt, FaRobot } from 'react-icons/fa';
+import { FaGraduationCap, FaUsers, FaBriefcase, FaCalendarAlt, FaLightbulb, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
 import Spokane from "../../Assets/Spokane.jpeg";
 import request from '../../api/axiosConfig';
 
@@ -31,17 +31,6 @@ const features = [
     url: "https://ieee-collabratec.ieee.org/"
   },
 ];
-
-const upcomingEvent = {
-  title: "Student Presentations: Rising Stars 2025",
-  description: "Join us for an exciting evening of student presentations! STEM Students Welcome! Free Pizza provided.",
-  date: "2025-01-30",
-  time: "5:00 PM - 6:30 PM",
-  location: "EWU Catalyst Building, 601 E Riverside Ave, Room CAT 304",
-  type: "Student Event",
-  registration: "https://events.vtools.ieee.org/m/462092",
-  bannerImage: "/images/events/rising-stars-2025.jpg"
-};
 
 const formatDate = (dateString) => {
   const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
