@@ -147,7 +147,9 @@
   width: 100%;
   background: white;
   border-radius: 10px;
-  transition: transform 0.3s ease, opacity 0.2s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.2s ease;
 }
 
 .nav-open .line1 {
@@ -251,7 +253,7 @@
   .menu-items {
     width: 260px;
   }
-  
+
   .hamburger {
     top: 15px;
     left: 15px;

@@ -1,21 +1,21 @@
 import React from "react";
 import "./TopNavBar.css";
-import { FaGlobe, FaBook, FaRocket, FaEllipsisH } from 'react-icons/fa';
+import { FaGlobe, FaBook, FaRocket, FaEllipsisH } from "react-icons/fa";
 
 const TopNavBar = () => {
   return (
     <nav className="top-nav">
       <div className="nav-links">
-        <a 
-          href="https://www.ieee.org/" 
-          target="_blank" 
+        <a
+          href="https://www.ieee.org/"
+          target="_blank"
           rel="noopener noreferrer"
           className="nav-link"
         >
           <FaGlobe className="nav-link-icon" />
           IEEE.org
         </a>
-        <a 
+        <a
           href="https://ieeexplore.ieee.org/Xplore/home.jsp"
           target="_blank"
           rel="noopener noreferrer"
@@ -24,7 +24,7 @@ const TopNavBar = () => {
           <FaBook className="nav-link-icon" />
           IEEE Xplore Digital Library
         </a>
-        <a 
+        <a
           href="https://standards.ieee.org/"
           target="_blank"
           rel="noopener noreferrer"
@@ -33,15 +33,15 @@ const TopNavBar = () => {
           <FaRocket className="nav-link-icon" />
           IEEE Standards
         </a>
-        <a 
+        <a
           href="https://spectrum.ieee.org/"
           target="_blank"
           rel="noopener noreferrer"
           className="nav-link"
         >
-          <FaGlobe style={{ marginRight: '5px' }} /> IEEE Spectrum
+          <FaGlobe style={{ marginRight: "5px" }} /> IEEE Spectrum
         </a>
-        <a 
+        <a
           href="https://www.ieee.org/sitemap.html"
           target="_blank"
           rel="noopener noreferrer"
