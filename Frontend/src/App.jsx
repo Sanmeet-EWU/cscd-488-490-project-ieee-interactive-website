@@ -4,7 +4,6 @@ import LHSNav from './Components/LHSNav';
 import Home from './Pages/Home/Home';
 import Officers from './Pages/Officers/Officers';
 import FormerOfficers from './Pages/FormerOfficers/FormerOfficers';
-import Employment from './Pages/Employment/Employment';
 import ContactForm from './Pages/ContactForm/ContactForm';
 import Admin from './Pages/Admin/Admin';
 import AdminDashboard from './Pages/Admin/AdminDashboard';
@@ -39,7 +38,6 @@ const App = () => {
               <Route path="/events" element={<Events />} />
               <Route path="/officers" element={<Officers />} />
               <Route path="/former-officers" element={<FormerOfficers />} />
-              <Route path="/employment" element={<Employment />} />
               <Route path="/contact" element={<ContactForm />} />
               <Route path="/admin" element={<Admin />} />
               <Route 

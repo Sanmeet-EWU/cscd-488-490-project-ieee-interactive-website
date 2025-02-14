@@ -26,7 +26,7 @@ const features = [
   },
   {
     icon: <FaLightbulb />,
-    title: "Collaboratec",
+    title: "IEEE Collaboratec",
     description: "Collaborate and connect with IEEE communities.",
     url: "https://ieee-collabratec.ieee.org/"
   },

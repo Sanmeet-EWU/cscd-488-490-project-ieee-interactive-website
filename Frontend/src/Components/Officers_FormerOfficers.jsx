@@ -1,5 +1,5 @@
 import React from 'react';
-import './OfficersCard.css';
+import './Officers_FormerOfficers.css';
 
 const OfficersCard = ({ name, title, email, icon, onAboutClick }) => {
   return (
