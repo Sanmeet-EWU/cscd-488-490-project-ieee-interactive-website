@@ -44,7 +44,7 @@
   z-index: 1000;
   opacity: 0;
   transform: translateY(-10px);
-  animation: slideDown 0.3s ease forwards;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 @keyframes slideDown {
@@ -52,6 +52,16 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.lhs-nav.open .dropdown-menu {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lhs-nav.closed .dropdown-menu {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 
 .dropdown-menu a {
@@ -147,7 +157,9 @@
   width: 100%;
   background: white;
   border-radius: 10px;
-  transition: transform 0.3s ease, opacity 0.2s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.2s ease;
 }
 
 .nav-open .line1 {
@@ -251,7 +263,7 @@
   .menu-items {
     width: 260px;
   }
-  
+
   .hamburger {
     top: 15px;
     left: 15px;

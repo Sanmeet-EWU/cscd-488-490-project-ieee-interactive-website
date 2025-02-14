@@ -16,8 +16,16 @@
   --text-muted: #888888;
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, var(--ieee-dark-blue), var(--ieee-blue));
-  --gradient-accent: linear-gradient(45deg, var(--ieee-blue), var(--ieee-light-blue));
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--ieee-dark-blue),
+    var(--ieee-blue)
+  );
+  --gradient-accent: linear-gradient(
+    45deg,
+    var(--ieee-blue),
+    var(--ieee-light-blue)
+  );
   --gradient-light: linear-gradient(to right, var(--pale-blue), #ffffff);
 
   /* Shadows */
@@ -59,7 +67,7 @@ body {
 }
 
 .section-title::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -8px;
   left: 0;

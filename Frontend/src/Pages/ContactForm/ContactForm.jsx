@@ -1,72 +1,80 @@
-import React, { useState } from 'react';
-import './ContactForm.css';
-import { FaUser, FaEnvelope, FaPhone, FaComment } from 'react-icons/fa';
-import Spokane from '../../Assets/Spokane.jpeg';
-import request from '../../api/axiosConfig';
+import React, { useState } from "react";
+import "./ContactForm.css";
+import { FaUser, FaEnvelope, FaPhone, FaComment } from "react-icons/fa";
+import Spokane from "../../Assets/Spokane.jpeg";
+import request from "../../api/axiosConfig";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   });
 
   const [isSending, setIsSending] = useState(false);
-  const [responseMessage, setResponseMessage] = useState('');
+  const [responseMessage, setResponseMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSending(true);
-    setResponseMessage('');
+    setResponseMessage("");
 
     try {
-      request('post', '/send-email', {
+      request("post", "/send-email", {
         email: formData.email,
         subject: `Message from ${formData.name}`,
-        text: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || 'N/A'}\nMessage: ${formData.message}`,
-      })
+        text: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || "N/A"}\nMessage: ${formData.message}`,
+      });
 
       // Handle successful response
-      setResponseMessage('Your message has been sent successfully!');
+      setResponseMessage("Your message has been sent successfully!");
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: '',
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
       });
     } catch (error) {
       // Handle error
-      setResponseMessage('There was an error sending your message. Please try again later.');
-      console.error('Error sending email:', error);
+      setResponseMessage(
+        "There was an error sending your message. Please try again later.",
+      );
+      console.error("Error sending email:", error);
     } finally {
       setIsSending(false);
     }
   };
 
   return (
-    <div className="contact-page" style={{
-      backgroundImage: `url(${Spokane})`,
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      minHeight: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: '20px'
-    }}>
+    <div
+      className="contact-page"
+      style={{
+        backgroundImage: `url(${Spokane})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
+      }}
+    >
       <div className="contact-container">
         <div className="contact-info">
           <h2>Get in Touch</h2>
-          <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+          <p>
+            Have questions? We'd love to hear from you. Send us a message and
+            we'll respond as soon as possible.
+          </p>
           <div className="contact-details">
             <div className="contact-item">
               <FaEnvelope />
@@ -132,8 +140,12 @@ const ContactForm = () => {
               ></textarea>
             </div>
 
-            <button type="submit" className="submit-button" disabled={isSending}>
-              {isSending ? 'Sending...' : 'Send Message'}
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isSending}
+            >
+              {isSending ? "Sending..." : "Send Message"}
             </button>
           </form>
 

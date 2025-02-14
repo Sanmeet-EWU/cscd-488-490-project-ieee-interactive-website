@@ -1,49 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import './Admin.css';
-import { FaUser, FaLock } from 'react-icons/fa';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import "./Admin.css";
+import { FaUser, FaLock } from "react-icons/fa";
 
 const Admin = () => {
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuth();
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/admin-dashboard');
+      navigate("/admin-dashboard");
     }
   }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
-    setError('');
+    setError("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    setError('');
+    setError("");
 
     try {
       const success = await login(formData.username, formData.password);
       if (success) {
-        navigate('/admin-dashboard');
+        navigate("/admin-dashboard");
       } else {
-        setError('Invalid username or password');
+        setError("Invalid username or password");
       }
     } catch (error) {
-      setError('An error occurred during login');
-      console.error('Login error:', error);
+      setError("An error occurred during login");
+      console.error("Login error:", error);
     } finally {
       setIsLoading(false);
     }
@@ -88,12 +88,8 @@ const Admin = () => {
                 placeholder="Password"
               />
             </div>
-            <button 
-              type="submit" 
-              className="login-button"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Logging in...' : 'Login'}
+            <button type="submit" className="login-button" disabled={isLoading}>
+              {isLoading ? "Logging in..." : "Login"}
             </button>
           </form>
         </div>

@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import OfficersCard from '../../Components/Officers_FormerOfficers';
-import './FormerOfficers.css';
-import { FaLinkedin, FaInstagram, FaSnapchat, FaYoutube, FaTwitch, FaTwitter, FaFacebook } from 'react-icons/fa';
-import request from '../../api/axiosConfig';
+import React, { useEffect, useState } from "react";
+import OfficersCard from "../../Components/Officers_FormerOfficers";
+import "./FormerOfficers.css";
+import {
+  FaLinkedin,
+  FaInstagram,
+  FaSnapchat,
+  FaYoutube,
+  FaTwitch,
+  FaTwitter,
+  FaFacebook,
+} from "react-icons/fa";
+import request from "../../api/axiosConfig";
 
 const OfficersGrid = () => {
   const [selectedOfficer, setSelectedOfficer] = useState(null);
@@ -10,19 +18,19 @@ const OfficersGrid = () => {
 
   const getSocialMediaIcon = (platform) => {
     switch (platform) {
-      case 'LinkedIn':
+      case "LinkedIn":
         return <FaLinkedin size={24} color="#0A66C2" />;
-      case 'Instagram':
+      case "Instagram":
         return <FaInstagram size={24} color="#E1306C" />;
-      case 'Snapchat':
+      case "Snapchat":
         return <FaSnapchat size={24} color="#FFFC00" />;
-      case 'Youtube':
+      case "Youtube":
         return <FaYoutube size={24} color="#FF0000" />;
-      case 'Twitch':
+      case "Twitch":
         return <FaTwitch size={24} color="#6441A5" />;
-      case 'Twitter':
+      case "Twitter":
         return <FaTwitter size={24} color="#1DA1F2" />;
-      case 'Facebook':
+      case "Facebook":
         return <FaFacebook size={24} color="#1877F2" />;
       default:
         return null;
@@ -31,10 +39,10 @@ const OfficersGrid = () => {
 
   const fetchOfficers = async () => {
     try {
-      const data = await request('get', '/officers');
-      setOfficers(data); 
+      const data = await request("get", "/officers");
+      setOfficers(data);
     } catch (error) {
-      console.error('Error fetching officers:', error);
+      console.error("Error fetching officers:", error);
     }
   };
 
@@ -50,7 +58,9 @@ const OfficersGrid = () => {
     setSelectedOfficer(null);
   };
 
-  const formerOfficers = officers.filter(officer => officer.is_former_officer === 1);
+  const formerOfficers = officers.filter(
+    (officer) => officer.is_former_officer === 1,
+  );
 
   const categorizedOfficers = formerOfficers.reduce((categories, officer) => {
     const { chapter_group } = officer;
@@ -85,10 +95,15 @@ const OfficersGrid = () => {
                 title={officer.position}
                 email={officer.email}
                 icon={
-                  <img 
-                    src={`http://localhost:3001/${officer.profile}`} 
-                    alt={officer.name} 
-                    style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover' }} 
+                  <img
+                    src={`http://localhost:3001/${officer.profile}`}
+                    alt={officer.name}
+                    style={{
+                      width: 150,
+                      height: 150,
+                      borderRadius: "50%",
+                      objectFit: "cover",
+                    }}
                   />
                 }
                 onAboutClick={() => handleBioClick(officer)}
@@ -101,13 +116,20 @@ const OfficersGrid = () => {
       {selectedOfficer && (
         <div className="modal-overlay" onClick={handleClosemodal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close" onClick={handleClosemodal}>&times;</button>
+            <button className="modal-close" onClick={handleClosemodal}>
+              &times;
+            </button>
             <div className="modal-header">
               <div className="modal-icon">
-                <img 
-                  src={`http://localhost:3001/${selectedOfficer.profile}`} 
-                  alt={selectedOfficer.name} 
-                  style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover' }} 
+                <img
+                  src={`http://localhost:3001/${selectedOfficer.profile}`}
+                  alt={selectedOfficer.name}
+                  style={{
+                    width: 150,
+                    height: 150,
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
                 />
               </div>
               <div className="modal-title">
@@ -118,24 +140,25 @@ const OfficersGrid = () => {
             </div>
             <div className="modal-body">
               <p>{selectedOfficer.bio}</p>
-              {selectedOfficer.social_media && selectedOfficer.social_media.length > 0 && (
-                <div className="social-media-icons">
-                  <h4>Socials:</h4>
-                  <div className="icons-container">
-                    {selectedOfficer.social_media.map((social, idx) => (
-                      <a
-                        key={idx}
-                        href={social.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="social-icon"
-                      >
-                        {getSocialMediaIcon(social.platform)}
-                      </a>
-                    ))}
+              {selectedOfficer.social_media &&
+                selectedOfficer.social_media.length > 0 && (
+                  <div className="social-media-icons">
+                    <h4>Socials:</h4>
+                    <div className="icons-container">
+                      {selectedOfficer.social_media.map((social, idx) => (
+                        <a
+                          key={idx}
+                          href={social.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="social-icon"
+                        >
+                          {getSocialMediaIcon(social.platform)}
+                        </a>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
             </div>
           </div>
         </div>

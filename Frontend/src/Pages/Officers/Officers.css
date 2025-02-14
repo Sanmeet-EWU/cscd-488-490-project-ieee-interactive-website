@@ -10,8 +10,7 @@
   font-size: 5rem;
   margin-bottom: 2rem;
   font-weight: bold;
-  background-color: #002855
-
+  background-color: #002855;
 }
 
 .officer-section {
@@ -182,4 +181,3 @@
 .social-icon:hover {
   transform: scale(1.2);
 }
-

@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import OfficersCard from '../../Components/Officers_FormerOfficers';
-import './Officers.css';
-import { FaUserCircle, FaLinkedin, FaInstagram, FaSnapchat, FaYoutube, FaTwitch, FaTwitter, FaFacebook } from 'react-icons/fa';
-import request from '../../api/axiosConfig';
+import React, { useEffect, useState } from "react";
+import OfficersCard from "../../Components/Officers_FormerOfficers";
+import "./Officers.css";
+import {
+  FaUserCircle,
+  FaLinkedin,
+  FaInstagram,
+  FaSnapchat,
+  FaYoutube,
+  FaTwitch,
+  FaTwitter,
+  FaFacebook,
+} from "react-icons/fa";
+import request from "../../api/axiosConfig";
 
 const OfficersGrid = () => {
   const [selectedOfficer, setSelectedOfficer] = useState(null);
@@ -19,29 +28,42 @@ const OfficersGrid = () => {
 
   const getSocialMediaIcon = (platform) => {
     switch (platform) {
-      case 'LinkedIn': return <FaLinkedin size={24} color="#0A66C2" />;
-      case 'Instagram': return <FaInstagram size={24} color="#E1306C" />;
-      case 'Snapchat': return <FaSnapchat size={24} color="#FFFC00" />;
-      case 'Youtube': return <FaYoutube size={24} color="#FF0000" />;
-      case 'Twitch': return <FaTwitch size={24} color="#6441A5" />;
-      case 'Twitter': return <FaTwitter size={24} color="#1DA1F2" />;
-      case 'Facebook': return <FaFacebook size={24} color="#1877F2" />;
-      default: return null;
+      case "LinkedIn":
+        return <FaLinkedin size={24} color="#0A66C2" />;
+      case "Instagram":
+        return <FaInstagram size={24} color="#E1306C" />;
+      case "Snapchat":
+        return <FaSnapchat size={24} color="#FFFC00" />;
+      case "Youtube":
+        return <FaYoutube size={24} color="#FF0000" />;
+      case "Twitch":
+        return <FaTwitch size={24} color="#6441A5" />;
+      case "Twitter":
+        return <FaTwitter size={24} color="#1DA1F2" />;
+      case "Facebook":
+        return <FaFacebook size={24} color="#1877F2" />;
+      default:
+        return null;
     }
   };
 
   const processOfficersData = (officers) => {
-    const regularOfficers = officers.filter(officer => officer.is_former_officer !== 1);
-    console.log(regularOfficers)
+    const regularOfficers = officers.filter(
+      (officer) => officer.is_former_officer !== 1,
+    );
+    console.log(regularOfficers);
 
     const grouped = regularOfficers.reduce((acc, officer) => {
-      const sectionTitle = SECTION_MAPPING[officer.chapter_group] || 'Other Officers';
+      const sectionTitle =
+        SECTION_MAPPING[officer.chapter_group] || "Other Officers";
 
       if (!acc[sectionTitle]) {
         acc[sectionTitle] = [];
       }
 
-      const profileImageUrl = officer.profile ? `http://localhost:3001/${officer.profile}` : null;
+      const profileImageUrl = officer.profile
+        ? `http://localhost:3001/${officer.profile}`
+        : null;
 
       acc[sectionTitle].push({
         name: officer.name,
@@ -51,9 +73,16 @@ const OfficersGrid = () => {
           <img
             src={profileImageUrl}
             alt={officer.name}
-            style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover' }}
+            style={{
+              width: 150,
+              height: 150,
+              borderRadius: "50%",
+              objectFit: "cover",
+            }}
           />
-        ) : <FaUserCircle size={150} color="#002855" />,
+        ) : (
+          <FaUserCircle size={150} color="#002855" />
+        ),
         bio: officer.bio,
         social_media: officer.social_media,
       });
@@ -65,12 +94,12 @@ const OfficersGrid = () => {
   };
   const fetchOfficers = async () => {
     try {
-      const data = await request('get', '/officers');
+      const data = await request("get", "/officers");
       const processedData = processOfficersData(data);
-      console.log(processedData)
+      console.log(processedData);
       setOfficerSections(processedData);
     } catch (error) {
-      console.error('Error fetching officers:', error);
+      console.error("Error fetching officers:", error);
     }
   };
 
@@ -111,12 +140,12 @@ const OfficersGrid = () => {
       {/* Modal remains the same */}
       {selectedOfficer && (
         <div className="modal-overlay" onClick={handleClosemodal}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <button className="modal-close" onClick={handleClosemodal}>&times;</button>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={handleClosemodal}>
+              &times;
+            </button>
             <div className="modal-header">
-              <div className="modal-icon">
-                {selectedOfficer.icon}
-              </div>
+              <div className="modal-icon">{selectedOfficer.icon}</div>
               <div className="modal-title">
                 <h3>{selectedOfficer.name}</h3>
                 <p>{selectedOfficer.title}</p>
