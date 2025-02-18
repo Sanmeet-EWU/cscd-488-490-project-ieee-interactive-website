@@ -10,7 +10,6 @@ import {
   FaLock,
   FaCalendarAlt,
   FaRegImages,
-  FaBook,
 } from "react-icons/fa";
 
 const LHSNav = () => {
@@ -52,12 +51,6 @@ const LHSNav = () => {
       path: "/contact",
       icon: <FaEnvelope className="nav-icon" />,
       label: "Contact Form",
-      internal: true,
-    },
-    {
-      path: "/society-chapters",
-      icon: <FaBook className="nav-icon" />,
-      label: "Society Chapters",
       internal: true,
     },
     {
