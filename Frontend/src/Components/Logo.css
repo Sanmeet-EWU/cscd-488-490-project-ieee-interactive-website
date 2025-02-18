@@ -2,8 +2,6 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  position: sticky; /* Keeps the logo at the top while scrolling */
-  top: 0;
   background-color: white; /* Background to avoid overlap */
   height: 63px;
   padding: 10px 0;
