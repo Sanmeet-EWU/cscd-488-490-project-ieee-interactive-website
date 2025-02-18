@@ -111,6 +111,18 @@
   background-color: #003366;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.success-message {
+  animation: fadeIn 1s ease-in-out;
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .contact-container {
