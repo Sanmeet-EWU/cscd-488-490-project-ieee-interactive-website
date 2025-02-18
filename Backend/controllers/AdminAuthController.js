@@ -23,4 +23,8 @@ export const verifyAdmin = async (req, res, next) => {
     console.error("Authorization error:", error);
     return res.status(401).json({ message: "Invalid or expired token." });
   }
+<<<<<<< HEAD
 };
+=======
+};
+>>>>>>> dc94d8873728419495ab7b2dafb8ac1a9c286fa7
