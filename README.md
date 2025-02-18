@@ -3,8 +3,8 @@
 
 # Project IEEE Interactive Website
 
-
 ## Table of Contents
+
 - [IEEE Interactive Website](#project)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -12,8 +12,8 @@
   - [Web](#web)
   - [Contributing](#contributing)
 
-
 ### Prerequisites
+
 - React
 - TailWindCSS
 - Node
@@ -30,6 +30,7 @@ git clone https://github.com/Sanmeet-EWU/cscd-488-490-project-ieee-interactive-w
 ```
 
 4. Navigate to the project directory website and check if react and node are up to date
+
 ```powershell
 cd ~/cscd-488-490-project-ieee-interactive-website/website
 React (version 10.9.0): npm -v
@@ -37,12 +38,15 @@ Node (version 20.10.0): node -v
 ```
 
 ### Server
+
 1. Make sure you are on the right directory before running it:
+
 ```powershell
 cd ./server
 ```
 
 2. **Running server**:
+
 ```powershell
 npm run dev
 ```
@@ -50,7 +54,9 @@ npm run dev
 3. **Localhost**: Link to the server is http://localhost:5000/api
 
 ### Web
+
 1. Make sure you have installed the react-scripts package before running it:
+
 ```powershell
 npm install
 ```
@@ -66,24 +72,30 @@ You can exit application by ctlr c
 Note: Saving the file will update the webpage of what you did
 
 ## Contributing
+
 1. **Switching to your branch**: Avoid pushing it to the main branch, switch to your branch:
+
 ```powershell
 git checkout <branch-name>
 Or use VS code bottom left theres main, click and change it to your branch
 ```
+
 2. **Make Your Changes**: Push your changes to your forked repository
+
 ```powershell
 git commit -m "<commit-message>"
 Or use VS code source
 ```
 
 3. **Push Your Changes**: Push your changes to your forked repository
+
 ```powershell
 git push origin <branch-name> # name format for your branch: development_firstName_lastName
 Or use VS code source
 ```
 
 4. **Pulling Someones Branch**: Pull someones change to your branch
+
 ```powershell
 git fetch <branch-name>
 ```

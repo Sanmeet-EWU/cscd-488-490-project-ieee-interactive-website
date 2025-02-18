@@ -1,57 +1,103 @@
-import React, {useEffect, useState} from 'react';
-import './ContactForm.css';
-import { FaUser, FaEnvelope, FaPhone, FaComment } from 'react-icons/fa';
-import Spokane from '../../Assets/Spokane.jpeg';
+import React, { useState } from "react";
+import "./ContactForm.css";
+import { FaUser, FaEnvelope, FaPhone, FaComment } from "react-icons/fa";
+import Spokane from "../../Assets/Spokane.jpeg";
+import axios from "axios";
+import Swal from 'sweetalert2';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
   });
+
+  const [isSending, setIsSending] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({
+    setFormData((prevState) => ({
       ...prevState,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Add form submission logic here
-    console.log('Form submitted:', formData);
+    setIsSending(true);
+    setResponseMessage("");
+
+    try {
+      const response = await axios.post("https://api.web3forms.com/submit", {
+        access_key: "1abead61-53e5-41c3-b880-49824781db40",
+        ...formData,
+      });
+
+      if (response.status === 200) {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Your message has been sent successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to send your message.',
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'There was an error sending your message. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+      });
+      console.error("Error sending message:", error);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
-    <div className="contact-page" style={{
+    <div
+      className="contact-page"
+      style={{
         backgroundImage: `url(${Spokane})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        minHeight: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: '20px'
-    }}>
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px",
+      }}
+    >
       <div className="contact-container">
         <div className="contact-info">
           <h2>Get in Touch</h2>
-          <p>Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+          <p>
+            Have questions? We'd love to hear from you. Send us a message and
+            we'll respond as soon as possible.
+          </p>
           <div className="contact-details">
             <div className="contact-item">
               <FaEnvelope />
-              <span>XXXXXXXXX</span>
-            </div>
-            <div className="contact-item">
-              <FaPhone />
-              <span>(509) XXXXXXX</span>
+              <span>IEEESpokane@gmail.com</span>
             </div>
           </div>
         </div>
-        
+
         <div className="contact-form">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
@@ -109,10 +155,20 @@ const ContactForm = () => {
               ></textarea>
             </div>
 
-            <button type="submit" className="submit-button">
-              Send Message
+            <button
+              type="submit"
+              className="submit-button"
+              disabled={isSending}
+            >
+              {isSending ? "Sending..." : "Send Message"}
             </button>
           </form>
+
+          {responseMessage && (
+            <div className={`response-message ${responseMessage.includes('successfully') ? 'success-message' : ''}`}>
+              <p>{responseMessage}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

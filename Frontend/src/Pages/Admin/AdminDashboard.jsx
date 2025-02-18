@@ -1,309 +1,129 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { FaCalendarAlt, FaUsers, FaPlus, FaEdit, FaTrash } from 'react-icons/fa';
-import { useAuth } from '../../context/AuthContext';
-import './AdminDashboard.css';
-
-const EventForm = ({ event, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState(event || {
-    title: '',
-    date: '',
-    time: '',
-    location: '',
-    description: '',
-    banner: null
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="admin-form">
-      <div className="form-group">
-        <label>Title</label>
-        <input
-          type="text"
-          value={formData.title}
-          onChange={(e) => setFormData({...formData, title: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Date</label>
-        <input
-          type="date"
-          value={formData.date}
-          onChange={(e) => setFormData({...formData, date: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Time</label>
-        <input
-          type="time"
-          value={formData.time}
-          onChange={(e) => setFormData({...formData, time: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Location</label>
-        <input
-          type="text"
-          value={formData.location}
-          onChange={(e) => setFormData({...formData, location: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Description</label>
-        <textarea
-          value={formData.description}
-          onChange={(e) => setFormData({...formData, description: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Banner Image</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setFormData({...formData, banner: e.target.files[0]})}
-        />
-      </div>
-      <div className="form-actions">
-        <button type="submit" className="btn-primary">
-          {event ? 'Update Event' : 'Add Event'}
-        </button>
-        <button type="button" className="btn-secondary" onClick={onCancel}>
-          Cancel
-        </button>
-      </div>
-    </form>
-  );
-};
-
-const OfficerForm = ({ officer, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState(officer || {
-    name: '',
-    position: '',
-    email: '',
-    chapter: 'ieee',
-    socialMediaAccounts: [],
-    bio: '',
-    profilePicture: null,
-    isFormerOfficer: false
-  });
-
-  const [showSocialMedia, setShowSocialMedia] = useState(false);
-
-  const chapters = [
-    { id: 'ieee', name: 'Spokane Section' },
-    { id: 'cs', name: 'Chapter: Power & Energy Society' },
-    { id: 'wie', name: 'Joint Chapter: Antennas and Propagation, Circuits and Systems, Electron Devices, Computer, and Control System Societies' },
-    { id: 'csie', name: 'Joint Chapter: Technology Management and Industry Application Societies' },
-    { id: 'cs', name: 'Affinity Group: Women In Engineering (WIE)' },
-    { id: 'cs', name: 'Affinity Group: Young Professionals (YP)' },
-  ];
-
-  const socialMediaPlatforms = [
-    'LinkedIn',
-    'Instagram',
-    'Snapchat',
-    'Youtube',
-    'Twitch',
-    'Twitter',
-    'Facebook'
-  ];
-
-  const handleAddSocialMedia = () => {
-    setFormData({
-      ...formData,
-      socialMediaAccounts: [...formData.socialMediaAccounts, { platform: '', url: '' }]
-    });
-  };
-
-  const handleRemoveSocialMedia = (index) => {
-    const updatedAccounts = formData.socialMediaAccounts.filter((_, i) => i !== index);
-    setFormData({
-      ...formData,
-      socialMediaAccounts: updatedAccounts
-    });
-  };
-
-  const handleSocialMediaChange = (index, field, value) => {
-    const updatedAccounts = formData.socialMediaAccounts.map((account, i) =>
-      i === index ? { ...account, [field]: value } : account
-    );
-    setFormData({
-      ...formData,
-      socialMediaAccounts: updatedAccounts
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-  };
-
-  return (
-    <form onSubmit={handleSubmit} className="admin-form">
-      <div className="form-group">
-        <label>Chapter/Group</label>
-        <select
-          value={formData.chapter}
-          onChange={(e) => setFormData({...formData, chapter: e.target.value})}
-          required
-        >
-          {chapters.map(chapter => (
-            <option key={chapter.id} value={chapter.id}>
-              {chapter.name}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          value={formData.name}
-          onChange={(e) => setFormData({...formData, name: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Position</label>
-        <input
-          type="text"
-          value={formData.position}
-          onChange={(e) => setFormData({...formData, position: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          value={formData.email}
-          onChange={(e) => setFormData({...formData, email: e.target.value})}
-          required
-        />
-      </div>
-      <div className="form-group">
-        <label>Is Former Officer?</label>
-        <select
-          value={formData.isFormerOfficer ? 'Yes' : 'No'}
-          onChange={(e) => setFormData({...formData, isFormerOfficer: e.target.value === 'Yes'})}
-        >
-          <option value="No">No</option>
-          <option value="Yes">Yes</option>
-        </select>
-      </div>
-      <div className="form-group">
-        <label>Social Media Accounts</label>
-        {formData.socialMediaAccounts.map((account, index) => (
-          <div key={index} className="social-media-entry">
-            <select
-              value={account.platform}
-              onChange={(e) => handleSocialMediaChange(index, 'platform', e.target.value)}
-            >
-              {socialMediaPlatforms.map(platform => (
-                <option key={platform} value={platform}>{platform}</option>
-              ))}
-            </select>
-            <input
-              type="url"
-              value={account.url}
-              onChange={(e) => handleSocialMediaChange(index, 'url', e.target.value)}
-              placeholder="Enter URL"
-            />
-            <button type="button" onClick={() => handleRemoveSocialMedia(index)}>Remove</button>
-          </div>
-        ))}
-        <button type="button" onClick={handleAddSocialMedia}>Add Social Media</button>
-      </div>
-      <div className="form-group">
-        <label>Bio</label>
-        <textarea
-          value={formData.bio}
-          onChange={(e) => setFormData({...formData, bio: e.target.value})}
-        />
-      </div>
-      <div className="form-group">
-        <label>Profile Picture</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setFormData({...formData, profilePicture: e.target.files[0]})}
-        />
-      </div>
-      <div className="form-actions">
-        <button type="submit" className="btn-primary">
-          {officer ? 'Update Officer' : 'Add Officer'}
-        </button>
-        <button type="button" className="btn-secondary" onClick={onCancel}>
-          Cancel
-        </button>
-      </div>
-    </form>
-  );
-};
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import {
+  FaCalendarAlt,
+  FaUsers,
+  FaPlus,
+  FaEdit,
+  FaTrash,
+} from "react-icons/fa";
+import { useAuth } from "../../context/AuthContext";
+import "./AdminDashboard.css";
+import EventForm from "../../Components/Forms/EventForm";
+import OfficerForm from "../../Components/Forms/OfficerForm";
+import request from "../../api/axiosConfig";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
   const { currentUser, logout } = useAuth();
-  const [activeTab, setActiveTab] = useState('events');
-  const [showEventForm, setShowEventForm] = useState(false);
-  const [showOfficerForm, setShowOfficerForm] = useState(false);
+  const [activeTab, setActiveTab] = useState("events");
+  const [showForm, setShowForm] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
   const [events, setEvents] = useState([]);
   const [officers, setOfficers] = useState([]);
-  const [selectedEvent, setSelectedEvent] = useState(null);
-  const [selectedOfficer, setSelectedOfficer] = useState(null);
+
+  const fetchEvents = async () => {
+    try {
+      const dataEvents = await request("get", "/events");
+      const dataOfficers = await request("get", "/officers");
+      setEvents(dataEvents);
+      setOfficers(dataOfficers);
+      console.log(dataOfficers);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
 
   useEffect(() => {
     if (!currentUser) {
-      navigate('/admin');
+      navigate("/admin");
+    } else {
+      fetchEvents();
     }
-  }, [currentUser, navigate]);
+  }, [currentUser]);
 
   const handleLogout = async () => {
     try {
       await logout();
-      navigate('/admin');
+      navigate("/admin");
     } catch (error) {
-      console.error('Failed to log out:', error);
+      console.error("Failed to log out:", error);
     }
   };
 
-  const handleEventSubmit = (eventData) => {
-    if (selectedEvent) {
-      setEvents(events.map(event => 
-        event.id === selectedEvent.id ? { ...eventData, id: event.id } : event
-      ));
+  const handleFormSubmit = async (data) => {
+    fetchEvents();
+    const isEditing = selectedItem !== null;
+    const updateState = activeTab === "events" ? setEvents : setOfficers;
+
+    if (isEditing) {
+      updateState((prevData) =>
+        prevData.map((item) =>
+          item.id === selectedItem.id ? { ...data, id: item.id } : item,
+        ),
+      );
     } else {
-      setEvents([...events, { ...eventData, id: Date.now() }]);
+      updateState((prevData) => {
+        console.log(data);
+        return [...prevData, { ...data }];
+      });
     }
-    setShowEventForm(false);
-    setSelectedEvent(null);
+
+    setShowForm(false);
+    setSelectedItem(null);
   };
 
-  const handleOfficerSubmit = (officerData) => {
-    if (selectedOfficer) {
-      setOfficers(officers.map(officer => 
-        officer.id === selectedOfficer.id ? { ...officerData, id: officer.id } : officer
-      ));
-    } else {
-      setOfficers([...officers, { ...officerData, id: Date.now() }]);
+  const handleDelete = async (id) => {
+    try {
+      const endpoint =
+        activeTab === "events" ? `/events/${id}` : `/officers/${id}`;
+      await request("delete", endpoint); // Delete request
+
+      // Update the correct state
+      if (activeTab === "events") {
+        setEvents((prev) => prev.filter((item) => item.id !== id));
+      } else {
+        setOfficers((prev) => prev.filter((item) => item.id !== id));
+      }
+    } catch (error) {
+      console.error(
+        `Error deleting ${activeTab === "events" ? "event" : "officer"}:`,
+        error,
+      );
     }
-    setShowOfficerForm(false);
-    setSelectedOfficer(null);
   };
 
-  if (!currentUser) {
-    return null;
-  }
+  const renderList = () => {
+    const data = activeTab === "events" ? events : officers;
+    return data.map((item, index) => (
+      <div key={index} className="item-card">
+        <div className="item-content">
+          <h4>{item.title || item.name}</h4>
+          {item.event_date && (
+            <p>{`${item.event_date.split("T")[0]} at ${item.event_time.substring(0, 5)}`}</p>
+          )}
+          {item.position && <p>{item.position}</p>}
+          <p>{item.location || item.email}</p>
+        </div>
+        <div className="item-actions">
+          <button
+            onClick={() => {
+              setSelectedItem(item);
+              setShowForm(true);
+            }}
+            className="btn-edit"
+          >
+            <FaEdit />
+          </button>
+          <button onClick={() => handleDelete(item.id)} className="btn-delete">
+            <FaTrash />
+          </button>
+        </div>
+      </div>
+    ));
+  };
+
+  if (!currentUser) return null;
 
   return (
     <div className="admin-dashboard">
@@ -315,15 +135,15 @@ const AdminDashboard = () => {
           </button>
         </div>
         <div className="tab-navigation">
-          <button 
-            className={`tab-button ${activeTab === 'events' ? 'active' : ''}`}
-            onClick={() => setActiveTab('events')}
+          <button
+            className={`tab-button ${activeTab === "events" ? "active" : ""}`}
+            onClick={() => setActiveTab("events")}
           >
             <FaCalendarAlt /> Events
           </button>
-          <button 
-            className={`tab-button ${activeTab === 'officers' ? 'active' : ''}`}
-            onClick={() => setActiveTab('officers')}
+          <button
+            className={`tab-button ${activeTab === "officers" ? "active" : ""}`}
+            onClick={() => setActiveTab("officers")}
           >
             <FaUsers /> Officers
           </button>
@@ -331,174 +151,51 @@ const AdminDashboard = () => {
       </div>
 
       <div className="dashboard-content">
-        {activeTab === 'events' ? (
-          <div className="section">
-            <div className="section-header">
-              <h2>Event Management</h2>
-              <button className="btn-add" onClick={() => setShowEventForm(true)}>
-                <FaPlus /> Add Event
-              </button>
-            </div>
-            {showEventForm && (
-              <div className="modal">
-                <div className="modal-content">
-                  <h3>{selectedEvent ? 'Edit Event' : 'Add New Event'}</h3>
-                  <EventForm 
-                    event={selectedEvent}
-                    onSubmit={handleEventSubmit}
+        <div className="section">
+          <div className="section-header">
+            <h2>
+              {activeTab === "events"
+                ? "Event Management"
+                : "Officer Management"}
+            </h2>
+            <button className="btn-add" onClick={() => setShowForm(true)}>
+              <FaPlus /> Add {activeTab === "events" ? "Event" : "Officer"}
+            </button>
+          </div>
+          {showForm && (
+            <div className="modal">
+              <div className="modal-content">
+                <h3>
+                  {selectedItem ? "Edit" : "Add New"}{" "}
+                  {activeTab === "events" ? "Event" : "Officer"}
+                </h3>
+                {activeTab === "events" ? (
+                  <EventForm
+                    event={selectedItem}
+                    onSubmit={handleFormSubmit}
                     onCancel={() => {
-                      setShowEventForm(false);
-                      setSelectedEvent(null);
+                      setShowForm(false);
+                      setSelectedItem(null);
                     }}
                   />
-                </div>
-              </div>
-            )}
-            <div className="items-list">
-              {events.map(event => (
-                <div key={event.id} className="item-card">
-                  <div className="item-content">
-                    <h4>{event.title}</h4>
-                    <p>{event.date} at {event.time}</p>
-                    <p>{event.location}</p>
-                  </div>
-                  <div className="item-actions">
-                    <button 
-                      onClick={() => {
-                        setSelectedEvent(event);
-                        setShowEventForm(true);
-                      }} 
-                      className="btn-edit"
-                    >
-                      <FaEdit />
-                    </button>
-                    <button 
-                      onClick={() => setEvents(events.filter(e => e.id !== event.id))} 
-                      className="btn-delete"
-                    >
-                      <FaTrash />
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        ) : (
-          <div className="section">
-            <div className="section-header">
-              <h2>Officer Management</h2>
-              <button className="btn-add" onClick={() => setShowOfficerForm(true)}>
-                <FaPlus /> Add Officer
-              </button>
-            </div>
-            {showOfficerForm && (
-              <div className="modal">
-                <div className="modal-content">
-                  <h3>{selectedOfficer ? 'Edit Officer' : 'Add New Officer'}</h3>
-                  <OfficerForm 
-                    officer={selectedOfficer}
-                    onSubmit={handleOfficerSubmit}
+                ) : (
+                  <OfficerForm
+                    officer={selectedItem}
+                    onSubmit={handleFormSubmit}
                     onCancel={() => {
-                      setShowOfficerForm(false);
-                      setSelectedOfficer(null);
+                      setShowForm(false);
+                      setSelectedItem(null);
                     }}
                   />
-                </div>
+                )}
               </div>
-            )}
-            <div className="items-list">
-              {officers.map(officer => (
-                <div key={officer.id} className="item-card">
-                  <div className="item-content">
-                    <h4>{officer.name}</h4>
-                    <p>{officer.position}</p>
-                    <p>{officer.email}</p>
-                  </div>
-                  <div className="item-actions">
-                    <button 
-                      onClick={() => {
-                        setSelectedOfficer(officer);
-                        setShowOfficerForm(true);
-                      }} 
-                      className="btn-edit"
-                    >
-                      <FaEdit />
-                    </button>
-                    <button 
-                      onClick={() => setOfficers(officers.filter(o => o.id !== officer.id))} 
-                      className="btn-delete"
-                    >
-                      <FaTrash />
-                    </button>
-                  </div>
-                </div>
-              ))}
             </div>
-          </div>
-        )}
+          )}
+          <div className="items-list">{renderList()}</div>
+        </div>
       </div>
     </div>
   );
 };
 
 export default AdminDashboard;
-
-
-// Fetch events from servers (havent tried)
-
-/*const handleEventSubmit = async (eventData) => {
-  try {
-    const method = selectedEvent ? 'PUT' : 'POST';
-    const url = selectedEvent
-      ? `/admin-dashboard/events/${selectedEvent.id}`
-      : '/admin-dashboard/events';
-
-    const response = await fetch(url, {
-      method,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(eventData),
-    });
-
-    if (!response.ok) throw new Error('Failed to save event');
-
-    fetchEvents(); // Refresh events after update
-    setShowEventForm(false);
-    setSelectedEvent(null);
-  } catch (error) {
-    console.error('Error saving event:', error);
-  }
-};
-
-const handleDeleteEvent = async (id) => {
-  try {
-    await fetch(`/admin-dashboard/events/${id}`, { method: 'DELETE' });
-    fetchEvents(); // Refresh events after deletion
-  } catch (error) {
-    console.error('Error deleting event:', error);
-  }
-};
-*/
-
-
-// For moving Officers to FormerOfficers
-
-/*const moveOfficerById = (officerId) => {
-  const moveQuery = `
-      INSERT INTO former_officers (chapter_id, name, title, email, icon_url, bio, date_ended)
-      SELECT chapter_id, name, title, email, icon_url, bio, CURDATE()
-      FROM officers WHERE id = ?;
-  `;
-  
-  const deleteQuery = "DELETE FROM officers WHERE id = ?;";
-
-  db.query(moveQuery, [officerId], (err, result) => {
-      if (err) throw err;
-      db.query(deleteQuery, [officerId], (err, result) => {
-          if (err) throw err;
-          console.log(`Moved officer with ID ${officerId} to former_officers`);
-      });
-  });
-};
-
-// Example: Move officer with ID 3
-moveOfficerById(3);*/

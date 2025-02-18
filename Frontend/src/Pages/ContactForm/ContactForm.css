@@ -1,4 +1,4 @@
-   .contact-page {
+.contact-page {
   min-height: 100vh;
   background-color: #f5f5f5;
   padding: 40px 20px;
@@ -17,7 +17,7 @@
 }
 
 .contact-info {
-  background: linear-gradient(135deg, #002855 0%, #004c99 100%);
+  background: linear-gradient(135deg, #2a3eb1 0%, #00d4ff 100%);
   color: white;
   padding: 40px;
   display: flex;
@@ -109,6 +109,18 @@
 
 .submit-button:hover {
   background-color: #003366;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.success-message {
+  animation: fadeIn 1s ease-in-out;
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
 }
 
 /* Responsive Design */

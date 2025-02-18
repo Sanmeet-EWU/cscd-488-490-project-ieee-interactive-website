@@ -13,7 +13,9 @@ body {
   background: rgb(229, 239, 245);
   color: rgb(14, 110, 158);
   padding: 10px 0;
-  font: 100 1rem "Roboto", sans-serif;
+  font:
+    100 1rem "Roboto",
+    sans-serif;
   font-size: 12px;
   font-weight: bold;
   border-bottom: 0.5px solid rgb(14, 110, 158);
@@ -24,6 +26,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.3s ease-in-out;
 }
 
 .top-nav-bar a {
@@ -43,15 +46,15 @@ body {
 }
 
 .logo-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 100px;
-  }
-  
-  .ieee-logo {
-    max-height: 1000px; /* Adjust the height as needed */
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.ieee-logo {
+  max-height: 1000px; /* Adjust the height as needed */
+}
 
 .top-nav {
   background: linear-gradient(135deg, #003f88 0%, #00509d 50%, #0066cc 100%);
@@ -65,7 +68,7 @@ body {
 }
 
 .top-nav::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -107,7 +110,7 @@ body {
 }
 
 .nav-link::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
