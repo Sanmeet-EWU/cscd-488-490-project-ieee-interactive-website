@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import "./ContactForm.css";
 import { FaUser, FaEnvelope, FaPhone, FaComment } from "react-icons/fa";
 import Spokane from "../../Assets/Spokane.jpeg";
-import request from "../../api/axiosConfig";
+import axios from "axios";
+import Swal from 'sweetalert2';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -29,26 +30,40 @@ const ContactForm = () => {
     setResponseMessage("");
 
     try {
-      request("post", "/send-email", {
-        email: formData.email,
-        subject: `Message from ${formData.name}`,
-        text: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || "N/A"}\nMessage: ${formData.message}`,
+      const response = await axios.post("https://api.web3forms.com/submit", {
+        access_key: "1abead61-53e5-41c3-b880-49824781db40",
+        ...formData,
       });
 
-      // Handle successful response
-      setResponseMessage("Your message has been sent successfully!");
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
+      if (response.status === 200) {
+        Swal.fire({
+          title: 'Success!',
+          text: 'Your message has been sent successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+      } else {
+        Swal.fire({
+          title: 'Error!',
+          text: 'Failed to send your message.',
+          icon: 'error',
+          confirmButtonText: 'Try Again'
+        });
+      }
     } catch (error) {
-      // Handle error
-      setResponseMessage(
-        "There was an error sending your message. Please try again later.",
-      );
-      console.error("Error sending email:", error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'There was an error sending your message. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'Try Again'
+      });
+      console.error("Error sending message:", error);
     } finally {
       setIsSending(false);
     }
@@ -150,7 +165,7 @@ const ContactForm = () => {
           </form>
 
           {responseMessage && (
-            <div className="response-message">
+            <div className={`response-message ${responseMessage.includes('successfully') ? 'success-message' : ''}`}>
               <p>{responseMessage}</p>
             </div>
           )}
