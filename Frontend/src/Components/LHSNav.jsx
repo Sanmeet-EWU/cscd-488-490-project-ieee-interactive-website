@@ -41,12 +41,13 @@ const LHSNav = () => {
       label: "Former Officers",
       internal: true,
     },
+    /*
     {
       path: "/photo-gallery",
       icon: <FaRegImages className="nav-icon" />,
       label: "Photo Gallery",
       internal: true,
-    },
+    },*/
     {
       path: "/contact",
       icon: <FaEnvelope className="nav-icon" />,

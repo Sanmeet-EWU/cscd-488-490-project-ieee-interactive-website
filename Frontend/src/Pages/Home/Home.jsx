@@ -146,44 +146,6 @@ const Home = () => {
           ))}
         </section>
 
-        <h2 className="testimonial-title">What Our Members Say</h2>
-        <hr className="divider" />
-        <div className="testimonial-grid">
-          <div className="testimonial">
-            <div className="stars">
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>☆</span>
-            </div>
-            <p className="testimonial-quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
-            <p className="testimonial-author">- John Doe</p>
-          </div>
-          <div className="testimonial">
-            <div className="stars">
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>☆</span>
-            </div>
-            <p className="testimonial-quote">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
-            <p className="testimonial-author">- Jane Smith</p>
-          </div>
-          <div className="testimonial">
-            <div className="stars">
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>★</span>
-              <span>☆</span>
-            </div>
-            <p className="testimonial-quote">"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
-            <p className="testimonial-author">- Alex Johnson</p>
-          </div>
-        </div>
-
         {upcomingEvents.length > 0 && (
           <section className="upcoming-event-section">
             <h2>Upcoming Event{upcomingEvents.length > 1 ? "s" : ""}</h2>
@@ -234,6 +196,43 @@ const Home = () => {
             {/* End of grid container */}
           </section>
         )}
+        <h2 className="testimonial-title">What Our Members Say</h2>
+        <hr className="divider" />
+        <div className="testimonial-grid">
+          <div className="testimonial">
+            <div className="stars">
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>☆</span>
+            </div>
+            <p className="testimonial-quote">"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."</p>
+            <p className="testimonial-author">- John Doe</p>
+          </div>
+          <div className="testimonial">
+            <div className="stars">
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>☆</span>
+            </div>
+            <p className="testimonial-quote">"Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."</p>
+            <p className="testimonial-author">- Jane Smith</p>
+          </div>
+          <div className="testimonial">
+            <div className="stars">
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>★</span>
+              <span>☆</span>
+            </div>
+            <p className="testimonial-quote">"Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."</p>
+            <p className="testimonial-author">- Alex Johnson</p>
+          </div>
+        </div>
       </div>
     </div>
   );
