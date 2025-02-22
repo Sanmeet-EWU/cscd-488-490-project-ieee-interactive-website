@@ -45,6 +45,7 @@ body {
   color: var(--text-dark);
 }
 
+/* Card component styling */
 .card {
   background: white;
   border-radius: 12px;
@@ -53,11 +54,13 @@ body {
   border: 1px solid rgba(0, 40, 85, 0.1);
 }
 
+/* Hover state for cards */
 .card:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
+/* Section title styling */
 .section-title {
   color: var(--ieee-dark-blue);
   font-size: 2rem;
@@ -66,6 +69,7 @@ body {
   position: relative;
 }
 
+/* Decorative underline for section titles */
 .section-title::after {
   content: "";
   position: absolute;
@@ -77,6 +81,7 @@ body {
   border-radius: 2px;
 }
 
+/* Primary button styling */
 .button-primary {
   background: var(--gradient-primary);
   color: white;
@@ -88,11 +93,13 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+/* Hover state for primary button */
 .button-primary:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-md);
 }
 
+/* Secondary button styling */
 .button-secondary {
   background: white;
   color: var(--ieee-blue);
@@ -103,6 +110,7 @@ body {
   transition: var(--transition-normal);
 }
 
+/* Hover state for secondary button */
 .button-secondary:hover {
   background: var(--ieee-blue);
   color: white;

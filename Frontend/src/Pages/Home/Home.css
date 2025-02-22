@@ -68,7 +68,8 @@ body {
   margin-top: 3rem;
 }
 
-.button-primary, .button-secondary {
+.button-primary,
+.button-secondary {
   padding: 1.5rem 3.5rem; /* Increase button size */
   font-size: 1.3rem; /* Increase font size */
   border-radius: 50px;
@@ -171,7 +172,8 @@ body {
 }
 
 @keyframes moveUpAndDown {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -490,7 +492,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .stars {

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Footer.css";
 
+// Footer component that renders the websites footer section
 const Footer = () => {
   return (
     <footer className="footer">
