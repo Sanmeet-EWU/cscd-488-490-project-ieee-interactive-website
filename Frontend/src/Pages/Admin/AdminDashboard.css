@@ -4,7 +4,9 @@
   max-width: 1200px;
   margin: 0 auto;
   background: #f8f9fa;
-  min-height: calc(100vh - 4rem); /* Ensures it covers most of the viewport height */
+  min-height: calc(
+    100vh - 4rem
+  ); /* Ensures it covers most of the viewport height */
 }
 
 /* Dashboard header section */

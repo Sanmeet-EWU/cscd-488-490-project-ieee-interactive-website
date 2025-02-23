@@ -155,7 +155,12 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
   transform: translateX(-100%);
   transition: 0.8s;
 }
@@ -188,7 +193,8 @@ body {
 
 /* Keyframe animation for moving up and down */
 @keyframes moveUpAndDown {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -546,7 +552,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 /* Star rating styling in testimonials */
@@ -617,75 +625,75 @@ body {
   .content-overlay {
     padding: 1rem;
   }
-  
+
   /* Adjust hero section padding on small screens */
   .hero-section {
     padding: 6rem 1.5rem;
   }
-  
+
   /* Reduce hero title font size on small screens */
   .hero-title {
     font-size: 2.8rem;
   }
-  
+
   /* Reduce hero subtitle font size on small screens */
   .hero-subtitle {
     font-size: 1.3rem;
   }
-  
+
   /* Adjust grid layout for features on small screens */
   .features-grid {
     grid-template-columns: 1fr;
     padding: 0 1rem;
   }
-  
+
   /* Adjust events section padding and margin on small screens */
   .events-section {
     padding: 2rem 1.5rem;
     margin: 2rem 1rem;
   }
-  
+
   /* Stack event card content vertically on small screens */
   .event-card {
     flex-direction: column;
     gap: 1.5rem;
     padding: 1.5rem;
   }
-  
+
   /* Remove right border from event date on small screens */
   .event-date {
     border-right: none;
     border-bottom: 2px solid rgba(0, 102, 153, 0.1);
     padding-bottom: 1rem;
   }
-  
+
   /* Adjust button sizes on small screens */
   .button-primary,
   .button-secondary {
     padding: 1rem 2rem;
     font-size: 1rem;
   }
-  
+
   /* Adjust margin for event cards on home page on small screens */
   .event-card-home {
     margin: 1rem;
   }
-  
+
   /* Reduce height for event banner on home page on small screens */
   .event-banner-home {
     height: 300px;
   }
-  
+
   /* Reduce font size for event title on home page on small screens */
   .event-title-home {
     font-size: 1.5rem;
   }
-  
+
   /* Reduce padding for event content on home page on small screens */
   .event-content-home {
     padding: 1.5rem;
   }
-  
+
   /* Stack event action buttons vertically on small screens */
   .event-actions-home {
     flex-direction: column;

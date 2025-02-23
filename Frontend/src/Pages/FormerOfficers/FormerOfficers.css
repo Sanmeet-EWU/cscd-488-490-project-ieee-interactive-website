@@ -1,11 +1,11 @@
-  /* Sets padding and max width for the officers page layout */
+/* Sets padding and max width for the officers page layout */
 .officers-page {
   padding: 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-  /* Styles the main page title */
+/* Styles the main page title */
 .page-title {
   text-align: center;
   color: #fff;
@@ -14,12 +14,12 @@
   font-weight: bold;
 }
 
-  /* Adds spacing below each officer section */
+/* Adds spacing below each officer section */
 .officer-section {
   margin-bottom: 3rem;
 }
 
-  /* Styles section titles with a bottom border */
+/* Styles section titles with a bottom border */
 .section-title {
   color: #002855;
   font-size: 1.8rem;
@@ -28,7 +28,7 @@
   border-bottom: 2px solid #002855;
 }
 
-  /* Creates a responsive grid layout for officers */
+/* Creates a responsive grid layout for officers */
 .officers-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -50,7 +50,7 @@
   z-index: 1000;
 }
 
-  /* Styles the modal content box */
+/* Styles the modal content box */
 .modal-content {
   background-color: white;
   padding: 2rem;
@@ -62,7 +62,7 @@
   position: relative;
 }
 
-  /* Positions the close button inside the modal */
+/* Positions the close button inside the modal */
 .modal-close {
   position: absolute;
   top: 1rem;
@@ -74,19 +74,19 @@
   color: #666;
 }
 
-  /* Changes close button color on hover */
+/* Changes close button color on hover */
 .modal-close:hover {
   color: #002855;
 }
 
-  /* Arranges modal header elements in a row */
+/* Arranges modal header elements in a row */
 .modal-header {
   display: flex;
   gap: 2rem;
   margin-bottom: 1.5rem;
 }
 
-  /* Styles the profile image inside the modal */
+/* Styles the profile image inside the modal */
 .modal-image {
   width: 150px;
   height: 150px;
@@ -94,31 +94,31 @@
   object-fit: cover;
 }
 
-  /* Ensures title section takes up remaining space */
+/* Ensures title section takes up remaining space */
 .modal-title {
   flex: 1;
 }
 
-  /* Styles modal title text */
+/* Styles modal title text */
 .modal-title h3 {
   color: #002855;
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
 }
 
-  /* Styles modal subtitle text */
+/* Styles modal subtitle text */
 .modal-title p {
   color: #666;
   margin-bottom: 0.5rem;
 }
 
-  /* Styles email text inside the modal */
+/* Styles email text inside the modal */
 .modal-email {
   color: #002855;
   font-weight: 500;
 }
 
-  /* Styles modal body text */
+/* Styles modal body text */
 .modal-body {
   color: #333;
   line-height: 1.6;
@@ -133,78 +133,78 @@
     gap: 1rem;
   }
 
-      /* Reduces modal image size for smaller screens */
+  /* Reduces modal image size for smaller screens */
   .modal-image {
     width: 120px;
     height: 120px;
   }
 
-      /* Reduces font size for section titles on small screens */
+  /* Reduces font size for section titles on small screens */
   .section-title {
     font-size: 1.5rem;
   }
 }
 
-  /* Adds top margin for social media links section */
+/* Adds top margin for social media links section */
 .social-media-links {
   margin-top: 20px;
 }
 
-  /* Styles heading for social media links */
+/* Styles heading for social media links */
 .social-media-links h4 {
   margin-bottom: 10px;
   font-size: 1.2em;
   color: #002855;
 }
 
-  /* Removes default list styles */
+/* Removes default list styles */
 .social-media-links ul {
   list-style: none;
   padding: 0;
 }
 
-  /* Adds spacing between list items */
+/* Adds spacing between list items */
 .social-media-links ul li {
   margin-bottom: 5px;
 }
 
-  /* Styles social media links */
+/* Styles social media links */
 .social-media-links ul li a {
   color: #0056b3;
   text-decoration: none;
   transition: color 0.3s;
 }
 
-  /* Changes link color on hover */
+/* Changes link color on hover */
 .social-media-links ul li a:hover {
   color: #002855;
 }
 
-  /* Adds spacing above social media icons */
+/* Adds spacing above social media icons */
 .social-media-icons {
   margin-top: 20px;
 }
 
-  /* Styles heading for social media icons */
+/* Styles heading for social media icons */
 .social-media-icons h4 {
   margin-bottom: 10px;
   font-size: 1.2em;
   color: #002855;
 }
 
-  /* Arranges icons in a row with spacing */
+/* Arranges icons in a row with spacing */
 .icons-container {
   display: flex;
   gap: 10px;
 }
 
-  /* Adds transition for smooth hover effect */
+/* Adds transition for smooth hover effect */
 .social-icon {
   text-decoration: none;
   transition: transform 0.2s ease;
 }
 
-  /* Enlarges icon slightly on hover */
+/* Enlarges icon slightly on hover */
 .social-icon:hover {
   transform: scale(1.2);
 }
