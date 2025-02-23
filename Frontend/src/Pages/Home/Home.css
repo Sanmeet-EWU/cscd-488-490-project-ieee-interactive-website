@@ -1,3 +1,4 @@
+/* Base styles for the document */
 body {
   font-family: "Roboto", sans-serif;
   margin: 0;
@@ -5,12 +6,14 @@ body {
   overflow-x: hidden;
 }
 
+/* Ensure slick slider images are responsive and rounded */
 .slick-slide img {
   width: 100%;
   height: auto;
   border-radius: 10px;
 }
 
+/* Home container settings with fixed background */
 .home-container {
   min-height: 100vh;
   background-size: cover;
@@ -20,12 +23,14 @@ body {
   position: relative;
 }
 
+/* Transparent overlay for content within home container */
 .content-overlay {
   min-height: 100vh;
   padding: 2rem;
   background: transparent;
 }
 
+/* Hero section styling for centering and spacing */
 .hero-section {
   display: flex;
   flex-direction: column;
@@ -38,12 +43,14 @@ body {
   position: relative;
 }
 
+/* Container for hero text content with centered alignment */
 .hero-content {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
 }
 
+/* Main hero title styling */
 .hero-title {
   font-size: 4rem;
   font-weight: 800;
@@ -52,6 +59,7 @@ body {
   letter-spacing: -0.5px;
 }
 
+/* Hero subtitle styling */
 .hero-subtitle {
   font-size: 1.6rem;
   margin-bottom: 2.5rem;
@@ -61,6 +69,7 @@ body {
   letter-spacing: 0.5px;
 }
 
+/* Container for call-to-action buttons in hero section */
 .cta-buttons {
   display: flex;
   gap: 1.5rem;
@@ -68,7 +77,9 @@ body {
   margin-top: 3rem;
 }
 
-.button-primary, .button-secondary {
+/* Primary and secondary button styling */
+.button-primary,
+.button-secondary {
   padding: 1.5rem 3.5rem; /* Increase button size */
   font-size: 1.3rem; /* Increase font size */
   border-radius: 50px;
@@ -77,31 +88,35 @@ body {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Primary button specific styles */
 .button-primary {
   background: linear-gradient(135deg, #2a3eb1, #00d4ff);
   color: white;
   border: none;
 }
 
+/* Primary button hover effects */
 .button-primary:hover {
   background: linear-gradient(135deg, #2a3eb1, #00d4ff);
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
+/* Secondary button specific styles */
 .button-secondary {
   background: linear-gradient(135deg, #ff9a9e, #fad0c4);
   color: white;
   border: none;
 }
 
+/* Secondary button hover effects */
 .button-secondary:hover {
   background: linear-gradient(135deg, #fad0c4, #ff9a9e);
   transform: translateY(-5px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
-/* Features Section */
+/* Grid layout for features section */
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -111,6 +126,7 @@ body {
   padding: 0 2rem;
 }
 
+/* Feature card styling with background and blur effect */
 .feature-card {
   background: rgba(255, 255, 255, 0.9);
   padding: 2.5rem;
@@ -123,6 +139,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Hover effect for feature cards */
 .feature-card:hover {
   transform: translateY(-12px) scale(1.05);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
@@ -130,6 +147,7 @@ body {
   border-color: rgba(0, 102, 153, 0.6);
 }
 
+/* Overlay effect on feature cards on hover */
 .feature-card::after {
   content: "";
   position: absolute;
@@ -147,10 +165,12 @@ body {
   transition: 0.8s;
 }
 
+/* Reveal overlay effect on hover for feature cards */
 .feature-card:hover::after {
   transform: translateX(100%);
 }
 
+/* Styling for feature icon container */
 .feature-icon {
   width: 60px;
   height: 60px;
@@ -166,12 +186,15 @@ body {
   animation: moveUpAndDown 2s infinite ease-in-out;
 }
 
+/* Floating animation class for feature icon */
 .feature-icon.floating {
   animation: floating 3s ease-in-out infinite;
 }
 
+/* Keyframe animation for moving up and down */
 @keyframes moveUpAndDown {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -179,6 +202,7 @@ body {
   }
 }
 
+/* Keyframe animation for floating effect */
 @keyframes floating {
   0% {
     transform: translatey(0px);
@@ -191,6 +215,7 @@ body {
   }
 }
 
+/* Styling for feature title text */
 .feature-title {
   font-size: 1.5rem;
   color: var(--ieee-dark-blue);
@@ -198,13 +223,14 @@ body {
   font-weight: 700;
 }
 
+/* Styling for feature description text */
 .feature-description {
   color: #546e7a;
   line-height: 1.7;
   font-size: 1.1rem;
 }
 
-/* About Section */
+/* About section styling with background and border radius */
 .about-section {
   text-align: center;
   padding: 60px 20px;
@@ -213,12 +239,14 @@ body {
   margin-bottom: 40px;
 }
 
+/* About section heading style */
 .about-section h2 {
   color: #002855;
   margin-bottom: 20px;
   font-size: 2rem;
 }
 
+/* About section paragraph styling */
 .about-section p {
   max-width: 800px;
   margin: 0 auto 30px;
@@ -226,6 +254,7 @@ body {
   color: #666;
 }
 
+/* Learn more button styling in about section */
 .learn-more-button {
   display: inline-block;
   padding: 12px 24px;
@@ -236,16 +265,18 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Hover effect for learn more button */
 .learn-more-button:hover {
   background-color: #003366;
   transform: translateY(-2px);
 }
 
-/* Links Section */
+/* Links section container styling */
 .links-section {
   margin-bottom: 40px;
 }
 
+/* Links section heading style */
 .links-section h2 {
   text-align: center;
   color: #002855;
@@ -253,12 +284,14 @@ body {
   font-size: 2rem;
 }
 
+/* Grid layout for link cards */
 .links-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 30px;
 }
 
+/* Link card styling */
 .link-card {
   background-color: white;
   padding: 30px;
@@ -268,22 +301,26 @@ body {
   transition: transform 0.3s ease;
 }
 
+/* Hover effect for link cards */
 .link-card:hover {
   transform: translateY(-5px);
 }
 
+/* Link card heading style */
 .link-card h3 {
   color: #002855;
   margin-bottom: 15px;
   font-size: 1.3rem;
 }
 
+/* Link card paragraph styling */
 .link-card p {
   color: #666;
   margin-bottom: 20px;
   line-height: 1.6;
 }
 
+/* Button styling for link card actions */
 .link-button {
   display: inline-block;
   padding: 10px 20px;
@@ -294,10 +331,12 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Hover effect for link buttons */
 .link-button:hover {
   background-color: #003366;
 }
 
+/* Events section styling with semi-transparent background and blur effect */
 .events-section {
   background: rgba(255, 255, 255, 0.92);
   padding: 4rem;
@@ -308,6 +347,7 @@ body {
   max-width: 1200px;
 }
 
+/* Section title styling for events section */
 .section-title {
   font-size: 2.5rem;
   color: var(--ieee-dark-blue);
@@ -316,6 +356,7 @@ body {
   font-weight: 700;
 }
 
+/* Layout for individual event cards in events section */
 .event-card {
   display: flex;
   gap: 2.5rem;
@@ -327,11 +368,13 @@ body {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
 }
 
+/* Hover effect for event cards */
 .event-card:hover {
   transform: translateX(12px);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling for event date container */
 .event-date {
   min-width: 100px;
   text-align: center;
@@ -339,6 +382,7 @@ body {
   border-right: 2px solid rgba(0, 102, 153, 0.1);
 }
 
+/* Styling for event day text */
 .event-day {
   font-size: 2.2rem;
   font-weight: 800;
@@ -347,6 +391,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
+/* Styling for event month text */
 .event-month {
   font-size: 1rem;
   color: #546e7a;
@@ -355,6 +400,7 @@ body {
   letter-spacing: 1px;
 }
 
+/* Event content container styling */
 .event-content h3 {
   color: var(--ieee-dark-blue);
   font-size: 1.4rem;
@@ -362,18 +408,21 @@ body {
   font-weight: 700;
 }
 
+/* Styling for event content paragraphs */
 .event-content p {
   color: #546e7a;
   line-height: 1.6;
   font-size: 1.1rem;
 }
 
+/* Upcoming events section container styling */
 .upcoming-event-section {
   margin: 4rem auto;
   max-width: 800px;
   padding: 0 1rem;
 }
 
+/* Upcoming events heading style */
 .upcoming-event-section h2 {
   color: white;
   font-size: 2rem;
@@ -381,6 +430,7 @@ body {
   text-align: center;
 }
 
+/* Styling for event card on home page */
 .event-card-home {
   background: rgba(255, 255, 255, 0.95);
   border-radius: 12px;
@@ -390,26 +440,31 @@ body {
   /* max-height: 700px; */
 }
 
+/* Hover effect for home event cards */
 .event-card-home:hover {
   transform: translateY(-5px);
 }
 
+/* Padding for event content on home page */
 .event-content-home {
   padding: 2rem;
 }
 
+/* Home event title styling */
 .event-title-home {
   color: var(--ieee-dark-blue);
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
 
+/* Home event description styling */
 .event-description-home {
   color: var(--text-light);
   margin-bottom: 1.5rem;
   line-height: 1.6;
 }
 
+/* Home event details container styling */
 .event-details-home {
   display: flex;
   flex-direction: column;
@@ -417,6 +472,7 @@ body {
   margin-bottom: 2rem;
 }
 
+/* Styling for individual detail items in home events */
 .detail-item-home {
   display: flex;
   align-items: center;
@@ -424,16 +480,19 @@ body {
   color: var(--text-dark);
 }
 
+/* Detail icon styling */
 .detail-icon {
   color: var(--ieee-blue);
 }
 
+/* Event actions container for home page events */
 .event-actions-home {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
 }
 
+/* Register button styling for home events */
 .register-button-home {
   background: var(--ieee-blue);
   color: white;
@@ -446,14 +505,15 @@ body {
   text-align: center;
 }
 
+/* Hover effect for register button on home events */
 .register-button-home:hover {
   background: var(--ieee-dark-blue);
 }
 
+/* View all events button styling */
 .view-all-events-button {
-  background: transparent;
-  color: white;
   background: var(--ieee-blue);
+  color: white;
   padding: 0.8rem 1.5rem;
   border-radius: 25px;
   text-decoration: none;
@@ -464,12 +524,85 @@ body {
   text-align: center;
 }
 
+/* Hover effect for view all events button */
 .view-all-events-button:hover {
   background: white;
   color: var(--ieee-dark-blue);
 }
 
-/* Animations */
+/* Testimonial grid container styling */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0px;
+  margin: 20px auto;
+  max-width: 1200px;
+}
+
+/* Individual testimonial card styling */
+.testimonial {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 0;
+  width: 300px;
+  height: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+/* Star rating styling in testimonials */
+.stars {
+  color: gold;
+  font-size: 30px;
+  margin-bottom: 15px;
+}
+
+/* Hover effect for testimonials */
+.testimonial:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Testimonial quote styling */
+.testimonial-quote {
+  font-style: italic;
+  font-size: 1.2em;
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Testimonial author styling */
+.testimonial-author {
+  text-align: right;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Testimonial section title styling */
+.testimonial-title {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 2em;
+  color: white;
+}
+
+/* Divider styling for testimonial section */
+.divider {
+  border: none;
+  height: 4px; /* Increased height for thickness */
+  background-color: white;
+  margin: 10px auto; /* Center the divider */
+  width: 100%;
+}
+
+/* Animations: fadeIn keyframe for elements */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -481,79 +614,104 @@ body {
   }
 }
 
+/* Class to apply fadeIn animation to elements */
 .animate-in {
   animation: fadeIn 0.5s ease forwards;
 }
 
-/* Responsive Design */
+/* Responsive Design for screens 768px wide or less */
 @media (max-width: 768px) {
+  /* Reduce padding for content overlay on small screens */
   .content-overlay {
     padding: 1rem;
   }
 
+  /* Adjust hero section padding on small screens */
   .hero-section {
     padding: 6rem 1.5rem;
   }
 
+  /* Reduce hero title font size on small screens */
   .hero-title {
     font-size: 2.8rem;
   }
 
+  /* Reduce hero subtitle font size on small screens */
   .hero-subtitle {
     font-size: 1.3rem;
   }
 
+  /* Adjust grid layout for features on small screens */
   .features-grid {
     grid-template-columns: 1fr;
     padding: 0 1rem;
   }
 
+  /* Adjust events section padding and margin on small screens */
   .events-section {
     padding: 2rem 1.5rem;
     margin: 2rem 1rem;
   }
 
+  /* Stack event card content vertically on small screens */
   .event-card {
     flex-direction: column;
     gap: 1.5rem;
     padding: 1.5rem;
   }
 
+  /* Remove right border from event date on small screens */
   .event-date {
     border-right: none;
     border-bottom: 2px solid rgba(0, 102, 153, 0.1);
     padding-bottom: 1rem;
   }
 
+  /* Adjust button sizes on small screens */
   .button-primary,
   .button-secondary {
     padding: 1rem 2rem;
     font-size: 1rem;
   }
 
+  /* Adjust margin for event cards on home page on small screens */
   .event-card-home {
     margin: 1rem;
   }
 
+  /* Reduce height for event banner on home page on small screens */
   .event-banner-home {
     height: 300px;
   }
 
+  /* Reduce font size for event title on home page on small screens */
   .event-title-home {
     font-size: 1.5rem;
   }
 
+  /* Reduce padding for event content on home page on small screens */
   .event-content-home {
     padding: 1.5rem;
   }
 
+  /* Stack event action buttons vertically on small screens */
   .event-actions-home {
     flex-direction: column;
   }
 }
 
+/* Layout adjustments for upcoming events grid container */
 .upcoming-event-section .event-grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
+}
+
+/* Divider styling for a visual break */
+.divider {
+  border: none;
+  height: 4px; /* Increased height for thickness */
+  background-color: white;
+  margin: 10px auto; /* Center the divider */
+  width: 100%;
 }

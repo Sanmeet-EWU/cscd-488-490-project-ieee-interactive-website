@@ -22,6 +22,7 @@
     box-shadow 0.2s ease;
 }
 
+/* Hover state for the officer card to create a lifting effect */
 .officer-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -34,10 +35,12 @@
   align-items: center;
 }
 
+/* Container for details within the card header */
 .officer-card-details {
   flex: 1;
 }
 
+/* Officer image container */
 .officer-image {
   margin-bottom: 1rem;
   display: flex;
@@ -45,6 +48,7 @@
   align-items: center;
 }
 
+/* Officer information styling */
 .officer-info {
   text-align: center;
   width: 100%;
@@ -77,6 +81,7 @@
   margin-top: auto; /* Pushes the button to the bottom */
 }
 
+/* About Button Styles */
 .about-button {
   background-color: #002855;
   color: white;
@@ -88,6 +93,7 @@
   transition: background-color 0.2s ease;
 }
 
+/* Hover state for the about button: Darker blue background */
 .about-button:hover {
   background-color: #003366;
 }

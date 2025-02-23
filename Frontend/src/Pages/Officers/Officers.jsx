@@ -13,10 +13,14 @@ import {
 } from "react-icons/fa";
 import request from "../../api/axiosConfig";
 
+// OfficersGrid component displays a grid of current officers categorized by section
 const OfficersGrid = () => {
+  // State to store the officer selected for viewing detailed bio in a modal
   const [selectedOfficer, setSelectedOfficer] = useState(null);
+  // State to store officers grouped by their chapter/section
   const [officerSections, setOfficerSections] = useState({});
 
+  // Mapping of chapter group codes to their full display names
   const SECTION_MAPPING = {
     sc: "Spokane Section",
     power: "Chapter: Power & Energy Society",
@@ -26,6 +30,7 @@ const OfficersGrid = () => {
     wie: "Affinity Group: Women In Engineering (WIE)",
   };
 
+  // Returns the corresponding social media icon for a given platform name
   const getSocialMediaIcon = (platform) => {
     switch (platform) {
       case "LinkedIn":
@@ -47,28 +52,37 @@ const OfficersGrid = () => {
     }
   };
 
+  // Processes the fetched officers data by filtering out former officers
+  // and grouping the remaining officers by their chapter group
   const processOfficersData = (officers) => {
+    // Filter out former officers (we only want current officers)
     const regularOfficers = officers.filter(
       (officer) => officer.is_former_officer !== 1,
     );
     console.log(regularOfficers);
 
+    // Group the officers by their chapter group
     const grouped = regularOfficers.reduce((acc, officer) => {
+      // Get the full section title from the mapping, default to "Other Officers" if not found
       const sectionTitle =
         SECTION_MAPPING[officer.chapter_group] || "Other Officers";
 
+      // Initialize the group if it doesn't exist yet
       if (!acc[sectionTitle]) {
         acc[sectionTitle] = [];
       }
 
+      // Prepare the profile image URL if available
       const profileImageUrl = officer.profile
         ? `http://localhost:3001/${officer.profile}`
         : null;
 
+      // Push the officer's data into the appropriate group
       acc[sectionTitle].push({
         name: officer.name,
         title: officer.position,
         email: officer.email,
+        // If a profile image is available, render it as an image; otherwise, use a default icon
         icon: profileImageUrl ? (
           <img
             src={profileImageUrl}
@@ -92,6 +106,8 @@ const OfficersGrid = () => {
 
     return grouped;
   };
+
+  // Fetches the officers data from the backend and processes it for display
   const fetchOfficers = async () => {
     try {
       const data = await request("get", "/officers");
@@ -103,14 +119,17 @@ const OfficersGrid = () => {
     }
   };
 
+  // useEffect to fetch officers data when the component mounts
   useEffect(() => {
     fetchOfficers();
   }, []);
 
+  // Handler to open the modal with the selected officer's details
   const handleBioClick = (officer) => {
     setSelectedOfficer(officer);
   };
 
+  // Handler to close the modal by clearing the selected officer
   const handleClosemodal = () => {
     setSelectedOfficer(null);
   };
@@ -119,10 +138,12 @@ const OfficersGrid = () => {
     <div className="officers-page">
       <h1 className="page-title">Officers</h1>
 
+      {/* Render a section for each group of officers */}
       {Object.entries(officerSections).map(([sectionTitle, officers]) => (
         <section key={sectionTitle} className="officer-section">
           <h2 className="section-title">{sectionTitle}</h2>
           <div className="officers-grid">
+            {/* Render each officer's card */}
             {officers.map((officer, index) => (
               <OfficersCard
                 key={index}
@@ -137,9 +158,10 @@ const OfficersGrid = () => {
         </section>
       ))}
 
-      {/* Modal remains the same */}
+      {/* Modal to display detailed information for the selected officer */}
       {selectedOfficer && (
         <div className="modal-overlay" onClick={handleClosemodal}>
+          {/* Prevent clicks within the modal content from closing the modal */}
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={handleClosemodal}>
               &times;
@@ -154,6 +176,7 @@ const OfficersGrid = () => {
             </div>
             <div className="modal-body">
               <p>{selectedOfficer.bio}</p>
+              {/* Display social media icons if available */}
               {selectedOfficer.social_media.length > 0 && (
                 <div className="social-media-icons">
                   <h4>Socials:</h4>
