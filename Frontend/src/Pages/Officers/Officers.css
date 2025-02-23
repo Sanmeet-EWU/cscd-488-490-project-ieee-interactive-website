@@ -1,9 +1,11 @@
+  /* Sets padding and max width for the officers page */
 .officers-page {
   padding: 40px 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
+/* Styles the main page title with center alignment and background color */
 .page-title {
   text-align: center;
   color: #ffffff;
@@ -13,10 +15,12 @@
   background-color: #002855;
 }
 
+/* Adds spacing below each officer section */
 .officer-section {
   margin-bottom: 3rem;
 }
 
+/* Styles section titles with a bottom border */
 .section-title {
   color: #002855;
   font-size: 1.8rem;
@@ -25,6 +29,7 @@
   border-bottom: 2px solid #002855;
 }
 
+/* Creates a responsive grid layout for officers */
 .officers-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -46,6 +51,7 @@
   z-index: 1000;
 }
 
+/* Styles the modal content box */
 .modal-content {
   background-color: rgb(230, 0, 0);
   padding: 2rem;
@@ -57,6 +63,7 @@
   position: relative;
 }
 
+/* Positions the close button inside the modal */
 .modal-close {
   position: absolute;
   top: 1rem;
@@ -68,16 +75,19 @@
   color: #666;
 }
 
+/* Changes close button color on hover */
 .modal-close:hover {
   color: #002855;
 }
 
+/* Arranges modal header elements in a row */
 .modal-header {
   display: flex;
   gap: 2rem;
   margin-bottom: 1.5rem;
 }
 
+/* Styles the profile image inside the modal */
 .modal-image {
   width: 150px;
   height: 150px;
@@ -85,6 +95,7 @@
   object-fit: cover;
 }
 
+/* Ensures title section takes up remaining space */
 .modal-title {
   flex: 1;
 }
@@ -119,65 +130,78 @@
     gap: 1rem;
   }
 
+  /* Reduces modal image size for smaller screens */
   .modal-image {
     width: 120px;
     height: 120px;
   }
 
+  /* Reduces font size for section titles on small screens */
   .section-title {
     font-size: 1.5rem;
   }
 }
 
+/* Adds top margin for social media links section */
 .social-media-links {
   margin-top: 20px;
 }
 
+/* Styles heading for social media links */
 .social-media-links h4 {
   margin-bottom: 10px;
   font-size: 1.2em;
   color: #002855;
 }
 
+/* Removes default list styles */
 .social-media-links ul {
   list-style: none;
   padding: 0;
 }
 
+/* Adds spacing between list items */
 .social-media-links ul li {
   margin-bottom: 5px;
 }
 
+/* Styles social media links */
 .social-media-links ul li a {
   color: #0056b3;
   text-decoration: none;
   transition: color 0.3s;
 }
 
+/* Changes link color on hover */
 .social-media-links ul li a:hover {
   color: #002855;
 }
 
+/* Adds spacing above social media icons */
 .social-media-icons {
   margin-top: 20px;
 }
 
+/* Styles heading for social media icons */
 .social-media-icons h4 {
   margin-bottom: 10px;
   font-size: 1.2em;
   color: #002855;
 }
 
+/* Arranges icons in a row with spacing */
 .icons-container {
   display: flex;
   gap: 10px;
 }
 
+/* Adds transition for smooth hover effect */
 .social-icon {
   text-decoration: none;
   transition: transform 0.2s ease;
 }
 
+/* Enlarges icon slightly on hover */
 .social-icon:hover {
   transform: scale(1.2);
 }
