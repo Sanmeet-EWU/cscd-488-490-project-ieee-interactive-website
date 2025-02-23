@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import request from "../../api/axiosConfig";
 
+// EventForm component receives event data and callback functions for submit and cancel actions
 export default function EventForm({ event, onSubmit, onCancel }) {
+  // Initialize form state with provided event data or default empty values
   const [formData, setFormData] = useState(
     event || {
       title: "",
@@ -14,25 +16,32 @@ export default function EventForm({ event, onSubmit, onCancel }) {
     },
   );
 
+  // Update the form state when the event prop changes (e.g., when editing an existing event)
   useEffect(() => {
     if (event) {
       setFormData({
         ...event,
+        // Format event_date to a YYYY-MM-DD string for the date input field
         event_date: event.event_date ? event.event_date.split("T")[0] : "",
+        // Format event_time to a HH:MM string for the time input field
         event_time: event.event_time ? event.event_time.substring(0, 5) : "",
       });
     }
   }, [event]);
 
+  // Handle for submission
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault(); //Prevent the default form submission behavior
 
+    // Create a new FormData object to handle file uploads along with other form fields
     const formDataToSend = new FormData();
+    // Append each key/value pair from formData to formDataToSend
     Object.entries(formData).forEach(([key, value]) => {
       formDataToSend.append(key, value);
     });
 
     try {
+      // If editing an existing event, send a PATCH request; otherwise, send a POST request to create a new event
       if (event) {
         await request("patch", `/events/${event.id}`, formDataToSend, {
           headers: { "Content-Type": "multipart/form-data" },
@@ -43,20 +52,25 @@ export default function EventForm({ event, onSubmit, onCancel }) {
         });
       }
 
+      // Convert FormData entries to a plain object (useful for passing back to the parent component)
       const plainObject = Object.fromEntries(formDataToSend.entries());
 
+      // Call onSubmit callback with the plain object representing the form data
       onSubmit(plainObject);
     } catch (error) {
+      // Log any errors that occur during submission process
       console.error("Error submitting event:", error);
     }
   };
 
   return (
+    // Form element with multipart/form-data encoding for file uploads
     <form
       onSubmit={handleSubmit}
       className="admin-form"
       encType="multipart/form-data"
     >
+      {/* Input field for the event title */}
       <div className="form-group">
         <label>Title</label>
         <input
@@ -66,6 +80,7 @@ export default function EventForm({ event, onSubmit, onCancel }) {
           required
         />
       </div>
+      {/* Input field for the event date */}
       <div className="form-group">
         <label>Date</label>
         <input
@@ -77,6 +92,7 @@ export default function EventForm({ event, onSubmit, onCancel }) {
           required
         />
       </div>
+      {/* Input field for the event time */}
       <div className="form-group">
         <label>Time</label>
         <input
@@ -88,6 +104,7 @@ export default function EventForm({ event, onSubmit, onCancel }) {
           required
         />
       </div>
+      {/* Input field for the event location */}
       <div className="form-group">
         <label>Location</label>
         <input
@@ -99,6 +116,7 @@ export default function EventForm({ event, onSubmit, onCancel }) {
           required
         />
       </div>
+      {/* Textarea for the event description */}
       <div className="form-group">
         <label>Description</label>
         <textarea
@@ -109,6 +127,7 @@ export default function EventForm({ event, onSubmit, onCancel }) {
           required
         />
       </div>
+      {/* Input field for the event link */}
       <div className="form-group">
         <label>Event Link</label>
         <input
@@ -118,17 +137,21 @@ export default function EventForm({ event, onSubmit, onCancel }) {
           required
         />
       </div>
+      {/* File input for the banner image */}
       <div className="form-group">
         <label>Banner Image</label>
         <input
           type="file"
           accept="image/*"
           onChange={(e) => {
+            // Set the first selected file as the banner image in formData
             setFormData({ ...formData, banner: e.target.files[0] });
+            // Log the file to the console for debugging
             console.log(e.target.files[0]);
           }}
         />
       </div>
+      {/* Form actions: Submit and Cancel buttons */}
       <div className="form-actions">
         <button type="submit" className="btn-primary">
           {event ? "Update Event" : "Add Event"}

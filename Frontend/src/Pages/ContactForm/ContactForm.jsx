@@ -3,7 +3,7 @@ import "./ContactForm.css";
 import { FaUser, FaEnvelope, FaPhone, FaComment } from "react-icons/fa";
 import Spokane from "../../Assets/Spokane.jpeg";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -37,10 +37,10 @@ const ContactForm = () => {
 
       if (response.status === 200) {
         Swal.fire({
-          title: 'Success!',
-          text: 'Your message has been sent successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK'
+          title: "Success!",
+          text: "Your message has been sent successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
         });
         setFormData({
           name: "",
@@ -50,18 +50,18 @@ const ContactForm = () => {
         });
       } else {
         Swal.fire({
-          title: 'Error!',
-          text: 'Failed to send your message.',
-          icon: 'error',
-          confirmButtonText: 'Try Again'
+          title: "Error!",
+          text: "Failed to send your message.",
+          icon: "error",
+          confirmButtonText: "Try Again",
         });
       }
     } catch (error) {
       Swal.fire({
-        title: 'Error!',
-        text: 'There was an error sending your message. Please try again later.',
-        icon: 'error',
-        confirmButtonText: 'Try Again'
+        title: "Error!",
+        text: "There was an error sending your message. Please try again later.",
+        icon: "error",
+        confirmButtonText: "Try Again",
       });
       console.error("Error sending message:", error);
     } finally {
@@ -165,7 +165,9 @@ const ContactForm = () => {
           </form>
 
           {responseMessage && (
-            <div className={`response-message ${responseMessage.includes('successfully') ? 'success-message' : ''}`}>
+            <div
+              className={`response-message ${responseMessage.includes("successfully") ? "success-message" : ""}`}
+            >
               <p>{responseMessage}</p>
             </div>
           )}

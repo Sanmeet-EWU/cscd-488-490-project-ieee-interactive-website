@@ -36,13 +36,13 @@ import "./PhotoGallery.css";
     );
     }*/
 
-    const PhotoGallery = () => {
-        console.log("PhotoGallery component is rendering");
-        return (
-            <div className="photo-container">
-                <h1>Photo Gallery</h1>
-                <p>This is a work in progress</p>
-            </div>
-        );
-    }
-    export default PhotoGallery;
+const PhotoGallery = () => {
+  console.log("PhotoGallery component is rendering");
+  return (
+    <div className="photo-container">
+      <h1>Photo Gallery</h1>
+      <p>This is a work in progress</p>
+    </div>
+  );
+};
+export default PhotoGallery;

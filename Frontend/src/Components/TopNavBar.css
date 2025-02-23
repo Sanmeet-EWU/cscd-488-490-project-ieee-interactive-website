@@ -1,3 +1,4 @@
+/* Global Styles for HTML & Body */
 html,
 body {
   width: 100%;
@@ -29,6 +30,7 @@ body {
   transition: all 0.3s ease-in-out;
 }
 
+/*  Navigation links inside the top navigation bar */
 .top-nav-bar a {
   color: rgb(255, 0, 55);
   text-decoration: none;
@@ -36,15 +38,18 @@ body {
   position: relative;
 }
 
+/* Underline effect on hover */
 .top-nav-bar a:hover {
   text-decoration: underline;
 }
 
+/* Divider between navigation links */
 .divider {
   margin: 0 8px;
   color: rgb(14, 110, 158);
 }
 
+/* Logo Container */
 .logo-container {
   display: flex;
   justify-content: center;
@@ -56,6 +61,7 @@ body {
   max-height: 1000px; /* Adjust the height as needed */
 }
 
+/* Main Navigation Bar (Top Navigation) */
 .top-nav {
   background: linear-gradient(135deg, #003f88 0%, #00509d 50%, #0066cc 100%);
   padding: 0.5rem 1rem;
@@ -67,6 +73,7 @@ body {
   overflow: hidden;
 }
 
+/*  Animated top border shimmer effect */
 .top-nav::before {
   content: "";
   position: absolute;
@@ -78,6 +85,7 @@ body {
   animation: shimmer 2s infinite linear;
 }
 
+/* Keyframe animation for shimmer effect */
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
@@ -87,6 +95,7 @@ body {
   }
 }
 
+/* Navigation Links Container */
 .nav-links {
   display: flex;
   gap: 1.5rem;
@@ -94,6 +103,7 @@ body {
   margin-right: 2rem;
 }
 
+/* Individual Navigation Links  */
 .nav-link {
   color: white;
   text-decoration: none;
@@ -109,6 +119,7 @@ body {
   gap: 0.5rem;
 }
 
+/* Hover Effect - Creates a subtle overlay */
 .nav-link::before {
   content: "";
   position: absolute;
@@ -121,20 +132,24 @@ body {
   transition: transform 0.3s ease;
 }
 
+/* Shows the overlay when hovered */
 .nav-link:hover::before {
   transform: translateX(0);
 }
 
+/* Hover State */
 .nav-link:hover {
   transform: translateY(-2px);
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Active Navigation Link */
 .nav-link.active {
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(5px);
 }
 
+/* Navigation Icon Styling */
 .nav-link-icon {
   font-size: 1.1rem;
   transition: transform 0.3s ease;
