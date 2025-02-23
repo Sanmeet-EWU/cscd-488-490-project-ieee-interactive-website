@@ -9,7 +9,7 @@ import {
   FaBriefcase,
   FaLock,
   FaCalendarAlt,
-  FaRegImages,
+  FaGlobe,
 } from "react-icons/fa";
 
 const LHSNav = () => {
@@ -39,6 +39,12 @@ const LHSNav = () => {
       path: "/former-officers",
       icon: <FaHistory className="nav-icon" />,
       label: "Former Officers",
+      internal: true,
+    },
+    {
+      path: "/society-chapters",
+      icon: <FaGlobe className="nav-icon" />,
+      label: "Society Chapters",
       internal: true,
     },
     /*

@@ -14,6 +14,7 @@ import ContactForm from "./Pages/ContactForm/ContactForm";
 import Admin from "./Pages/Admin/Admin";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import Events from "./Pages/Events/Events";
+import SocietyChapters from "./Pages/SocietyChapters/SocietyChapters"; // Added import statement
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Footer from "./Components/Footer";
 import Logo from "./Components/Logo";
@@ -45,6 +46,7 @@ const App = () => {
               <Route path="/officers" element={<Officers />} />
               <Route path="/former-officers" element={<FormerOfficers />} />
               <Route path="/photo-gallery" element={ <PhotoGallery />} />
+              <Route path="/society-chapters" element={<SocietyChapters />} />
               <Route path="/contact" element={<ContactForm />} />
               <Route path="/admin" element={<Admin />} />
               <Route
