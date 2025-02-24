@@ -38,7 +38,7 @@ const LHSNav = () => {
     {
       path: "/former-officers",
       icon: <FaHistory className="nav-icon" />,
-      label: "Former Officers",
+      label: "Officer History",
       internal: true,
     },
     {
