@@ -90,15 +90,16 @@ body {
 
 /* Primary button specific styles */
 .button-primary {
-  background: linear-gradient(135deg, #2a3eb1, #00d4ff);
+  background: linear-gradient(45deg, #ff6600, #fbcb39) !important;
   color: white;
   border: none;
 }
 
 /* Primary button hover effects */
 .button-primary:hover {
-  background: linear-gradient(135deg, #2a3eb1, #00d4ff);
-  transform: translateY(-5px);
+  background: linear-gradient(45deg, #ff8533, #ff6600) !important;
+  color: white;
+  transform: scale(1.05);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
@@ -174,7 +175,7 @@ body {
 .feature-icon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #006699, #0099cc);
+  background: linear-gradient(45deg, #ff6600, #fbcb39);
   border-radius: 16px;
   display: flex;
   align-items: center;
