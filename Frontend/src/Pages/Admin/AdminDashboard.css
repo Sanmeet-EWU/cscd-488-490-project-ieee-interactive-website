@@ -94,6 +94,7 @@
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
+  position: relative;
 }
 
 /* Section header layout */
@@ -101,18 +102,22 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-gray-blue);
 }
 
 /* Section header title */
 .section-header h2 {
-  color: var(--ieee-dark-blue);
   margin: 0;
+  color: var(--ieee-dark-blue);
   font-size: 1.5rem;
 }
 
 /* Add button styling */
 .btn-add {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
