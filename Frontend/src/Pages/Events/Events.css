@@ -30,7 +30,8 @@
 /* Margin for both upcoming and past events sections */
 .upcoming-events-section,
 .past-events-section {
-  margin-bottom: 4rem;
+  margin-bottom: 80px;
+  position: relative;
 }
 
 /* Heading styles for upcoming and past events sections */
@@ -83,13 +84,13 @@
 
 /* Styling for an individual event card */
 .event-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  transition: transform 0.3s ease;
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 900px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 /* Hover effect for event cards */
@@ -212,6 +213,88 @@
   box-shadow: var(--shadow-sm);
   margin: 0 auto;
   max-width: 600px;
+}
+
+/* Event slider styles */
+.events-page .event-slider {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.events-page .event-slide {
+  padding: 0;
+}
+
+.events-page .slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+.events-page .slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.events-page .slick-track {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+}
+
+.events-page .slick-slide {
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  display: flex !important;
+}
+
+.events-page .slick-slide > div {
+  width: 100%;
+}
+
+/* Customize slick arrows specifically for events page */
+.events-page .slick-prev,
+.events-page .slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.events-page .slick-prev {
+  left: -50px;
+}
+
+.events-page .slick-next {
+  right: -50px;
+}
+
+.events-page .slick-prev:before,
+.events-page .slick-next:before {
+  font-size: 30px;
+  color: var(--ieee-dark-blue);
+  opacity: 1;
+}
+
+/* Customize slick dots for events page */
+.events-page .slick-dots {
+  bottom: -40px;
+}
+
+.events-page .slick-dots li button:before {
+  color: var(--ieee-blue);
+  font-size: 12px;
+}
+
+.events-page .slick-dots li.slick-active button:before {
+  color: var(--ieee-dark-blue);
 }
 
 /* Responsive styles for screens up to 768px wide */

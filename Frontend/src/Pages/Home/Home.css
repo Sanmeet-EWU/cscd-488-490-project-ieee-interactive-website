@@ -603,6 +603,148 @@ body {
   width: 100%;
 }
 
+/* Event slider styles */
+.event-slider {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.event-slide {
+  padding: 0;
+}
+
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+.slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-track {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+}
+
+.slick-slide {
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  display: flex !important;
+}
+
+.slick-slide > div {
+  width: 100%;
+}
+
+.event-card-home {
+  margin: 0 auto;
+  max-width: 900px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize slick dots */
+.slick-dots {
+  bottom: -40px;
+}
+
+.slick-dots li button:before {
+  color: #333333;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #000000;
+  opacity: 1;
+}
+
+/* Customize slick arrows */
+.slick-prev,
+.slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: -50px;
+}
+
+.slick-next {
+  right: -50px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 30px;
+  color: var(--ieee-dark-blue);
+  opacity: 1;
+}
+
+/* Ensure event cards maintain their style within the slider */
+.event-card-home {
+  margin: 0 auto;
+  max-width: 900px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize slick arrows specifically for home page */
+.home-container .slick-prev,
+.home-container .slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.home-container .slick-prev {
+  left: -50px;
+}
+
+.home-container .slick-next {
+  right: -50px;
+}
+
+.home-container .slick-prev:before,
+.home-container .slick-next:before {
+  font-size: 30px;
+  color: white;
+  opacity: 1;
+}
+
+/* Customize slick dots for home page */
+.home-container .slick-dots {
+  bottom: -40px;
+}
+
+.home-container .slick-dots li button:before {
+  color: white;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.home-container .slick-dots li.slick-active button:before {
+  color: white;
+  opacity: 1;
+}
+
 /* Animations: fadeIn keyframe for elements */
 @keyframes fadeIn {
   from {

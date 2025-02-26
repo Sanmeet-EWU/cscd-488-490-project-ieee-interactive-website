@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
 import "./Events.css";
 import request from "../../api/axiosConfig";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Utility function to convert a 24-hour time string (e.g., "14:30") to a 12-hour format with AM/PM
 const convertTo12HourFormat = (time24) => {
@@ -80,6 +83,19 @@ const Events = () => {
     }
   };
 
+  // Slider settings
+  const sliderSettings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    arrows: true,
+    centerMode: false,
+  };
+
   // useEffect to fetch events when the component mounts
   useEffect(() => {
     fetchEvents();
@@ -97,67 +113,9 @@ const Events = () => {
       <section className="upcoming-events-section">
         <h2>Upcoming Event{upcomingEvents.length > 1 ? "s" : ""}</h2>
         {upcomingEvents.length > 0 ? (
-          upcomingEvents.map((event) => (
-            <div className="event-card" key={event.id}>
-              {/* Event banner image */}
-              <div className="event-banner">
-                <img
-                  src={`http://localhost:3001/${event.banner}`}
-                  alt={event.title}
-                />
-              </div>
-              {/* Event content details */}
-              <div className="event-content">
-                <h3 className="event-title">{event.title}</h3>
-                <p className="event-description">{event.description}</p>
-
-                {/* Event metadata: date, time, and location */}
-                <div className="event-meta">
-                  <div className="meta-item">
-                    <FaCalendarAlt className="meta-icon" />
-                    <span>{formatDate(event.event_date)}</span>
-                  </div>
-                  <div className="meta-item">
-                    <FaClock className="meta-icon" />
-                    <span>
-                      {convertTo12HourFormat(event.event_time.substring(0, 5))}
-                    </span>
-                  </div>
-                  <div className="meta-item">
-                    <FaMapMarkerAlt className="meta-icon" />
-                    <span>{event.location}</span>
-                  </div>
-                </div>
-
-                {/* Action button to register for the event */}
-                <div className="event-actions">
-                  <a
-                    href={event.link || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="register-button"
-                  >
-                    Register Now
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          // Message to display when there are no upcoming events
-          <p className="no-events">
-            No upcoming events scheduled yet. Check back later!
-          </p>
-        )}
-      </section>
-
-      {/* Past events section */}
-      <section className="past-events-section">
-        <h2>Past Events</h2>
-        {pastEvents.length > 0 ? (
-          <ul>
-            {pastEvents.map((event) => (
-              <li key={event.id}>
+          <Slider {...sliderSettings} className="event-slider">
+            {upcomingEvents.map((event) => (
+              <div className="event-slide" key={event.id}>
                 <div className="event-card">
                   {/* Event banner image */}
                   <div className="event-banner">
@@ -180,9 +138,7 @@ const Events = () => {
                       <div className="meta-item">
                         <FaClock className="meta-icon" />
                         <span>
-                          {convertTo12HourFormat(
-                            event.event_time.substring(0, 5),
-                          )}
+                          {convertTo12HourFormat(event.event_time.substring(0, 5))}
                         </span>
                       </div>
                       <div className="meta-item">
@@ -204,9 +160,71 @@ const Events = () => {
                     </div>
                   </div>
                 </div>
-              </li>
+              </div>
             ))}
-          </ul>
+          </Slider>
+        ) : (
+          // Message to display when there are no upcoming events
+          <p className="no-events">
+            No upcoming events scheduled yet. Check back later!
+          </p>
+        )}
+      </section>
+
+      {/* Past events section */}
+      <section className="past-events-section">
+        <h2>Past Events</h2>
+        {pastEvents.length > 0 ? (
+          <Slider {...sliderSettings} className="event-slider">
+            {pastEvents.map((event) => (
+              <div className="event-slide" key={event.id}>
+                <div className="event-card">
+                  {/* Event banner image */}
+                  <div className="event-banner">
+                    <img
+                      src={`http://localhost:3001/${event.banner}`}
+                      alt={event.title}
+                    />
+                  </div>
+                  {/* Event content details */}
+                  <div className="event-content">
+                    <h3 className="event-title">{event.title}</h3>
+                    <p className="event-description">{event.description}</p>
+
+                    {/* Event metadata: date, time, and location */}
+                    <div className="event-meta">
+                      <div className="meta-item">
+                        <FaCalendarAlt className="meta-icon" />
+                        <span>{formatDate(event.event_date)}</span>
+                      </div>
+                      <div className="meta-item">
+                        <FaClock className="meta-icon" />
+                        <span>
+                          {convertTo12HourFormat(event.event_time.substring(0, 5))}
+                        </span>
+                      </div>
+                      <div className="meta-item">
+                        <FaMapMarkerAlt className="meta-icon" />
+                        <span>{event.location}</span>
+                      </div>
+                    </div>
+
+                    {/* Action button to register for the event */}
+                    <div className="event-actions">
+                      <a
+                        href={event.link || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="register-button"
+                      >
+                        View Details
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Slider>
         ) : (
           // Message to display when there are no past events
           <p className="no-events">No past events to display.</p>

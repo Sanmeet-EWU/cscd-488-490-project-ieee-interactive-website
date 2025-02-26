@@ -12,6 +12,9 @@ import {
 } from "react-icons/fa";
 import Spokane from "../../Assets/Spokane.jpeg";
 import request from "../../api/axiosConfig";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Define a list of feature cards to display on the home page
 const features = [
@@ -155,55 +158,63 @@ const Home = () => {
         {upcomingEvents.length > 0 && (
           <section className="upcoming-event-section">
             <h2>Upcoming Event{upcomingEvents.length > 1 ? "s" : ""}</h2>
-            <div className="event-grid-container">
+            <Slider
+              dots={true}
+              infinite={true}
+              speed={500}
+              slidesToShow={1}
+              slidesToScroll={1}
+              autoplay={true}
+              autoplaySpeed={5000}
+              arrows={true}
+              className="event-slider"
+              centerMode={false}
+            >
               {upcomingEvents.map((event) => (
-                <div className="event-card-home" key={event.id}>
-                  {/* Event banner image */}
-                  <div className="event-banner-home">
-                    <img
-                      src={`http://localhost:3001/${event.banner}`}
-                      alt={event.title}
-                      style={{
-                        height: "400px",
-                        objectFit: "cover",
-                        width: "100%",
-                      }}
-                    />
-                  </div>
-                  {/* Event content details */}
-                  <div className="event-content-home">
-                    <h3 className="event-title-home">{event.title}</h3>
-                    <p className="event-description-home">
-                      {event.description}
-                    </p>
-
-                    {/* Event details: date, time, and location */}
-                    <div className="event-details-home">
-                      <div className="detail-item-home">
-                        <FaCalendarAlt className="detail-icon" />
-                        <span>{formatDate(event.event_date)}</span>
-                      </div>
-                      <div className="detail-item-home">
-                        <FaClock className="detail-icon" />
-                        <span>{event.event_time}</span>
-                      </div>
-                      <div className="detail-item-home">
-                        <FaMapMarkerAlt className="detail-icon" />
-                        <span>{event.location}</span>
-                      </div>
+                <div className="event-slide" key={event.id}>
+                  <div className="event-card-home">
+                    <div className="event-banner-home">
+                      <img
+                        src={`http://localhost:3001/${event.banner}`}
+                        alt={event.title}
+                        style={{
+                          height: "400px",
+                          objectFit: "cover",
+                          width: "100%",
+                        }}
+                      />
                     </div>
+                    <div className="event-content-home">
+                      <h3 className="event-title-home">{event.title}</h3>
+                      <p className="event-description-home">
+                        {event.description}
+                      </p>
 
-                    {/* Link to view all events */}
-                    <div className="event-actions-home">
-                      <Link to="/events" className="view-all-events-button">
-                        View All Events
-                      </Link>
+                      <div className="event-details-home">
+                        <div className="detail-item-home">
+                          <FaCalendarAlt className="detail-icon" />
+                          <span>{formatDate(event.event_date)}</span>
+                        </div>
+                        <div className="detail-item-home">
+                          <FaClock className="detail-icon" />
+                          <span>{event.event_time}</span>
+                        </div>
+                        <div className="detail-item-home">
+                          <FaMapMarkerAlt className="detail-icon" />
+                          <span>{event.location}</span>
+                        </div>
+                      </div>
+
+                      <div className="event-actions-home">
+                        <Link to="/events" className="view-all-events-button">
+                          View All Events
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               ))}
-            </div>
-            {/* End of grid container */}
+            </Slider>
           </section>
         )}
 
