@@ -4,9 +4,42 @@ import { useAuth } from "../../context/AuthContext";
 import "./Admin.css";
 import { FaUser, FaLock } from "react-icons/fa";
 
+import { doSignInWithEmailAndPassword, doSignInWithGoogle } from "../../Firebase/auth";
+
+
 // Admin component for rendering the admin login page
 const Admin = () => {
   const navigate = useNavigate(); // Initialize navigation hook
+  
+  //Firebase test
+
+  const [email, setEmail] = useAuth();
+  const [password, setPassword] = useState("");
+  const [isSigningIn, setIsSigningIn] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    if (!isSigningIn) {
+      setIsSigningIn(true);
+      await doSignInWithEmailAndPassword(email, password);
+  }
+
+  const onGoogleSignIn = async (e) => {
+    e.preventDefault();
+    if (!isSigningIn) {
+      setIsSigningIn(true);
+      await doSignInWithGoogle().catch((error) => {
+        setIsSigningIn(false);
+        });
+      }
+    }
+  }
+
+
+
+
+  // Earls update
   const { login, isAuthenticated } = useAuth(); // Destructure login function and authentication status from context
 
   // State for form data: username and password
@@ -64,6 +97,8 @@ const Admin = () => {
       setIsLoading(false);
     }
   };
+
+  
 
   return (
     <div className="admin-page">
