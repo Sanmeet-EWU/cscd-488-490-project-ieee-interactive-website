@@ -18,7 +18,7 @@ import Events from "./Pages/Events/Events";
 //import SocietyChapters from './Pages/SocietyChapters/SocietyChapters';
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Footer from "./Components/Footer";
-import Logo from "./Components/Logo";
+import Logo from "./Components/logo";
 import TopNavBar from "./Components/TopNavBar";
 import "./styles/theme.css";
 
