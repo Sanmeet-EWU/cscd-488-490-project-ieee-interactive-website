@@ -94,7 +94,7 @@ export const updateEventById = async (req, res) => {
       [id],
     );
 
-    // If event doesn't exost, return a 404 response
+    // If event doesn't exist, return a 404 response
     if (existingEvent.length === 0) {
       return res.status(404).json({ message: "Event not found" });
     }

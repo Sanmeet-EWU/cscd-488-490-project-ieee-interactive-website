@@ -69,13 +69,6 @@ const SocietyChapters = () => {
             </div>
 
             <div className="chapter-item">
-              <h3>Washington State University - Pullman (SBC02221)</h3>
-              <p className="type-label">Type: Student Branch</p>
-              <p>Computer Society Student Branch Chapter at WSU Pullman.</p>
-              <a href="https://ieee.wsu.edu" target="_blank" rel="noopener noreferrer" className="learn-more-button">Learn More</a>
-            </div>
-
-            <div className="chapter-item">
               <h3>Eastern Washington University (STB35111)</h3>
               <p className="type-label">Type: Student Branch</p>
               <p>IEEE Student Branch at Eastern Washington University.</p>
