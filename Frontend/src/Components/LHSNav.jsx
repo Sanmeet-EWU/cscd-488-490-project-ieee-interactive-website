@@ -66,12 +66,12 @@ const LHSNav = () => {
       label: "IEEE Job Site",
       internal: false,
     },
-    {
+    /*{
       path: "/admin",
       icon: <FaLock className="nav-icon" />,
       label: "Admin",
       internal: true,
-    },
+    },*/
   ];
 
   // Close menu when route changes

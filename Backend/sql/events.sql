@@ -14,20 +14,12 @@ CREATE TABLE `events` (
 
 SET GLOBAL event_scheduler = ON;
 
--- Just to test
-/*set SQL_Safe_UPDATES = 0;
-DELETE FROM Events WHERE event_date < CURDATE() - INTERVAL 1 DAY;
-set SQL_Safe_UPDATES = 1;
--- What Cait wants
--- DELETE FROM Events WHERE event_date < CURDATE() - INTERVAL 5 YEAR;
+/*CREATE EVENT delete_old_events
+ON SCHEDULE EVERY 1 DAY
+STARTS CURRENT_TIMESTAMP
+DO
+DELETE FROM events WHERE event_date < CURDATE() - INTERVAL 1 DAY;
+*/
 
-INSERT INTO Events (title, event_date, event_time, description, banner, location, link)
-VALUES (
-	'Tech Talk: Future of AI', 
-    '2025-02-15', 
-    '14:00:00', 
-    'Join us for an insightful discussion on the future of artificial intelligence with industry experts.',
-    'ai-event-banner.jpg', 
-    'IEEE Conference Hall, University Campus', 
-    'https://ieee.org/tech-talk-ai'
-);*/
+-- What Cait wants
+-- DELETE FROM events WHERE event_date < CURDATE() - INTERVAL 5 YEAR;

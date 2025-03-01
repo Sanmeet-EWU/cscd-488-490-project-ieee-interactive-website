@@ -11,10 +11,10 @@ import Officers from "./Pages/Officers/Officers";
 import FormerOfficers from "./Pages/FormerOfficers/FormerOfficers";
 import PhotoGallery from "./Pages/PhotoGallery/PhotoGallery";
 import ContactForm from "./Pages/ContactForm/ContactForm";
-import Admin from "./Pages/Admin/Admin";
+import Admin from "./Pages/Admin/Login";
 import AdminDashboard from "./Pages/Admin/AdminDashboard";
 import Events from "./Pages/Events/Events";
-import SocietyChapters from "./Pages/SocietyChapters/SocietyChapters"; // Added import statement
+import SocietyChapters from "./Pages/SocietyChapters/SocietyChapters";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import Footer from "./Components/Footer";
 import Logo from "./Components/logo";
@@ -25,7 +25,7 @@ const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) {
-    return <Navigate to="/admin" />;
+    return <Navigate to="/Login" />;
   }
 
   return children;
@@ -48,7 +48,7 @@ const App = () => {
               <Route path="/photo-gallery" element={ <PhotoGallery />} />
               <Route path="/society-chapters" element={<SocietyChapters />} />
               <Route path="/contact" element={<ContactForm />} />
-              <Route path="/admin" element={<Admin />} />
+              <Route path="/Login" element={<Admin />} />
               <Route
                 path="/admin-dashboard"
                 element={
