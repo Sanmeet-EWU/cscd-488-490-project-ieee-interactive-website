@@ -85,6 +85,9 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
       } else if (key === "profile" && value) {
         // Append file if profile exists
         formDataToSend.append(key, value);
+      } else if (key === "is_former_officer") {
+        // Explicitly send as a boolean string ("true" or "false")
+        formDataToSend.append(key, value ? "true" : "false");
       } else {
         // Append other fields directly
         formDataToSend.append(key, value);
