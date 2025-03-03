@@ -32,6 +32,7 @@
 .past-events-section {
   margin-bottom: 80px;
   position: relative;
+  padding: 0 30px;
 }
 
 /* Heading styles for upcoming and past events sections */
@@ -215,22 +216,72 @@
   max-width: 600px;
 }
 
-/* Event slider styles */
-.events-page .event-slider {
-  width: 100%;
-  max-width: 1200px;
+/* Single event container styles */
+.single-event-container {
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
-  padding: 20px 0;
+  max-width: 900px;
+}
+
+/* Event slider styles */
+.event-slider {
+  padding: 0 10px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 900px;
 }
 
 .events-page .event-slide {
+  padding: 0 10px;
+  height: 100%;
+}
+
+/* Ensure the slider arrows are visible and positioned correctly */
+.slick-prev, .slick-next {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 30px;
+  height: 30px;
   padding: 0;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: -25px;
+}
+
+.slick-next {
+  right: -25px;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 30px;
+  line-height: 1;
+  opacity: .75;
+  color: var(--ieee-dark-blue);
+}
+
+.slick-prev:hover, .slick-next:hover {
+  background: transparent;
+}
+
+.slick-prev:hover:before, .slick-next:hover:before {
+  opacity: 1;
 }
 
 .events-page .slick-slider {
-  position: relative;
-  display: block;
-  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 900px;
 }
 
 .events-page .slick-list {
@@ -258,29 +309,6 @@
 
 .events-page .slick-slide > div {
   width: 100%;
-}
-
-/* Customize slick arrows specifically for events page */
-.events-page .slick-prev,
-.events-page .slick-next {
-  width: 40px;
-  height: 40px;
-  z-index: 1;
-}
-
-.events-page .slick-prev {
-  left: -50px;
-}
-
-.events-page .slick-next {
-  right: -50px;
-}
-
-.events-page .slick-prev:before,
-.events-page .slick-next:before {
-  font-size: 30px;
-  color: var(--ieee-dark-blue);
-  opacity: 1;
 }
 
 /* Customize slick dots for events page */

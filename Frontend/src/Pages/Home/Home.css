@@ -13,6 +13,56 @@ body {
   border-radius: 10px;
 }
 
+/* Event slider container for both single and multiple events */
+.event-slider {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+/* Ensure the slider arrows are visible and positioned correctly */
+.slick-prev, .slick-next {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: -25px;
+}
+
+.slick-next {
+  right: -25px;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 30px;
+  line-height: 1;
+  opacity: .75;
+  color: var(--ieee-dark-blue);
+}
+
+.slick-prev:hover, .slick-next:hover {
+  background: transparent;
+}
+
+.slick-prev:hover:before, .slick-next:hover:before {
+  opacity: 1;
+}
+
 /* Home container settings with fixed background */
 .home-container {
   min-height: 100vh;
@@ -594,7 +644,7 @@ body {
   color: white;
 }
 
-/* Divider styling for testimonial section */
+/* Divider styling for a visual break */
 .divider {
   border: none;
   height: 4px; /* Increased height for thickness */
@@ -606,9 +656,9 @@ body {
 /* Event slider styles */
 .event-slider {
   width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px 0;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 10px;
 }
 
 .event-slide {
@@ -848,6 +898,11 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
+}
+
+/* Add padding to the slider container to make room for arrows */
+.upcoming-event-section {
+  padding: 0 30px;
 }
 
 /* Divider styling for a visual break */
