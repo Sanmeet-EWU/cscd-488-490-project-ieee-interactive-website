@@ -1,0 +1,232 @@
+/* Sets the base font for the entire page */
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Admin Login Page Styles */
+.admin-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../../Assets/Spokane.jpeg") center/cover no-repeat;
+}
+
+/* Sets a max width and padding for the login form */
+.login-container {
+  width: 100%;
+  max-width: 320px;
+  padding: 20px;
+}
+
+/* Styles the login form container */
+.login-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 30px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles the login heading */
+.login-box h2 {
+  color: #002855;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+/* Aligns input fields and labels */
+.form-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Styles form labels */
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--ieee-dark-blue);
+  font-size: 0.9rem;
+}
+
+/* Positions icons inside input fields */
+.input-icon {
+  position: absolute;
+  left: -35px;
+  bottom: 26px;
+  color: #002855;
+  z-index: 1;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  margin-right: 8px;
+}
+
+/* Styles the input fields */
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  padding-left: 28px;
+  border: 2px solid #e1e1e1;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+/* Highlights input field on focus */
+.form-group input:focus {
+  border-color: var(--ieee-blue);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 40, 85, 0.1);
+}
+
+/* Styles the login button */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background: var(--ieee-blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Adds hover effect for the login button */
+.login-button:hover:not(:disabled) {
+  background: var(--ieee-dark-blue);
+  transform: translateY(-2px);
+}
+
+/* Styles the disabled login button */
+.login-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Styles the error message display */
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 0.8rem;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* Admin Dashboard Styles */
+.admin-dashboard {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 2rem;
+}
+
+/* Styles the top header of the admin dashboard */
+.dashboard-header {
+  background-color: white;
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Styles dashboard heading */
+.dashboard-header h1 {
+  color: #002855;
+  margin: 0;
+}
+
+/* Styles the logout button */
+.logout-button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Changes logout button color on hover */
+.logout-button:hover {
+  background-color: #c82333;
+}
+
+/* Styles the main dashboard content area */
+.dashboard-content {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+}
+
+/* Styles section titles inside the dashboard */
+.dashboard-section h2 {
+  color: #002855;
+  margin-bottom: 1.5rem;
+}
+
+/* Creates a responsive grid layout for dashboard sections */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Styles individual dashboard cards */
+.dashboard-card {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #002855;
+  transition: transform 0.3s ease;
+}
+
+/* Adds hover effect to dashboard cards */
+.dashboard-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Styles dashboard card titles */
+.dashboard-card h3 {
+  color: #002855;
+  margin-bottom: 0.5rem;
+}
+
+/* Styles text inside dashboard cards */
+.dashboard-card p {
+  color: #6c757d;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    padding: 10px;
+  }
+
+  /* Reduces padding inside login box for small screens */
+  .login-box {
+    padding: 1.5rem;
+  }
+
+  /* Adjusts header layout for smaller screens */
+  .dashboard-header {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}

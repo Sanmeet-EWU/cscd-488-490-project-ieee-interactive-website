@@ -1,0 +1,178 @@
+/* Styles for the Society Chapters page */
+
+body {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2 {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+p {
+  line-height: 1.6;
+}
+
+.society-chapters-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    align-items: center;
+}
+
+.society-chapters-header {
+    text-align: center;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.section-header-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 40px 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    font-size: 2em;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 15px 30px;
+    display: inline-block;
+}
+
+.chapter-section {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    background-color: rgba(128, 128, 128, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 800px;
+    margin: 0 auto 20px;
+}
+
+.chapter-banner {
+    width: 200px;
+    height: auto;
+    margin-right: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: white;
+    padding: 10px;
+}
+
+.chapter-banner:hover {
+    transform: scale(1.1);
+}
+
+.chapter-content {
+    flex: 1;
+    text-align: left;
+}
+
+.chapter-content h2 {
+    color: #ffffff;
+    margin-bottom: 15px;
+    font-size: 1.8em;
+}
+
+.chapter-content p {
+    font-size: 1.1em;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.chapter-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.chapter-group {
+    width: 100%;
+}
+
+.chapter-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.chapter-item:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.chapter-item h3 {
+    color: #ffffff;
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.type-label {
+    color: #00629B;
+    font-weight: bold;
+    margin: 10px 0;
+    font-size: 0.9em;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 4px;
+}
+
+.learn-more-button {
+    background: linear-gradient(45deg, #ff6600, #fbcb39);
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.learn-more-button:hover {
+    background: linear-gradient(45deg, #ff8533, #ff6600);
+    color: white;
+    transform: scale(1.05);
+}
+
+.society-chapters-paragraph {
+    font-size: 1em;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .chapter-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .chapter-banner {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .chapter-item {
+        text-align: center;
+    }
+}

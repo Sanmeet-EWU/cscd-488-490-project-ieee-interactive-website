@@ -1,11 +1,15 @@
+/* Admin Dashboard container */
 .admin-dashboard {
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
   background: #f8f9fa;
-  min-height: calc(100vh - 4rem);
+  min-height: calc(
+    100vh - 4rem
+  ); /* Ensures it covers most of the viewport height */
 }
 
+/* Dashboard header section */
 .dashboard-header {
   background: white;
   padding: 1.5rem;
@@ -14,6 +18,7 @@
   margin-bottom: 2rem;
 }
 
+/* Header content layout */
 .header-content {
   display: flex;
   justify-content: space-between;
@@ -21,12 +26,14 @@
   margin-bottom: 1.5rem;
 }
 
+/* Dashboard title styling */
 .header-content h1 {
   color: var(--ieee-dark-blue);
   margin: 0;
   font-size: 1.8rem;
 }
 
+/* Logout button styling */
 .btn-logout {
   padding: 0.5rem 1.2rem;
   background: var(--light-gray-blue);
@@ -41,11 +48,13 @@
   gap: 0.5rem;
 }
 
+/* Logout button hover effect */
 .btn-logout:hover {
   background: #dc3545;
   color: white;
 }
 
+/* Tab navigation bar */
 .tab-navigation {
   display: flex;
   gap: 1rem;
@@ -53,6 +62,7 @@
   padding-bottom: 0.5rem;
 }
 
+/* Individual tab button styling */
 .tab-button {
   display: flex;
   align-items: center;
@@ -67,36 +77,47 @@
   transition: all 0.3s ease;
 }
 
+/* Tab button hover effect */
 .tab-button:hover {
   color: var(--ieee-blue);
 }
 
+/* Active tab button */
 .tab-button.active {
   color: var(--ieee-blue);
   background: var(--light-gray-blue);
 }
 
+/* General section container */
 .section {
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 1.5rem;
+  position: relative;
 }
 
+/* Section header layout */
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--light-gray-blue);
 }
 
+/* Section header title */
 .section-header h2 {
-  color: var(--ieee-dark-blue);
   margin: 0;
+  color: var(--ieee-dark-blue);
   font-size: 1.5rem;
 }
 
+/* Add button styling */
 .btn-add {
+  position: absolute;
+  right: 1.5rem;
+  top: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -110,16 +131,19 @@
   transition: all 0.3s ease;
 }
 
+/* Add button hover effect */
 .btn-add:hover {
   background: var(--ieee-dark-blue);
   transform: translateY(-2px);
 }
 
+/* Grid layout for item listing */
 .items-list {
   display: grid;
   gap: 1rem;
 }
 
+/* Individual item card */
 .item-card {
   display: flex;
   justify-content: space-between;
@@ -130,29 +154,35 @@
   transition: all 0.3s ease;
 }
 
+/* Item card hover effect */
 .item-card:hover {
   transform: translateX(5px);
 }
 
+/* Item content layout */
 .item-content {
   flex: 1;
 }
 
+/* Item title */
 .item-content h4 {
   color: var(--ieee-dark-blue);
   margin: 0 0 0.5rem 0;
 }
 
+/* Item description */
 .item-content p {
   color: var(--text-light);
   margin: 0;
 }
 
+/* Item actions container */
 .item-actions {
   display: flex;
   gap: 0.5rem;
 }
 
+/* Edit and Delete button styling */
 .btn-edit,
 .btn-delete {
   display: flex;
@@ -166,21 +196,25 @@
   transition: all 0.3s ease;
 }
 
+/* Edit button */
 .btn-edit {
   background: var(--ieee-blue);
   color: white;
 }
 
+/* Delete button */
 .btn-delete {
   background: #dc3545;
   color: white;
 }
 
+/* Button hover effects */
 .btn-edit:hover,
 .btn-delete:hover {
   transform: scale(1.1);
 }
 
+/* Modal background */
 .modal {
   position: fixed;
   top: 0;
@@ -194,6 +228,7 @@
   z-index: 1000;
 }
 
+/* Modal content box */
 .modal-content {
   background: white;
   padding: 2rem;
@@ -204,28 +239,33 @@
   overflow-y: auto;
 }
 
+/* Modal title */
 .modal-content h3 {
   color: var(--ieee-dark-blue);
   margin-bottom: 1.5rem;
 }
 
+/* Form styling */
 .admin-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
+/* Form group layout */
 .form-group {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
+/* Form label styling */
 .form-group label {
   color: var(--text-dark);
   font-weight: 500;
 }
 
+/* Input, select, and textarea styles */
 .form-group input,
 .form-group select,
 .form-group textarea {
@@ -235,23 +275,27 @@
   font-size: 1rem;
 }
 
+/* Textarea adjustments */
 .form-group textarea {
   min-height: 100px;
   resize: vertical;
 }
 
+/* Dropdown styling */
 select {
   max-width: 200px;
   font-size: 0.9rem;
   padding: 5px;
 }
 
+/* Form action buttons */
 .form-actions {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
 }
 
+/* Primary and secondary button styles */
 .btn-primary,
 .btn-secondary {
   flex: 1;
@@ -263,21 +307,25 @@ select {
   transition: all 0.3s ease;
 }
 
+/* Primary button */
 .btn-primary {
   background: var(--ieee-blue);
   color: white;
 }
 
+/* Secondary button */
 .btn-secondary {
   background: var(--light-gray-blue);
   color: var(--text-dark);
 }
 
+/* Button hover effects */
 .btn-primary:hover,
 .btn-secondary:hover {
   transform: translateY(-2px);
 }
 
+/* Responsive styles for mobile devices */
 @media (max-width: 768px) {
   .admin-dashboard {
     padding: 1rem;

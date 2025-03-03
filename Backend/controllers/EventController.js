@@ -1,26 +1,29 @@
-import { pool } from "../config/db.js";
+import { pool } from "../config/db.js"; // Database connection
 
 // Insert a new event
 export const createEvent = async (req, res) => {
   try {
-    console.log("Received body:", req.body); // Debugging
+    console.log("Received body:", req.body); // Debugging statement
 
+    // Extract event details from request body
     const { title, event_date, event_time, description, location, link } =
       req.body;
+
+    // If a file is uploaded, set the banner path; otherwise set to null
     const banner = req.file ? `uploads/events/${req.file.filename}` : null;
 
+    // Insert event details into the database
     const [result] = await pool.query(
       `INSERT INTO events (title, event_date, event_time, description, banner, location, link) 
              VALUES (?, ?, ?, ?, ?, ?, ?)`,
       [title, event_date, event_time, description, banner, location, link],
     );
 
-    res
-      .status(201)
-      .json({
-        message: "Event created successfully",
-        eventId: result.insertId,
-      });
+    // Respond with success message and the inserted event ID
+    res.status(201).json({
+      message: "Event created successfully",
+      eventId: result.insertId,
+    });
   } catch (error) {
     console.error("Error inserting event:", error);
     res.status(500).json({ message: "Database error" });
@@ -44,12 +47,15 @@ export const getEvents = async (req, res) => {
 export const getEventById = async (req, res) => {
   try {
     const { id } = req.params;
+
+    // Fetch event from the database based on ID
     const [rows] = await pool.query("SELECT * FROM events WHERE id = ?", [id]);
 
     if (rows.length === 0) {
       return res.status(404).json({ message: "Event not found" });
     }
 
+    // Send the found event as a JSON response
     res.status(200).json(rows[0]);
   } catch (error) {
     console.error("Error fetching event:", error);
@@ -74,6 +80,7 @@ export const deleteEventById = async (req, res) => {
   }
 };
 
+// Update an event by its id
 export const updateEventById = async (req, res) => {
   try {
     const { id } = req.params;
@@ -81,15 +88,17 @@ export const updateEventById = async (req, res) => {
       req.body;
     const banner = req.file ? `uploads/events/${req.file.filename}` : null;
 
+    // Check if the event exists before updating
     const [existingEvent] = await pool.query(
       "SELECT * FROM events WHERE id = ?",
       [id],
     );
 
+    // If event doesn't exist, return a 404 response
     if (existingEvent.length === 0) {
       return res.status(404).json({ message: "Event not found" });
     }
-
+    // Update query using COALESCE to keep existing values if new ones are not provided
     const updateQuery = `
             UPDATE events
             SET 
@@ -103,6 +112,7 @@ export const updateEventById = async (req, res) => {
             WHERE id = ?
         `;
 
+    // Execute update query with provided values
     await pool.query(updateQuery, [
       title,
       description,
@@ -114,6 +124,7 @@ export const updateEventById = async (req, res) => {
       id,
     ]);
 
+    // Respond with success message
     res.status(200).json({ message: "Event updated successfully" });
   } catch (error) {
     console.error("Error updating event:", error);

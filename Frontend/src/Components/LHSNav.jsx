@@ -9,7 +9,7 @@ import {
   FaBriefcase,
   FaLock,
   FaCalendarAlt,
-  FaRegImages,
+  FaGlobe,
 } from "react-icons/fa";
 
 const LHSNav = () => {
@@ -38,15 +38,22 @@ const LHSNav = () => {
     {
       path: "/former-officers",
       icon: <FaHistory className="nav-icon" />,
-      label: "Former Officers",
+      label: "Officer History",
       internal: true,
     },
+    {
+      path: "/society-chapters",
+      icon: <FaGlobe className="nav-icon" />,
+      label: "Society Chapters",
+      internal: true,
+    },
+    /*
     {
       path: "/photo-gallery",
       icon: <FaRegImages className="nav-icon" />,
       label: "Photo Gallery",
       internal: true,
-    },
+    },*/
     {
       path: "/contact",
       icon: <FaEnvelope className="nav-icon" />,
@@ -59,12 +66,12 @@ const LHSNav = () => {
       label: "IEEE Job Site",
       internal: false,
     },
-    {
+    /*{
       path: "/admin",
       icon: <FaLock className="nav-icon" />,
       label: "Admin",
       internal: true,
-    },
+    },*/
   ];
 
   // Close menu when route changes
