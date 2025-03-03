@@ -10,6 +10,13 @@ CREATE TABLE `events` (
   `location` varchar(255) NOT NULL,
   `link` varchar(500) NOT NULL,
   PRIMARY KEY (`id`)
+
+CREATE EVENT delete_old_events
+ON SCHEDULE EVERY 1 DAY
+STARTS CURRENT_TIMESTAMP
+DO
+DELETE FROM events WHERE event_date < CURDATE() - INTERVAL 1 DAY;
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 SET GLOBAL event_scheduler = ON;
