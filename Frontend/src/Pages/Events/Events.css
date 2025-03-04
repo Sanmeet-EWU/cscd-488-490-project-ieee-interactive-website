@@ -30,7 +30,9 @@
 /* Margin for both upcoming and past events sections */
 .upcoming-events-section,
 .past-events-section {
-  margin-bottom: 4rem;
+  margin-bottom: 80px;
+  position: relative;
+  padding: 0 30px;
 }
 
 /* Heading styles for upcoming and past events sections */
@@ -83,23 +85,21 @@
 
 /* Styling for an individual event card */
 .event-card {
-  background: white;
-  border-radius: 12px;
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  transition: transform 0.3s ease;
   margin: 0 auto;
-  max-width: 800px;
-}
-
-/* Hover effect for event cards */
-.event-card:hover {
-  transform: translateY(-5px);
+  max-width: 900px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Container for the event banner image */
 .event-banner {
   width: 100%;
+  height: auto;
   position: relative;
   background: var(--ieee-dark-blue);
   display: flex;
@@ -107,14 +107,22 @@
   align-items: center;
   padding: 0;
   margin: 0;
+  min-height: 400px;
 }
 
-/* Styling for the event banner image */
+/* Clickable event banner image */
 .event-banner img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  max-height: 600px;
+}
+
+.event-banner img:hover {
+  opacity: 0.9;
 }
 
 /* Container for the event content */
@@ -214,6 +222,152 @@
   max-width: 600px;
 }
 
+/* Single event container styles */
+.single-event-container {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+/* Event slider styles */
+.event-slider {
+  padding: 0 10px;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 900px;
+}
+
+.events-page .event-slide {
+  padding: 0 10px;
+  height: 100%;
+}
+
+/* Ensure the slider arrows are visible and positioned correctly */
+.slick-prev, .slick-next {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: -25px;
+}
+
+.slick-next {
+  right: -25px;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 30px;
+  line-height: 1;
+  opacity: .75;
+  color: var(--ieee-dark-blue);
+}
+
+.slick-prev:hover, .slick-next:hover {
+  background: transparent;
+}
+
+.slick-prev:hover:before, .slick-next:hover:before {
+  opacity: 1;
+}
+
+.events-page .slick-slider {
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.events-page .slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.events-page .slick-track {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+}
+
+.events-page .slick-slide {
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  display: flex !important;
+}
+
+.events-page .slick-slide > div {
+  width: 100%;
+}
+
+/* Customize slick dots for events page */
+.events-page .slick-dots {
+  bottom: -40px;
+}
+
+.events-page .slick-dots li button:before {
+  color: var(--ieee-blue);
+  font-size: 12px;
+}
+
+.events-page .slick-dots li.slick-active button:before {
+  color: var(--ieee-dark-blue);
+}
+
+/* Image Preview Modal */
+.image-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.image-preview-modal img {
+  max-width: 90%;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+.image-preview-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 10px;
+}
+
+.image-preview-close:hover {
+  opacity: 0.8;
+}
+
 /* Responsive styles for screens up to 768px wide */
 @media (max-width: 768px) {
   /* Adjust events page padding for mobile */
@@ -242,8 +396,12 @@
   }
 
   /* Limit event banner image height for mobile */
+  .event-banner {
+    min-height: 300px;
+  }
+  
   .event-banner img {
-    max-height: 300px;
+    max-height: 400px;
   }
 
   /* Reduce font size for event title on mobile */

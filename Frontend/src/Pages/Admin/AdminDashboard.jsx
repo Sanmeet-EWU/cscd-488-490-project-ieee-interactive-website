@@ -7,6 +7,7 @@ import {
   FaEdit,
   FaTrash,
 } from "react-icons/fa";
+import { SiFirebase } from "react-icons/si";
 import { useAuth } from "../../context/AuthContext";
 import "./AdminDashboard.css";
 import EventForm from "../../Components/Forms/EventForm";
@@ -178,6 +179,15 @@ const AdminDashboard = () => {
             onClick={() => setActiveTab("officers")}
           >
             <FaUsers /> Officers
+          </button>
+          <button className="tab-button">
+          <a href="https://console.firebase.google.com/u/0/project/caitlinchb-75527"
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <SiFirebase /> Firebase
+          </a>
           </button>
         </div>
       </div>

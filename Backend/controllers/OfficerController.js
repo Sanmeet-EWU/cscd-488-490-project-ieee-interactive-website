@@ -1,4 +1,38 @@
 import { pool } from "../config/db.js";
+import fs from 'fs';
+import { promisify } from 'util';
+
+const unlinkAsync = promisify(fs.unlink);
+
+// Allowed social media platforms and their URL patterns
+const ALLOWED_PLATFORMS = {
+  LinkedIn: /^https?:\/\/(?:www\.)?linkedin\.com\/.+$/,
+  Instagram: /^https?:\/\/(?:www\.)?instagram\.com\/.+$/,
+  GitHub: /^https?:\/\/(?:www\.)?github\.com\/.+$/
+};
+
+// Validate social media entries
+const validateSocialMedia = (socialMediaArray) => {
+  if (!Array.isArray(socialMediaArray)) {
+    throw new Error("Social media must be an array");
+  }
+
+  socialMediaArray.forEach(account => {
+    if (!account.platform || !account.url) {
+      throw new Error("Each social media account must have a platform and URL");
+    }
+    
+    if (!ALLOWED_PLATFORMS[account.platform]) {
+      throw new Error(`Platform ${account.platform} is not allowed. Allowed platforms are: ${Object.keys(ALLOWED_PLATFORMS).join(", ")}`);
+    }
+    
+    if (!ALLOWED_PLATFORMS[account.platform].test(account.url)) {
+      throw new Error(`Invalid URL format for ${account.platform}`);
+    }
+  });
+
+  return true;
+};
 
 // Get all officers
 export const getOfficers = async (req, res) => {
@@ -33,6 +67,7 @@ export const getOfficers = async (req, res) => {
     res.status(500).json({ message: "Database error" });
   }
 };
+
 // Get a single officers ID
 export const getOfficerById = async (req, res) => {
   try {
@@ -82,10 +117,22 @@ export const createOfficer = async (req, res) => {
       bio,
     } = req.body;
 
-    // Format social_media by parsing and then stringifying the JSON object
-    const formattedSocialMedia = social_media
-      ? JSON.stringify(JSON.parse(social_media))
-      : null;
+    // Parse and validate social media data
+    let parsedSocialMedia = null;
+    if (social_media) {
+      try {
+        parsedSocialMedia = JSON.parse(social_media);
+        validateSocialMedia(parsedSocialMedia);
+      } catch (error) {
+        return res.status(400).json({ 
+          message: "Invalid social media data", 
+          error: error.message 
+        });
+      }
+    }
+
+    // Format social_media for database storage
+    const formattedSocialMedia = parsedSocialMedia ? JSON.stringify(parsedSocialMedia) : null;
 
     // Determine file path for the officers profile image if uploaded
     const profilePath = req.file
@@ -124,7 +171,7 @@ export const createOfficer = async (req, res) => {
 // Updates an officer by ID
 export const updateOfficerById = async (req, res) => {
   try {
-    const { id } = req.params; // Retrieve officer ID from request parameters
+    const { id } = req.params;
     const {
       name,
       chapter_group,
@@ -134,7 +181,21 @@ export const updateOfficerById = async (req, res) => {
       social_media,
       bio,
       profile,
-    } = req.body; // Destructure fields from the request body
+    } = req.body;
+
+    // Parse and validate social media data if provided
+    let parsedSocialMedia = null;
+    if (social_media) {
+      try {
+        parsedSocialMedia = JSON.parse(social_media);
+        validateSocialMedia(parsedSocialMedia);
+      } catch (error) {
+        return res.status(400).json({ 
+          message: "Invalid social media data", 
+          error: error.message 
+        });
+      }
+    }
 
     // Determine new profile image path if a file is uploaded; otherwise use the existing profile path
     const profilePath = req.file
@@ -150,6 +211,7 @@ export const updateOfficerById = async (req, res) => {
     if (existingOfficer.length === 0) {
       return res.status(404).json({ message: "Officer not found" });
     }
+
     // Convert is_former_officer to a numeric value (1 for true, 0 for false)
     const isFormerOfficerBool = is_former_officer === "true" ? 1 : 0;
 
@@ -197,12 +259,25 @@ export const deleteOfficerById = async (req, res) => {
 
     // Check if the officer exists before deletion
     const [existingOfficer] = await pool.query(
-      "SELECT * FROM officers WHERE id = ?",
+      "SELECT profile FROM officers WHERE id = ?",
       [id],
     );
 
     if (existingOfficer.length === 0) {
       return res.status(404).json({ message: "Officer not found" });
+    }
+
+    // Get the image path
+    const imagePath = existingOfficer[0].profile;
+
+    // Delete the image file if it exists
+    if (imagePath) {
+      try {
+        await unlinkAsync(imagePath);
+      } catch (err) {
+        console.error("Error deleting image file:", err);
+        // Continue with officer deletion even if image deletion fails
+      }
     }
 
     // Execute the deletion query

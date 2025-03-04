@@ -1,30 +1,36 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
+import { 
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged
+} from 'firebase/auth';
+import { auth } from '../firebase/config';
 
-const AuthContext = createContext(null);
+const AuthContext = createContext();
+
+export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(
-    localStorage.getItem("isAuth") === "true", // Retrieve authentication status
-  );
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Ensure authentication persists after page reload
-    if (localStorage.getItem("isAuth") === "true") {
-      setIsAuthenticated(true);
-      setCurrentUser({ username: "admin" }); // You might fetch user details from backend
-    }
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setCurrentUser(user);
+      setIsAuthenticated(!!user);
+      setLoading(false);
+    });
+
+    return unsubscribe;
   }, []);
 
-  const login = async (username, password) => {
+  const login = async (email, password) => {
     try {
-      if (username === "admin" && password === "ieee2024") {
-        setCurrentUser({ username });
-        setIsAuthenticated(true);
-        localStorage.setItem("isAuth", "true"); // Store auth state in localStorage
-        return true;
-      }
-      return false;
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      setCurrentUser(userCredential.user);
+      setIsAuthenticated(true);
+      return true;
     } catch (error) {
       console.error("Login error:", error);
       return false;
@@ -33,13 +39,11 @@ export const AuthProvider = ({ children }) => {
 
   const logout = async () => {
     try {
+      await signOut(auth);
       setCurrentUser(null);
       setIsAuthenticated(false);
-      localStorage.removeItem("isAuth"); // Remove auth state
-      return true;
     } catch (error) {
       console.error("Logout error:", error);
-      return false;
     }
   };
 
@@ -47,16 +51,12 @@ export const AuthProvider = ({ children }) => {
     currentUser,
     isAuthenticated,
     login,
-    logout,
+    logout
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+  return (
+    <AuthContext.Provider value={value}>
+      {!loading && children}
+    </AuthContext.Provider>
+  );
 };

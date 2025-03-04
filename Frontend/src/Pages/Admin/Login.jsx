@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import "./Admin.css";
+import "./Login.css";
 import { FaUser, FaLock } from "react-icons/fa";
 
 
@@ -12,9 +12,9 @@ const Admin = () => {
   // Earls update
   const { login, isAuthenticated } = useAuth(); // Destructure login function and authentication status from context
 
-  // State for form data: username and password
+  // State for form data: email and password
   const [formData, setFormData] = useState({
-    username: "",
+    email: "",
     password: "",
   });
 
@@ -44,26 +44,21 @@ const Admin = () => {
 
   // Handle form submission for login
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-    setIsLoading(true); // Set loading state to true during login request
-    setError(""); // Clear previous errors
+    e.preventDefault();
+    setIsLoading(true);
+    setError("");
 
     try {
-      // Attempt login with provided username and password
-      const success = await login(formData.username, formData.password);
+      const success = await login(formData.email, formData.password);
       if (success) {
-        // Navigate to admin dashboard on successful login
         navigate("/admin-dashboard");
       } else {
-        // Set error message if login failed
-        setError("Invalid username or password");
+        setError("Invalid email or password");
       }
-    } catch (error) {
-      // Handle any errors during the login process
+    } catch (err) {
       setError("An error occurred during login");
-      console.error("Login error:", error);
+      console.error(err);
     } finally {
-      // Reset loading state regardless of outcome
       setIsLoading(false);
     }
   };
@@ -78,39 +73,29 @@ const Admin = () => {
           <h2>Admin Login</h2>
           {/* Display error message if any */}
           {error && <div className="error-message">{error}</div>}
-          <form onSubmit={handleSubmit}>
-            {/* Username input field */}
+          <form onSubmit={handleSubmit} className="admin-login-form">
+            {/* Email input field */}
             <div className="form-group">
-              <label htmlFor="username"></label>
-              <div className="input-icon">
-                <FaUser size={14} /> {/* Icon representing user */}
-              </div>
+              <label htmlFor="email">Email</label>
               <input
-                id="username"
-                type="text"
-                name="username"
-                value={formData.username}
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
                 onChange={handleChange}
-                disabled={isLoading}
                 required
-                placeholder="Username"
               />
             </div>
             {/* Password input field */}
             <div className="form-group">
-              <label htmlFor="password"></label>
-              <div className="input-icon">
-                <FaLock size={14} /> {/* Icon representing password */}
-              </div>
+              <label htmlFor="password">Password</label>
               <input
-                id="password"
                 type="password"
+                id="password"
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                disabled={isLoading}
                 required
-                placeholder="Password"
               />
             </div>
             {/* Submit button: disabled while loading */}

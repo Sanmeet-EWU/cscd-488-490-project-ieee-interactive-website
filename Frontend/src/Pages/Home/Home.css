@@ -13,6 +13,56 @@ body {
   border-radius: 10px;
 }
 
+/* Event slider container for both single and multiple events */
+.event-slider {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+/* Ensure the slider arrows are visible and positioned correctly */
+.slick-prev, .slick-next {
+  font-size: 0;
+  line-height: 0;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: -25px;
+}
+
+.slick-next {
+  right: -25px;
+}
+
+.slick-prev:before, .slick-next:before {
+  font-size: 30px;
+  line-height: 1;
+  opacity: .75;
+  color: var(--ieee-dark-blue);
+}
+
+.slick-prev:hover, .slick-next:hover {
+  background: transparent;
+}
+
+.slick-prev:hover:before, .slick-next:hover:before {
+  opacity: 1;
+}
+
 /* Home container settings with fixed background */
 .home-container {
   min-height: 100vh;
@@ -90,15 +140,16 @@ body {
 
 /* Primary button specific styles */
 .button-primary {
-  background: linear-gradient(135deg, #2a3eb1, #00d4ff);
+  background: linear-gradient(45deg, #ff6600, #fbcb39) !important;
   color: white;
   border: none;
 }
 
 /* Primary button hover effects */
 .button-primary:hover {
-  background: linear-gradient(135deg, #2a3eb1, #00d4ff);
-  transform: translateY(-5px);
+  background: linear-gradient(45deg, #ff8533, #ff6600) !important;
+  color: white;
+  transform: scale(1.05);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
@@ -174,7 +225,7 @@ body {
 .feature-icon {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #006699, #0099cc);
+  background: linear-gradient(45deg, #ff6600, #fbcb39);
   border-radius: 16px;
   display: flex;
   align-items: center;
@@ -593,13 +644,155 @@ body {
   color: white;
 }
 
-/* Divider styling for testimonial section */
+/* Divider styling for a visual break */
 .divider {
   border: none;
   height: 4px; /* Increased height for thickness */
   background-color: white;
   margin: 10px auto; /* Center the divider */
   width: 100%;
+}
+
+/* Event slider styles */
+.event-slider {
+  width: 100%;
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 10px;
+}
+
+.event-slide {
+  padding: 0;
+}
+
+.slick-slider {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+}
+
+.slick-list {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.slick-track {
+  display: flex;
+  position: relative;
+  top: 0;
+  left: 0;
+  margin: 0 auto;
+}
+
+.slick-slide {
+  float: left;
+  height: 100%;
+  min-height: 1px;
+  display: flex !important;
+}
+
+.slick-slide > div {
+  width: 100%;
+}
+
+.event-card-home {
+  margin: 0 auto;
+  max-width: 900px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize slick dots */
+.slick-dots {
+  bottom: -40px;
+}
+
+.slick-dots li button:before {
+  color: #333333;
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.slick-dots li.slick-active button:before {
+  color: #000000;
+  opacity: 1;
+}
+
+/* Customize slick arrows */
+.slick-prev,
+.slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.slick-prev {
+  left: -50px;
+}
+
+.slick-next {
+  right: -50px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-size: 30px;
+  color: var(--ieee-dark-blue);
+  opacity: 1;
+}
+
+/* Ensure event cards maintain their style within the slider */
+.event-card-home {
+  margin: 0 auto;
+  max-width: 900px;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Customize slick arrows specifically for home page */
+.home-container .slick-prev,
+.home-container .slick-next {
+  width: 40px;
+  height: 40px;
+  z-index: 1;
+}
+
+.home-container .slick-prev {
+  left: -50px;
+}
+
+.home-container .slick-next {
+  right: -50px;
+}
+
+.home-container .slick-prev:before,
+.home-container .slick-next:before {
+  font-size: 30px;
+  color: white;
+  opacity: 1;
+}
+
+/* Customize slick dots for home page */
+.home-container .slick-dots {
+  bottom: -40px;
+}
+
+.home-container .slick-dots li button:before {
+  color: white;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.home-container .slick-dots li.slick-active button:before {
+  color: white;
+  opacity: 1;
 }
 
 /* Animations: fadeIn keyframe for elements */
@@ -705,6 +898,11 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 2rem;
+}
+
+/* Add padding to the slider container to make room for arrows */
+.upcoming-event-section {
+  padding: 0 30px;
 }
 
 /* Divider styling for a visual break */

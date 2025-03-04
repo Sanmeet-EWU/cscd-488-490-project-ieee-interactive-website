@@ -12,6 +12,9 @@ import {
 } from "react-icons/fa";
 import Spokane from "../../Assets/Spokane.jpeg";
 import request from "../../api/axiosConfig";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Define a list of feature cards to display on the home page
 const features = [
@@ -97,6 +100,70 @@ const Home = () => {
     }
   };
 
+  // Custom slider settings based on number of events
+  const getSliderSettings = (events) => {
+    // If there's only one event, don't use a slider
+    if (events.length <= 1) {
+      return null;
+    }
+
+    // For multiple events, use a proper slider that shows one event at a time
+    return {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: false,
+      arrows: true,
+      centerMode: false
+    };
+  };
+
+  // Render a single event card
+  const renderEventCard = (event) => (
+    <div className="event-card-home" key={event.id}>
+      <div className="event-banner-home">
+        <img
+          src={`http://localhost:3001/${event.banner}`}
+          alt={event.title}
+          style={{
+            height: "400px",
+            objectFit: "cover",
+            width: "100%",
+          }}
+        />
+      </div>
+      <div className="event-content-home">
+        <h3 className="event-title-home">{event.title}</h3>
+        <p className="event-description-home">
+          {event.description}
+        </p>
+
+        <div className="event-details-home">
+          <div className="detail-item-home">
+            <FaCalendarAlt className="detail-icon" />
+            <span>{formatDate(event.event_date)}</span>
+          </div>
+          <div className="detail-item-home">
+            <FaClock className="detail-icon" />
+            <span>{event.event_time}</span>
+          </div>
+          <div className="detail-item-home">
+            <FaMapMarkerAlt className="detail-icon" />
+            <span>{event.location}</span>
+          </div>
+        </div>
+
+        <div className="event-actions-home">
+          <Link to="/events" className="view-all-events-button">
+            View All Events
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+
   // useEffect to fetch events when the component mounts
   useEffect(() => {
     fetchEvents();
@@ -155,59 +222,24 @@ const Home = () => {
         {upcomingEvents.length > 0 && (
           <section className="upcoming-event-section">
             <h2>Upcoming Event{upcomingEvents.length > 1 ? "s" : ""}</h2>
-            <div className="event-grid-container">
-              {upcomingEvents.map((event) => (
-                <div className="event-card-home" key={event.id}>
-                  {/* Event banner image */}
-                  <div className="event-banner-home">
-                    <img
-                      src={`http://localhost:3001/${event.banner}`}
-                      alt={event.title}
-                      style={{
-                        height: "400px",
-                        objectFit: "cover",
-                        width: "100%",
-                      }}
-                    />
+            {getSliderSettings(upcomingEvents) ? (
+              <Slider {...getSliderSettings(upcomingEvents)} className="event-slider">
+                {upcomingEvents.map((event) => (
+                  <div key={event.id}>
+                    {renderEventCard(event)}
                   </div>
-                  {/* Event content details */}
-                  <div className="event-content-home">
-                    <h3 className="event-title-home">{event.title}</h3>
-                    <p className="event-description-home">
-                      {event.description}
-                    </p>
-
-                    {/* Event details: date, time, and location */}
-                    <div className="event-details-home">
-                      <div className="detail-item-home">
-                        <FaCalendarAlt className="detail-icon" />
-                        <span>{formatDate(event.event_date)}</span>
-                      </div>
-                      <div className="detail-item-home">
-                        <FaClock className="detail-icon" />
-                        <span>{event.event_time}</span>
-                      </div>
-                      <div className="detail-item-home">
-                        <FaMapMarkerAlt className="detail-icon" />
-                        <span>{event.location}</span>
-                      </div>
-                    </div>
-
-                    {/* Link to view all events */}
-                    <div className="event-actions-home">
-                      <Link to="/events" className="view-all-events-button">
-                        View All Events
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-            {/* End of grid container */}
+                ))}
+              </Slider>
+            ) : (
+              <div className="single-event-container">
+                {renderEventCard(upcomingEvents[0])}
+              </div>
+            )}
           </section>
         )}
-
+        
         {/* Testimonial section: display member testimonials */}
+        {/* 
         <h2 className="testimonial-title">What Our Members Say</h2>
         <hr className="divider" />
         <div className="testimonial-grid">
@@ -223,37 +255,40 @@ const Home = () => {
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua."
             </p>
-            <p className="testimonial-author">- John Doe</p>
+            <div className="testimonial-author">- John Doe, Student</div>
           </div>
+
           <div className="testimonial">
             <div className="stars">
               <span>★</span>
               <span>★</span>
               <span>★</span>
               <span>★</span>
-              <span>☆</span>
+              <span>★</span>
             </div>
             <p className="testimonial-quote">
               "Ut enim ad minim veniam, quis nostrud exercitation ullamco
               laboris nisi ut aliquip ex ea commodo consequat."
             </p>
-            <p className="testimonial-author">- Jane Smith</p>
+            <div className="testimonial-author">- Jane Smith, Professional</div>
           </div>
+
           <div className="testimonial">
             <div className="stars">
               <span>★</span>
               <span>★</span>
               <span>★</span>
               <span>★</span>
-              <span>☆</span>
+              <span>★</span>
             </div>
             <p className="testimonial-quote">
               "Duis aute irure dolor in reprehenderit in voluptate velit esse
               cillum dolore eu fugiat nulla pariatur."
             </p>
-            <p className="testimonial-author">- Alex Johnson</p>
+            <div className="testimonial-author">- Sam Johnson, Engineer</div>
           </div>
         </div>
+        */}
       </div>
     </div>
   );

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaClock, FaCalendarAlt, FaTimes } from "react-icons/fa";
 import "./Events.css";
 import request from "../../api/axiosConfig";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // Utility function to convert a 24-hour time string (e.g., "14:30") to a 12-hour format with AM/PM
 const convertTo12HourFormat = (time24) => {
@@ -30,6 +33,7 @@ const Events = () => {
   // State to store upcoming events and past events separately
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // Function to fetch events from the API and separate them into upcoming and past events
   const fetchEvents = async () => {
@@ -80,13 +84,106 @@ const Events = () => {
     }
   };
 
+  // Custom slider settings based on number of events
+  const getSliderSettings = (events) => {
+    // If there's only one event, don't use a slider
+    if (events.length <= 1) {
+      return null;
+    }
+
+    // For multiple events, use a proper slider that shows one event at a time
+    return {
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: false,
+      arrows: true,
+      centerMode: false
+    };
+  };
+
+  // Function to handle image click
+  const handleImageClick = (imagePath) => {
+    setSelectedImage(`http://localhost:3001/${imagePath}`);
+  };
+
+  // Function to close the image preview
+  const handleClosePreview = () => {
+    setSelectedImage(null);
+  };
+
   // useEffect to fetch events when the component mounts
   useEffect(() => {
     fetchEvents();
   }, []);
 
+  // Render a single event card
+  const renderEventCard = (event) => (
+    <div className="event-card" key={event.id}>
+      {/* Event banner image */}
+      <div className="event-banner">
+        <img
+          src={`http://localhost:3001/${event.banner}`}
+          alt={event.title}
+          onClick={() => handleImageClick(event.banner)}
+        />
+      </div>
+      {/* Event content details */}
+      <div className="event-content">
+        <h3 className="event-title">{event.title}</h3>
+        <p className="event-description">{event.description}</p>
+
+        {/* Event metadata: date, time, and location */}
+        <div className="event-meta">
+          <div className="meta-item">
+            <FaCalendarAlt className="meta-icon" />
+            <span>{formatDate(event.event_date)}</span>
+          </div>
+          <div className="meta-item">
+            <FaClock className="meta-icon" />
+            <span>
+              {convertTo12HourFormat(event.event_time.substring(0, 5))}
+            </span>
+          </div>
+          <div className="meta-item">
+            <FaMapMarkerAlt className="meta-icon" />
+            <span>{event.location}</span>
+          </div>
+        </div>
+
+        {/* Action button to register for the event */}
+        <div className="event-actions">
+          <a
+            href={event.link || "#"}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="register-button"
+          >
+            Register Now
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="events-page">
+      {/* Image Preview Modal */}
+      {selectedImage && (
+        <div className="image-preview-modal" onClick={handleClosePreview}>
+          <button className="image-preview-close" onClick={handleClosePreview}>
+            <FaTimes />
+          </button>
+          <img
+            src={selectedImage}
+            alt="Event banner preview"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
       {/* Header section with title and description */}
       <div className="events-header">
         <h1>IEEE Events</h1>
@@ -97,52 +194,19 @@ const Events = () => {
       <section className="upcoming-events-section">
         <h2>Upcoming Event{upcomingEvents.length > 1 ? "s" : ""}</h2>
         {upcomingEvents.length > 0 ? (
-          upcomingEvents.map((event) => (
-            <div className="event-card" key={event.id}>
-              {/* Event banner image */}
-              <div className="event-banner">
-                <img
-                  src={`http://localhost:3001/${event.banner}`}
-                  alt={event.title}
-                />
-              </div>
-              {/* Event content details */}
-              <div className="event-content">
-                <h3 className="event-title">{event.title}</h3>
-                <p className="event-description">{event.description}</p>
-
-                {/* Event metadata: date, time, and location */}
-                <div className="event-meta">
-                  <div className="meta-item">
-                    <FaCalendarAlt className="meta-icon" />
-                    <span>{formatDate(event.event_date)}</span>
-                  </div>
-                  <div className="meta-item">
-                    <FaClock className="meta-icon" />
-                    <span>
-                      {convertTo12HourFormat(event.event_time.substring(0, 5))}
-                    </span>
-                  </div>
-                  <div className="meta-item">
-                    <FaMapMarkerAlt className="meta-icon" />
-                    <span>{event.location}</span>
-                  </div>
+          getSliderSettings(upcomingEvents) ? (
+            <Slider {...getSliderSettings(upcomingEvents)} className="event-slider">
+              {upcomingEvents.map((event) => (
+                <div key={event.id}>
+                  {renderEventCard(event)}
                 </div>
-
-                {/* Action button to register for the event */}
-                <div className="event-actions">
-                  <a
-                    href={event.link || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="register-button"
-                  >
-                    Register Now
-                  </a>
-                </div>
-              </div>
+              ))}
+            </Slider>
+          ) : (
+            <div className="single-event-container">
+              {renderEventCard(upcomingEvents[0])}
             </div>
-          ))
+          )
         ) : (
           // Message to display when there are no upcoming events
           <p className="no-events">
@@ -155,60 +219,20 @@ const Events = () => {
       <section className="past-events-section">
         <h2>Past Events</h2>
         {pastEvents.length > 0 ? (
-          <ul>
-            {pastEvents.map((event) => (
-              <li key={event.id}>
-                <div className="event-card">
-                  {/* Event banner image */}
-                  <div className="event-banner">
-                    <img
-                      src={`http://localhost:3001/${event.banner}`}
-                      alt={event.title}
-                    />
-                  </div>
-                  {/* Event content details */}
-                  <div className="event-content">
-                    <h3 className="event-title">{event.title}</h3>
-                    <p className="event-description">{event.description}</p>
-
-                    {/* Event metadata: date, time, and location */}
-                    <div className="event-meta">
-                      <div className="meta-item">
-                        <FaCalendarAlt className="meta-icon" />
-                        <span>{formatDate(event.event_date)}</span>
-                      </div>
-                      <div className="meta-item">
-                        <FaClock className="meta-icon" />
-                        <span>
-                          {convertTo12HourFormat(
-                            event.event_time.substring(0, 5),
-                          )}
-                        </span>
-                      </div>
-                      <div className="meta-item">
-                        <FaMapMarkerAlt className="meta-icon" />
-                        <span>{event.location}</span>
-                      </div>
-                    </div>
-
-                    {/* Action button to register for the event */}
-                    <div className="event-actions">
-                      <a
-                        href={event.link || "#"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="register-button"
-                      >
-                        Register Now
-                      </a>
-                    </div>
-                  </div>
+          getSliderSettings(pastEvents) ? (
+            <Slider {...getSliderSettings(pastEvents)} className="event-slider">
+              {pastEvents.map((event) => (
+                <div key={event.id}>
+                  {renderEventCard(event)}
                 </div>
-              </li>
-            ))}
-          </ul>
+              ))}
+            </Slider>
+          ) : (
+            <div className="single-event-container">
+              {renderEventCard(pastEvents[0])}
+            </div>
+          )
         ) : (
-          // Message to display when there are no past events
           <p className="no-events">No past events to display.</p>
         )}
       </section>

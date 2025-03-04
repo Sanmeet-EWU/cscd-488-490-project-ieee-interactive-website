@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import OfficersCard from "../../Components/Officers_FormerOfficers";
 import "./FormerOfficers.css";
 import {
+  FaUserCircle,
   FaLinkedin,
   FaInstagram,
-  FaSnapchat,
-  FaYoutube,
-  FaTwitch,
-  FaTwitter,
-  FaFacebook,
+  FaGithub,
 } from "react-icons/fa";
 import request from "../../api/axiosConfig";
 
@@ -26,16 +23,8 @@ const OfficersGrid = () => {
         return <FaLinkedin size={24} color="#0A66C2" />;
       case "Instagram":
         return <FaInstagram size={24} color="#E1306C" />;
-      case "Snapchat":
-        return <FaSnapchat size={24} color="#FFFC00" />;
-      case "Youtube":
-        return <FaYoutube size={24} color="#FF0000" />;
-      case "Twitch":
-        return <FaTwitch size={24} color="#6441A5" />;
-      case "Twitter":
-        return <FaTwitter size={24} color="#1DA1F2" />;
-      case "Facebook":
-        return <FaFacebook size={24} color="#1877F2" />;
+      case "GitHub":
+        return <FaGithub size={24} color="#333333" />;
       default:
         return null;
     }
