@@ -1,4 +1,7 @@
 import { pool } from "../config/db.js"; // Database connection
+import fs from 'fs';
+import { promisify } from 'util';
+const unlinkAsync = promisify(fs.unlink);
 
 // Insert a new event
 export const createEvent = async (req, res) => {
@@ -67,11 +70,32 @@ export const getEventById = async (req, res) => {
 export const deleteEventById = async (req, res) => {
   try {
     const { id } = req.params;
-    const [result] = await pool.query("DELETE FROM events WHERE id = ?", [id]);
 
-    if (result.affectedRows === 0) {
+    // Get the event's banner image path before deletion
+    const [existingEvent] = await pool.query(
+      "SELECT banner FROM events WHERE id = ?",
+      [id]
+    );
+
+    if (existingEvent.length === 0) {
       return res.status(404).json({ message: "Event not found" });
     }
+
+    // Get the image path
+    const imagePath = existingEvent[0].banner;
+
+    // Delete the image file if it exists
+    if (imagePath) {
+      try {
+        await unlinkAsync(imagePath);
+      } catch (err) {
+        console.error("Error deleting image file:", err);
+        // Continue with event deletion even if image deletion fails
+      }
+    }
+
+    // Delete the event from database
+    const [result] = await pool.query("DELETE FROM events WHERE id = ?", [id]);
 
     res.status(200).json({ message: "Event deleted successfully" });
   } catch (error) {

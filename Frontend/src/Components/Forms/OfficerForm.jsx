@@ -1,6 +1,5 @@
 import { useState } from "react"; // Import React hook for managing state
 import request from "../../api/axiosConfig"; // Import custom axios configuration for API requests
-// Note: Possibly style "Add Social Media" button
 
 // OfficerForm component receives officer data and callback functions for submit and cancel actions
 export default function OfficerForm({ officer, onSubmit, onCancel }) {
@@ -32,15 +31,23 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
     { id: "wie", name: "Affinity Group: Women In Engineering (WIE)" },
   ];
 
-  // List of available social media platforms for selection
+  // List of allowed social media platforms with their URL patterns
   const socialMediaPlatforms = [
-    "LinkedIn",
-    "Instagram",
-    "Snapchat",
-    "Youtube",
-    "Twitch",
-    "Twitter",
-    "Facebook",
+    { 
+      name: "LinkedIn",
+      pattern: "^https?://(?:www\\.)?linkedin\\.com/.*$",
+      placeholder: "https://linkedin.com/in/username"
+    },
+    { 
+      name: "Instagram",
+      pattern: "^https?://(?:www\\.)?instagram\\.com/.*$",
+      placeholder: "https://instagram.com/username"
+    },
+    { 
+      name: "GitHub",
+      pattern: "^https?://(?:www\\.)?github\\.com/.*$",
+      placeholder: "https://github.com/username"
+    }
   ];
 
   // Handler to add a new empty social media entry to the formData
@@ -62,9 +69,17 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
 
   // Handler to update a specific field (platform or url) in a social media entry
   const handleSocialMediaChange = (index, field, value) => {
-    const updatedAccounts = formData.social_media.map((account, i) =>
-      i === index ? { ...account, [field]: value } : account,
-    );
+    const updatedAccounts = formData.social_media.map((account, i) => {
+      if (i === index) {
+        const updatedAccount = { ...account, [field]: value };
+        // If platform is changed, reset the URL
+        if (field === "platform") {
+          updatedAccount.url = "";
+        }
+        return updatedAccount;
+      }
+      return account;
+    });
     setFormData({
       ...formData,
       social_media: updatedAccounts,
@@ -205,13 +220,14 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
               onChange={(e) =>
                 handleSocialMediaChange(index, "platform", e.target.value)
               }
+              required
             >
               <option value="" disabled>
                 Select a platform
               </option>
               {socialMediaPlatforms.map((platform) => (
-                <option key={platform} value={platform}>
-                  {platform}
+                <option key={platform.name} value={platform.name}>
+                  {platform.name}
                 </option>
               ))}
             </select>
@@ -222,7 +238,17 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
               onChange={(e) =>
                 handleSocialMediaChange(index, "url", e.target.value)
               }
-              placeholder="Enter URL"
+              placeholder={
+                account.platform
+                  ? socialMediaPlatforms.find(p => p.name === account.platform)?.placeholder
+                  : "Enter URL"
+              }
+              pattern={
+                account.platform
+                  ? socialMediaPlatforms.find(p => p.name === account.platform)?.pattern
+                  : undefined
+              }
+              required
             />
             {/* Button to remove this social media entry */}
             <button

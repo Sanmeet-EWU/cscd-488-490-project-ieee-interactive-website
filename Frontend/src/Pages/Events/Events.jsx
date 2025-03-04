@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaMapMarkerAlt, FaClock, FaCalendarAlt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaClock, FaCalendarAlt, FaTimes } from "react-icons/fa";
 import "./Events.css";
 import request from "../../api/axiosConfig";
 import Slider from "react-slick";
@@ -33,6 +33,7 @@ const Events = () => {
   // State to store upcoming events and past events separately
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [pastEvents, setPastEvents] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   // Function to fetch events from the API and separate them into upcoming and past events
   const fetchEvents = async () => {
@@ -103,6 +104,16 @@ const Events = () => {
     };
   };
 
+  // Function to handle image click
+  const handleImageClick = (imagePath) => {
+    setSelectedImage(`http://localhost:3001/${imagePath}`);
+  };
+
+  // Function to close the image preview
+  const handleClosePreview = () => {
+    setSelectedImage(null);
+  };
+
   // useEffect to fetch events when the component mounts
   useEffect(() => {
     fetchEvents();
@@ -116,6 +127,7 @@ const Events = () => {
         <img
           src={`http://localhost:3001/${event.banner}`}
           alt={event.title}
+          onClick={() => handleImageClick(event.banner)}
         />
       </div>
       {/* Event content details */}
@@ -158,6 +170,20 @@ const Events = () => {
 
   return (
     <div className="events-page">
+      {/* Image Preview Modal */}
+      {selectedImage && (
+        <div className="image-preview-modal" onClick={handleClosePreview}>
+          <button className="image-preview-close" onClick={handleClosePreview}>
+            <FaTimes />
+          </button>
+          <img
+            src={selectedImage}
+            alt="Event banner preview"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+
       {/* Header section with title and description */}
       <div className="events-header">
         <h1>IEEE Events</h1>
