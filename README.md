@@ -7,23 +7,27 @@
 
 - [IEEE Interactive Website](#project)
   - [Prerequisites](#prerequisites)
+  - [Deployment](#deployment)
   - [Installation](#installation)
-  - [Server](#server)
+  - [Backend](#backend)
   - [Web](#web)
   - [Contributing](#contributing)
 
 ### Prerequisites
 
 - React
-- TailWindCSS
 - Node
 - MySQL Database
+
+### Deployment
+
+- Netlify
+- Railway
 
 ### Installation
 
 1. Install es7-react-js-snippets on VS Code via Extensions for easier shortcuts
-2. Install TailwindCSS IntelliSense on VS Code via Extensions for easier reading CSS code and highlighting
-3. Clone repository:
+2. Clone repository:
 
 ```powershell
 git clone https://github.com/Sanmeet-EWU/cscd-488-490-project-ieee-interactive-website.git
@@ -32,17 +36,17 @@ git clone https://github.com/Sanmeet-EWU/cscd-488-490-project-ieee-interactive-w
 4. Navigate to the project directory website and check if react and node are up to date
 
 ```powershell
-cd ~/cscd-488-490-project-ieee-interactive-website/website
+cd ~/cscd-488-490-project-ieee-interactive-website
 React (version 10.9.0): npm -v
 Node (version 20.10.0): node -v
 ```
 
-### Server
+### Backend
 
 1. Make sure you are on the right directory before running it:
 
 ```powershell
-cd ./server
+cd ./Backend
 ```
 
 2. **Running server**:
@@ -51,7 +55,12 @@ cd ./server
 npm run dev
 ```
 
-3. **Localhost**: Link to the server is http://localhost:5000/api
+3. **Localhost**: Link to the server is http://localhost:3001
+
+4. Check in phpmyadmin for officers and events tables for testing purposes
+```powershell
+http://localhost/phpmyadmin/
+```
 
 ### Web
 
@@ -61,7 +70,13 @@ npm run dev
 npm install
 ```
 
-2. **Running webpage**: To run web page application, navigate to the project directory and run:
+2. **Running webpage**: To run web page application, navigate to the project directory:
+
+```powershell
+cd ./Frontend
+```
+
+And run:
 
 ```powershell
 npm start
@@ -97,9 +112,13 @@ Or use VS code source
 4. **Pulling Someones Branch**: Pull someones change to your branch
 
 ```powershell
-git fetch <branch-name>
+git pull <branch-name>
 ```
 
 5. **Create a Pull Request**: Go to your forked repository on GitHub and create a new pull request from your branch.
 
 If the pull request is approved, it will be merged into the main codebase. Please ensure that your code passes your tests and works properly before submitting a pull request
+
+6. **Updating Website**: Create a pull request from your branch to main
+
+Merging changes to main will update the website. Please ensure that no errors occur before merging
