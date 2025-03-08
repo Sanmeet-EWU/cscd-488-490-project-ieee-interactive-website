@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useCallback } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+
+import React, {useEffect, useState, useCallback } from "react";
 import OfficersCard from "../../Components/Officers_FormerOfficers";
 import "./Officers.css";
 import {
