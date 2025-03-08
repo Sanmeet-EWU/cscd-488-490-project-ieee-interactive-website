@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./Login.css";
-import { FaUser, FaLock } from "react-icons/fa";
+
 
 // Admin component for rendering the admin login page
 const Admin = () => {

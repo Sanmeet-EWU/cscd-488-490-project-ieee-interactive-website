@@ -110,7 +110,7 @@ const OfficersGrid = () => {
   // useEffect to fetch officers data when the component mounts
   useEffect(() => {
     fetchOfficers();
-  }, []);
+  }, [fetchOfficers]);
 
   // Handler to open the modal with the selected officer's details
   const handleBioClick = (officer) => {

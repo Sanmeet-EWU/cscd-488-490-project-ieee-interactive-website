@@ -7,7 +7,6 @@ import {
   FaHistory,
   FaEnvelope,
   FaBriefcase,
-  FaLock,
   FaCalendarAlt,
   FaGlobe,
 } from "react-icons/fa";

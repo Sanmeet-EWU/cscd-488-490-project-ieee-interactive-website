@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import OfficersCard from "../../Components/Officers_FormerOfficers";
 import "./FormerOfficers.css";
 import {
-  FaUserCircle,
   FaLinkedin,
   FaInstagram,
   FaGithub,
