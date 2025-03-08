@@ -125,7 +125,7 @@ const Events = () => {
       {/* Event banner image */}
       <div className="event-banner">
         <img
-          src={`${process.env.API_URL}/${event.banner}`}
+          src={`https://ieee-backend-production.up.railway.ap/${event.banner}`}
           alt={event.title}
           onClick={() => handleImageClick(event.banner)}
         />

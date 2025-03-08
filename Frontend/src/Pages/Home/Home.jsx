@@ -125,7 +125,7 @@ const Home = () => {
     <div className="event-card-home" key={event.id}>
       <div className="event-banner-home">
         <img
-          src={`${process.env.API_URL}/${event.banner}`}
+          src={`https://ieee-backend-production.up.railway.ap/${event.banner}`}
           alt={event.title}
           style={{
             height: "400px",
