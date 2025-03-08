@@ -125,7 +125,7 @@ const Home = () => {
     <div className="event-card-home" key={event.id}>
       <div className="event-banner-home">
         <img
-          src={`http://localhost:3001/${event.banner}`}
+          src={`${process.env.API_URL}/${event.banner}`}
           alt={event.title}
           style={{
             height: "400px",

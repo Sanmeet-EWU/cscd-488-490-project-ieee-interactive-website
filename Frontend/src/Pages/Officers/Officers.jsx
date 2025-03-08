@@ -64,7 +64,7 @@ const OfficersGrid = () => {
 
       // Prepare the profile image URL if available
       const profileImageUrl = officer.profile
-        ? `http://localhost:3001/${officer.profile}`
+        ? `${process.env.API_URL}/${officer.profile}`
         : null;
 
       // Push the officer's data into the appropriate group

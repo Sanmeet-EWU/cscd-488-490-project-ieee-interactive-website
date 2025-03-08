@@ -106,7 +106,7 @@ const Events = () => {
 
   // Function to handle image click
   const handleImageClick = (imagePath) => {
-    setSelectedImage(`http://localhost:3001/${imagePath}`);
+    setSelectedImage(`${process.env.API_URL}/${imagePath}`);
   };
 
   // Function to close the image preview
@@ -125,7 +125,7 @@ const Events = () => {
       {/* Event banner image */}
       <div className="event-banner">
         <img
-          src={`http://localhost:3001/${event.banner}`}
+          src={`${process.env.API_URL}/${event.banner}`}
           alt={event.title}
           onClick={() => handleImageClick(event.banner)}
         />

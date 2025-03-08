@@ -98,7 +98,7 @@ const OfficersGrid = () => {
                 // Pass an image as the icon prop for the officer card
                 icon={
                   <img
-                    src={`http://localhost:3001/${officer.profile}`}
+                    src={`${process.env.API_URL}/${officer.profile}`}
                     alt={officer.name}
                     style={{
                       width: 150,
@@ -129,7 +129,7 @@ const OfficersGrid = () => {
               {/* Officer's image in the modal */}
               <div className="modal-icon">
                 <img
-                  src={`http://localhost:3001/${selectedOfficer.profile}`}
+                  src={`${process.env.API_URL}/${selectedOfficer.profile}`}
                   alt={selectedOfficer.name}
                   style={{
                     width: 150,
