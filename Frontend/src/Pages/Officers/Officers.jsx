@@ -94,7 +94,6 @@ const OfficersGrid = () => {
 
     return grouped;
   };
-
   // Fetches the officers data from the backend and processes it for display
   const fetchOfficers = useCallback( async () => {
     try {
