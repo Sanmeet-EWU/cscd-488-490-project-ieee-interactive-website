@@ -42,7 +42,7 @@ const OfficersGrid = () => {
 
   // Processes the fetched officers data by filtering out former officers
   // and grouping the remaining officers by their chapter group
-  const processOfficersData = (officers) => {
+  const processOfficersData = useCallback((officers) => {
     // Filter out former officers (we only want current officers)
     const regularOfficers = officers.filter(
       (officer) => officer.is_former_officer !== 1,
@@ -93,9 +93,9 @@ const OfficersGrid = () => {
     }, {});
 
     return grouped;
-  };
-  // Fetches the officers data from the backend and processes it for display
-  const fetchOfficers = useCallback( async () => {
+  }, []);
+  
+  const fetchOfficers = useCallback(async () => {
     try {
       const data = await request("get", "/officers");
       const processedData = processOfficersData(data);
@@ -106,15 +106,11 @@ const OfficersGrid = () => {
     }
   }, [processOfficersData]);
 
-  // useEffect to fetch officers data when the component mounts
   useEffect(() => {
-    const fetchData = async () => {
-      await fetchOfficers();
-    };
-
-    fetchData();
+    fetchOfficers();
   }, [fetchOfficers]);
-  
+
+
   // Handler to open the modal with the selected officer's details
   const handleBioClick = (officer) => {
     setSelectedOfficer(officer);
