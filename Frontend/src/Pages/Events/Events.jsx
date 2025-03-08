@@ -106,7 +106,7 @@ const Events = () => {
 
   // Function to handle image click
   const handleImageClick = (imagePath) => {
-    setSelectedImage(`${process.env.API_URL}/${imagePath}`);
+    setSelectedImage(`https://ieee-backend-production.up.railway.app/${imagePath}`);
   };
 
   // Function to close the image preview

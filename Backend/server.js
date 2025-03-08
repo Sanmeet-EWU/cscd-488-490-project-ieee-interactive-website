@@ -13,6 +13,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors({
+  origin: "*", // This allows all domains. In production, restrict to your frontend URL
+}));
+
 // Serve static files
 app.use("/uploads", express.static("uploads"));
 

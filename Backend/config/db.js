@@ -2,12 +2,12 @@ import mysql from "mysql2/promise";
 import "dotenv/config";
 
 export const pool = mysql.createPool({
-  host: "metro.proxy.rlwy.net",
+  host: "centerbeam.proxy.rlwy.net",
   // host: "mysql.railway.internal",
   user: "root",
-  password: "zqlIaEmclbQwIWrJxUACRuQJwohQYGhg",
+  password: "PZQdHzLMVilBODpObgcSfzcNtUKMAksB",
   database: "railway",
-  port: 43379,  // Use the provided proxy port
+  port: 56013,  // Use the provided proxy port
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
