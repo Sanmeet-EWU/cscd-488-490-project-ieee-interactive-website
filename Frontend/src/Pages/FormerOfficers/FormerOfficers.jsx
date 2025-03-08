@@ -129,7 +129,7 @@ const OfficersGrid = () => {
               {/* Officer's image in the modal */}
               <div className="modal-icon">
                 <img
-                  src={`https://ieee-backend-production.up.railway.app/${selectedOfficer.profile}`}
+                  src={`${selectedOfficer.profile}`}
                   alt={selectedOfficer.name}
                   style={{
                     width: 150,

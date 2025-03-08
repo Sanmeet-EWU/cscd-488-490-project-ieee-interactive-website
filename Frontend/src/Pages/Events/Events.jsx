@@ -125,7 +125,7 @@ const Events = () => {
       {/* Event banner image */}
       <div className="event-banner">
         <img
-          src={`https://ieee-backend-production.up.railway.ap/${event.banner}`}
+          src={`${event.banner}`}
           alt={event.title}
           onClick={() => handleImageClick(event.banner)}
         />
