@@ -119,7 +119,7 @@ const AdminDashboard = () => {
   const renderList = () => {
     // Choose the data array based on activeTab
     const data = activeTab === "events" ? events : officers;
-    return data.map((item, index) => (
+    return data?.map((item, index) => (
       <div key={index} className="item-card">
         <div className="item-content">
           {/* Display title for events or name for officers */}
