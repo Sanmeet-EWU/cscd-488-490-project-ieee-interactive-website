@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import OfficersCard from "../../Components/Officers_FormerOfficers";
 import "./Officers.css";
 import {
@@ -96,7 +96,7 @@ const OfficersGrid = () => {
   };
 
   // Fetches the officers data from the backend and processes it for display
-  const fetchOfficers = async () => {
+  const fetchOfficers = useCallback( async () => {
     try {
       const data = await request("get", "/officers");
       const processedData = processOfficersData(data);
@@ -105,13 +105,17 @@ const OfficersGrid = () => {
     } catch (error) {
       console.error("Error fetching officers:", error);
     }
-  };
+  }, []);
 
   // useEffect to fetch officers data when the component mounts
   useEffect(() => {
-    fetchOfficers();
-  }, [fetchOfficers]);
+    const fetchData = async () => {
+      await fetchOfficers();
+    };
 
+    fetchData();
+  }, [fetchOfficers]);
+  
   // Handler to open the modal with the selected officer's details
   const handleBioClick = (officer) => {
     setSelectedOfficer(officer);
