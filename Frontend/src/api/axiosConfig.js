@@ -3,7 +3,7 @@ import axios from "axios"; // Import axios for making HTTP requests
 
 // Create an axios instance with a default base URL and headers
 const api = axios.create({
-  baseURL: process.env.API_URL, // Base URL for the API server
+  baseURL: "https://ieee-backend-production.up.railway.app", // Base URL for the API server
   headers: {
     "Content-Type": "application/json", // Set the default content type to JSON
   },
