@@ -98,7 +98,7 @@ const OfficersGrid = () => {
                 // Pass an image as the icon prop for the officer card
                 icon={
                   <img
-                    src={`https://ieee-backend-production.up.railway.app/${officer.profile}`}
+                    src={`${officer.profile}`}
                     alt={officer.name}
                     style={{
                       width: 150,
