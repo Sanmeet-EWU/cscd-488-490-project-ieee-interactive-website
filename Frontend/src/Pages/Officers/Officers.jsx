@@ -105,7 +105,7 @@ const OfficersGrid = () => {
     } catch (error) {
       console.error("Error fetching officers:", error);
     }
-  }, []);
+  }, [processOfficersData]);
 
   // useEffect to fetch officers data when the component mounts
   useEffect(() => {
