@@ -14,6 +14,9 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
     profile: officer?.profile || null,
     is_former_officer: officer?.is_former_officer || false,
   });
+  
+  // State to track validation errors
+  const [errors, setErrors] = useState({});
 
   // List of chapter/group options available in the form
   const chapters = [
@@ -85,10 +88,58 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
       social_media: updatedAccounts,
     });
   };
+  
+  // Function to validate file size
+  const validateFileSize = (file) => {
+    // 10MB in bytes
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
+    
+    if (file && file.size > MAX_FILE_SIZE) {
+      return "File size exceeds 10MB limit. Please choose a smaller image.";
+    }
+    
+    return null;
+  };
+  
+  // Handle file input change with validation
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    
+    if (file) {
+      // Validate file size
+      const errorMessage = validateFileSize(file);
+      
+      if (errorMessage) {
+        // Set error message
+        setErrors({...errors, profile: errorMessage});
+        // Alert the user
+        alert(errorMessage);
+        // Reset the file input
+        e.target.value = '';
+      } else {
+        // Clear any previous errors for this field
+        const newErrors = {...errors};
+        delete newErrors.profile;
+        setErrors(newErrors);
+        
+        // Update form data with the file
+        setFormData({ ...formData, profile: file });
+        // Log the selected file for debugging purposes
+        console.log(file);
+      }
+    }
+  };
 
   // Handle form submission for creating or updating an officer
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
+    
+    // Check if there are any validation errors
+    if (Object.keys(errors).length > 0) {
+      // Alert the user about validation errors
+      alert("Please fix the errors before submitting the form.");
+      return;
+    }
 
     try {
       let profileUrl = formData.profile;
@@ -307,12 +358,10 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
         <input
           type="file"
           accept="image/*"
-          onChange={(e) => {
-            setFormData({ ...formData, profile: e.target.files[0] });
-            // Log the selected file for debugging purposes
-            console.log(e.target.files[0]);
-          }}
+          onChange={handleFileChange}
         />
+        {errors.profile && <div className="error-message">{errors.profile}</div>}
+        <small>Maximum file size: 10MB</small>
       </div>
 
       {/* Form action buttons for submit and cancel */}

@@ -15,6 +15,9 @@ export default function EventForm({ event, onSubmit, onCancel }) {
       banner: null,
     },
   );
+  
+  // State to track validation errors
+  const [errors, setErrors] = useState({});
 
   // Update the form state when the event prop changes (e.g., when editing an existing event)
   useEffect(() => {
@@ -32,6 +35,13 @@ export default function EventForm({ event, onSubmit, onCancel }) {
   // Handle for submission
   const handleSubmit = async (e) => {
     e.preventDefault(); //Prevent the default form submission behavior
+
+    // Check if there are any validation errors
+    if (Object.keys(errors).length > 0) {
+      // Alert the user about validation errors
+      alert("Please fix the errors before submitting the form.");
+      return;
+    }
 
     try {
       let bannerUrl = formData.banner;
@@ -90,6 +100,46 @@ export default function EventForm({ event, onSubmit, onCancel }) {
     } catch (error) {
       // Log any errors that occur during submission process
       console.error("Error submitting event:", error);
+    }
+  };
+
+  // Function to validate file size
+  const validateFileSize = (file) => {
+    // 10MB in bytes
+    const MAX_FILE_SIZE = 10 * 1024 * 1024;
+    
+    if (file && file.size > MAX_FILE_SIZE) {
+      return "File size exceeds 10MB limit. Please choose a smaller image.";
+    }
+    
+    return null;
+  };
+
+  // Handle file input change with validation
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    
+    if (file) {
+      // Validate file size
+      const errorMessage = validateFileSize(file);
+      
+      if (errorMessage) {
+        // Set error message
+        setErrors({...errors, banner: errorMessage});
+        // Alert the user
+        alert(errorMessage);
+        // Reset the file input
+        e.target.value = '';
+      } else {
+        // Clear any previous errors for this field
+        const newErrors = {...errors};
+        delete newErrors.banner;
+        setErrors(newErrors);
+        
+        // Update form data with the file
+        setFormData({ ...formData, banner: file });
+        console.log(file);
+      }
     }
   };
 
@@ -173,13 +223,10 @@ export default function EventForm({ event, onSubmit, onCancel }) {
         <input
           type="file"
           accept="image/*"
-          onChange={(e) => {
-            // Set the first selected file as the banner image in formData
-            setFormData({ ...formData, banner: e.target.files[0] });
-            // Log the file to the console for debugging
-            console.log(e.target.files[0]);
-          }}
+          onChange={handleFileChange}
         />
+        {errors.banner && <div className="error-message">{errors.banner}</div>}
+        <small>Maximum file size: 10MB</small>
       </div>
       {/* Form actions: Submit and Cancel buttons */}
       <div className="form-actions">
