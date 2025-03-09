@@ -1,7 +1,4 @@
 import { pool } from "../config/db.js"; // Database connection
-import fs from 'fs';
-import { promisify } from 'util';
-const unlinkAsync = promisify(fs.unlink);
 
 // Insert a new event
 export const createEvent = async (req, res) => {
@@ -9,17 +6,17 @@ export const createEvent = async (req, res) => {
     console.log("Received body:", req.body); // Debugging statement
 
     // Extract event details from request body
-    const { title, event_date, event_time, description, location, link } =
+    const { title2, event_date, event_time, description, location, link, banner } =
       req.body;
 
-    // If a file is uploaded, set the banner path; otherwise set to null
-    const banner = req.file ? `uploads/events/${req.file.filename}` : null;
+    // Banner is now a Cloudinary URL passed directly in the request body
+    // No need to handle local file uploads
 
     // Insert event details into the database
     const [result] = await pool.query(
-      `INSERT INTO events (title, event_date, event_time, description, banner, location, link) 
+      `INSERT INTO events (title2, event_date, event_time, description, banner, location, link) 
              VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [title, event_date, event_time, description, banner, location, link],
+      [title2, event_date, event_time, description, banner, location, link],
     );
 
     // Respond with success message and the inserted event ID
@@ -71,9 +68,9 @@ export const deleteEventById = async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Get the event's banner image path before deletion
+    // Get the event before deletion
     const [existingEvent] = await pool.query(
-      "SELECT banner FROM events WHERE id = ?",
+      "SELECT * FROM events WHERE id = ?",
       [id]
     );
 
@@ -81,18 +78,7 @@ export const deleteEventById = async (req, res) => {
       return res.status(404).json({ message: "Event not found" });
     }
 
-    // Get the image path
-    const imagePath = existingEvent[0].banner;
-
-    // Delete the image file if it exists
-    if (imagePath) {
-      try {
-        await unlinkAsync(imagePath);
-      } catch (err) {
-        console.error("Error deleting image file:", err);
-        // Continue with event deletion even if image deletion fails
-      }
-    }
+    // No need to delete local files since we're using Cloudinary URLs
 
     // Delete the event from database
     const [result] = await pool.query("DELETE FROM events WHERE id = ?", [id]);
@@ -108,9 +94,8 @@ export const deleteEventById = async (req, res) => {
 export const updateEventById = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, description, event_date, event_time, link, location } =
+    const { title2, description, event_date, event_time, link, location, banner } =
       req.body;
-    const banner = req.file ? `uploads/events/${req.file.filename}` : null;
 
     // Check if the event exists before updating
     const [existingEvent] = await pool.query(
@@ -126,7 +111,7 @@ export const updateEventById = async (req, res) => {
     const updateQuery = `
             UPDATE events
             SET 
-                title = COALESCE(?, title),
+                title2 = COALESCE(?, title2),
                 description = COALESCE(?, description),
                 event_date = COALESCE(?, event_date),
                 event_time = COALESCE(?, event_time),
@@ -138,7 +123,7 @@ export const updateEventById = async (req, res) => {
 
     // Execute update query with provided values
     await pool.query(updateQuery, [
-      title,
+      title2,
       description,
       event_date,
       event_time,

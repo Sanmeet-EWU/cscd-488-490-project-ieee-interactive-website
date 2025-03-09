@@ -1,8 +1,5 @@
 import { pool } from "../config/db.js";
-import fs from 'fs';
-import { promisify } from 'util';
-
-const unlinkAsync = promisify(fs.unlink);
+import cloudinary from '../config/cloudinary.js'; // Import Cloudinary
 
 // Allowed social media platforms and their URL patterns
 const ALLOWED_PLATFORMS = {
@@ -40,14 +37,18 @@ export const getOfficers = async (req, res) => {
     // Query all officers from the database
     const [officers] = await pool.query("SELECT * FROM officers");
 
-    // Format each officers social_Medial field from JSON string to a javascript object
+    // Format each officer's social_media field from JSON string to a JavaScript object
     const formattedOfficers = officers.map((officer) => {
-      let socialMedia = null;
+      let socialMedia = [];
       try {
-        // Parse social_media field from JSON string to a javascript object
-        socialMedia = officer.social_media
-          ? JSON.parse(officer.social_media)
-          : null;
+        // Check if social_media is a string and needs parsing
+        if (typeof officer.social_media === 'string') {
+          socialMedia = JSON.parse(officer.social_media);
+        } 
+        // If it's already an object (MySQL JSON type might be automatically parsed)
+        else if (officer.social_media) {
+          socialMedia = officer.social_media;
+        }
       } catch (error) {
         // Log parsing errors without crashing the entire process
         console.error("Error parsing social_media:", error);
@@ -71,7 +72,7 @@ export const getOfficers = async (req, res) => {
 // Get a single officers ID
 export const getOfficerById = async (req, res) => {
   try {
-    const { id } = req.params; // Retrieve officer ID from request paramters
+    const { id } = req.params; // Retrieve officer ID from request parameters
     // Query the database for the officer with the given ID
     const [officers] = await pool.query("SELECT * FROM officers WHERE id = ?", [
       id,
@@ -83,11 +84,16 @@ export const getOfficerById = async (req, res) => {
     }
 
     // Attempt to parse the social_media JSON string, if it exists
-    let socialMedia = null;
+    let socialMedia = [];
     try {
-      socialMedia = officers[0].social_media
-        ? JSON.parse(officers[0].social_media)
-        : null;
+      // Check if social_media is a string and needs parsing
+      if (typeof officers[0].social_media === 'string') {
+        socialMedia = JSON.parse(officers[0].social_media);
+      } 
+      // If it's already an object (MySQL JSON type might be automatically parsed)
+      else if (officers[0].social_media) {
+        socialMedia = officers[0].social_media;
+      }
     } catch (error) {
       console.error("Error parsing social_media:", error);
     }
@@ -115,13 +121,18 @@ export const createOfficer = async (req, res) => {
       is_former_officer,
       social_media,
       bio,
+      profile,
     } = req.body;
 
     // Parse and validate social media data
-    let parsedSocialMedia = null;
+    let parsedSocialMedia = [];
     if (social_media) {
       try {
-        parsedSocialMedia = JSON.parse(social_media);
+        // If it's a string, parse it; otherwise, use it directly
+        parsedSocialMedia = typeof social_media === 'string' 
+          ? JSON.parse(social_media) 
+          : social_media;
+        
         validateSocialMedia(parsedSocialMedia);
       } catch (error) {
         return res.status(400).json({ 
@@ -131,13 +142,12 @@ export const createOfficer = async (req, res) => {
       }
     }
 
-    // Format social_media for database storage
-    const formattedSocialMedia = parsedSocialMedia ? JSON.stringify(parsedSocialMedia) : null;
+    // Format social_media for database storage - MySQL JSON type expects a JSON string
+    const formattedSocialMedia = JSON.stringify(parsedSocialMedia);
 
-    // Determine file path for the officers profile image if uploaded
-    const profilePath = req.file
-      ? `uploads/officers/${req.file.filename}`
-      : null;
+    // Profile is now a Cloudinary URL passed directly in the request body
+    // No need to handle local file uploads
+
     // Convert the is_former_officer string to a boolean value
     const isFormerOfficerBool = is_former_officer === "true";
 
@@ -155,7 +165,7 @@ export const createOfficer = async (req, res) => {
       email,
       isFormerOfficerBool,
       formattedSocialMedia,
-      profilePath,
+      profile,
       bio,
     ]);
 
@@ -184,11 +194,20 @@ export const updateOfficerById = async (req, res) => {
     } = req.body;
 
     // Parse and validate social media data if provided
-    let parsedSocialMedia = null;
+    let parsedSocialMedia = [];
+    let formattedSocialMedia = null;
+    
     if (social_media) {
       try {
-        parsedSocialMedia = JSON.parse(social_media);
+        // If it's a string, parse it; otherwise, use it directly
+        parsedSocialMedia = typeof social_media === 'string' 
+          ? JSON.parse(social_media) 
+          : social_media;
+        
         validateSocialMedia(parsedSocialMedia);
+        
+        // Format social_media for database storage - MySQL JSON type expects a JSON string
+        formattedSocialMedia = JSON.stringify(parsedSocialMedia);
       } catch (error) {
         return res.status(400).json({ 
           message: "Invalid social media data", 
@@ -197,10 +216,8 @@ export const updateOfficerById = async (req, res) => {
       }
     }
 
-    // Determine new profile image path if a file is uploaded; otherwise use the existing profile path
-    const profilePath = req.file
-      ? `uploads/officers/${req.file.filename}`
-      : profile;
+    // Profile is now a Cloudinary URL passed directly in the request body
+    // No need to handle local file uploads
 
     // Check if the officer exists in the database
     const [existingOfficer] = await pool.query(
@@ -237,9 +254,9 @@ export const updateOfficerById = async (req, res) => {
       position,
       email,
       isFormerOfficerBool,
-      social_media,
+      formattedSocialMedia,
       bio,
-      profilePath,
+      profile,
       id,
     ]);
 
@@ -259,7 +276,7 @@ export const deleteOfficerById = async (req, res) => {
 
     // Check if the officer exists before deletion
     const [existingOfficer] = await pool.query(
-      "SELECT profile FROM officers WHERE id = ?",
+      "SELECT * FROM officers WHERE id = ?",
       [id],
     );
 
@@ -267,15 +284,20 @@ export const deleteOfficerById = async (req, res) => {
       return res.status(404).json({ message: "Officer not found" });
     }
 
-    // Get the image path
-    const imagePath = existingOfficer[0].profile;
-
-    // Delete the image file if it exists
-    if (imagePath) {
+    // Delete the Cloudinary image if it exists
+    if (existingOfficer[0].profile) {
       try {
-        await unlinkAsync(imagePath);
+        // Extract the public ID from the Cloudinary URL
+        // Cloudinary URLs typically look like: https://res.cloudinary.com/cloud_name/image/upload/v1234567890/public_id.jpg
+        const urlParts = existingOfficer[0].profile.split('/');
+        const publicIdWithExtension = urlParts[urlParts.length - 1];
+        const publicId = publicIdWithExtension.split('.')[0]; // Remove file extension if present
+        
+        // Delete the image from Cloudinary
+        await cloudinary.uploader.destroy(publicId);
+        console.log(`Deleted image with public ID: ${publicId}`);
       } catch (err) {
-        console.error("Error deleting image file:", err);
+        console.error("Error deleting image from Cloudinary:", err);
         // Continue with officer deletion even if image deletion fails
       }
     }
