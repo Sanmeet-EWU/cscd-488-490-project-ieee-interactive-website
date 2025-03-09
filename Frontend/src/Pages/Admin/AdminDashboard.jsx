@@ -123,7 +123,7 @@ const AdminDashboard = () => {
       <div key={index} className="item-card">
         <div className="item-content">
           {/* Display title for events or name for officers */}
-          <h4>{item.title || item.name}</h4>
+          <h4>{item.title2 || item.name}</h4>
           {/* If available, display event date and time */}
           {item.event_date && (
             <p>{`${item.event_date.split("T")[0]} at ${item.event_time.substring(0, 5)}`}</p>

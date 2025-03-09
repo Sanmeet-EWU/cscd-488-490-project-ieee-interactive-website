@@ -6,7 +6,7 @@ export default function EventForm({ event, onSubmit, onCancel }) {
   // Initialize form state with provided event data or default empty values
   const [formData, setFormData] = useState(
     event || {
-      title: "",
+      title2: "",
       event_date: "",
       event_time: "",
       location: "",
@@ -33,14 +33,44 @@ export default function EventForm({ event, onSubmit, onCancel }) {
   const handleSubmit = async (e) => {
     e.preventDefault(); //Prevent the default form submission behavior
 
-    // Create a new FormData object to handle file uploads along with other form fields
-    const formDataToSend = new FormData();
-    // Append each key/value pair from formData to formDataToSend
-    Object.entries(formData).forEach(([key, value]) => {
-      formDataToSend.append(key, value);
-    });
-
     try {
+      let bannerUrl = formData.banner;
+
+      // If a new banner image is selected, upload it to Cloudinary
+      if (formData.banner && formData.banner instanceof File) {
+        const uploadData = new FormData();
+        uploadData.append('file', formData.banner);
+        uploadData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || 'ieee-images');
+        uploadData.append('folder', 'events');
+
+        try {
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, 
+            {
+              method: 'POST',
+              body: uploadData,
+            }
+          );
+    
+          if (!response.ok) {
+            throw new Error(`Upload failed: ${response.statusText}`);
+          }
+          
+          const data = await response.json();
+          bannerUrl = data.secure_url;
+        } catch (error) {
+          console.error('Error uploading image to Cloudinary:', error);
+          throw error;
+        }
+      }
+
+      // Create a new FormData object to handle file uploads along with other form fields
+      const formDataToSend = new FormData();
+      // Append each key/value pair from formData to formDataToSend
+      Object.entries({ ...formData, banner: bannerUrl }).forEach(([key, value]) => {
+        formDataToSend.append(key, value);
+      });
+
       // If editing an existing event, send a PATCH request; otherwise, send a POST request to create a new event
       if (event) {
         await request("patch", `/events/${event.id}`, formDataToSend, {
@@ -75,8 +105,8 @@ export default function EventForm({ event, onSubmit, onCancel }) {
         <label>Title</label>
         <input
           type="text"
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
+          value={formData.title2}
+          onChange={(e) => setFormData({ ...formData, title2: e.target.value })}
           required
         />
       </div>

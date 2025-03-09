@@ -106,7 +106,7 @@ const Events = () => {
 
   // Function to handle image click
   const handleImageClick = (imagePath) => {
-    setSelectedImage(`https://ieee-backend-production.up.railway.app/${imagePath}`);
+    setSelectedImage(`${imagePath}`);
   };
 
   // Function to close the image preview
@@ -126,13 +126,13 @@ const Events = () => {
       <div className="event-banner">
         <img
           src={`${event.banner}`}
-          alt={event.title}
+          alt={event.title2}
           onClick={() => handleImageClick(event.banner)}
         />
       </div>
       {/* Event content details */}
       <div className="event-content">
-        <h3 className="event-title">{event.title}</h3>
+        <h3 className="event-title">{event.title2}</h3>
         <p className="event-description">{event.description}</p>
 
         {/* Event metadata: date, time, and location */}

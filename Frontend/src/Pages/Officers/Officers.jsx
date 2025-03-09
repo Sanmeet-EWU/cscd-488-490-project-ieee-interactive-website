@@ -64,7 +64,7 @@ const OfficersGrid = () => {
 
       // Prepare the profile image URL if available
       const profileImageUrl = officer.profile
-        ? `https://ieee-backend-production.up.railway.app/${officer.profile}`
+        ? `${officer.profile}`
         : null;
 
       // Push the officer's data into the appropriate group

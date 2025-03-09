@@ -20,7 +20,7 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
     { id: "sc", name: "Spokane Section" },
     { id: "power", name: "Chapter: Power & Energy Society" },
     {
-      id: "comp",
+      id: "comp", 
       name: "Joint Chapter: Antennas and Propagation, Circuits and Systems, Electron Devices, Computer, and Control System Societies",
     },
     {
@@ -90,26 +90,53 @@ export default function OfficerForm({ officer, onSubmit, onCancel }) {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent default form submission behavior
 
-    // Create a FormData object to handle file uploads along with other form fields
-    const formDataToSend = new FormData();
-    // Append all formData entries to the FormData object
-    Object.entries(formData).forEach(([key, value]) => {
-      // For social_media, stringify the value as it's an array of objects
-      if (key === "social_media") {
-        formDataToSend.append(key, JSON.stringify(value));
-      } else if (key === "profile" && value) {
-        // Append file if profile exists
-        formDataToSend.append(key, value);
-      } else if (key === "is_former_officer") {
-        // Explicitly send as a boolean string ("true" or "false")
-        formDataToSend.append(key, value ? "true" : "false");
-      } else {
-        // Append other fields directly
-        formDataToSend.append(key, value);
-      }
-    });
-
     try {
+      let profileUrl = formData.profile;
+
+      // If a new profile image is selected, upload it to Cloudinary
+      if (formData.profile && formData.profile instanceof File) {
+        const uploadData = new FormData();
+        uploadData.append('file', formData.profile);
+        uploadData.append('upload_preset', process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET || 'ieee-images');
+        uploadData.append('folder', 'officers');
+
+        try {
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, 
+            {
+              method: 'POST',
+              body: uploadData,
+            }
+          );
+    
+          if (!response.ok) {
+            throw new Error(`Upload failed: ${response.statusText}`);
+          }
+          
+          const data = await response.json();
+          profileUrl = data.secure_url;
+        } catch (error) {
+          console.error('Error uploading image to Cloudinary:', error);
+          throw error;
+        }
+      }
+
+      // Create a FormData object to handle file uploads along with other form fields
+      const formDataToSend = new FormData();
+      // Append all formData entries to the FormData object
+      Object.entries({...formData, profile: profileUrl}).forEach(([key, value]) => {
+        // For social_media, stringify the value as it's an array of objects
+        if (key === "social_media") {
+          formDataToSend.append(key, JSON.stringify(value));
+        } else if (key === "is_former_officer") {
+          // Explicitly send as a boolean string ("true" or "false")
+          formDataToSend.append(key, value ? "true" : "false");
+        } else {
+          // Append other fields directly
+          formDataToSend.append(key, value);
+        }
+      });
+
       // If editing an existing officer, send a PATCH request; otherwise, send a POST request to add a new officer
       if (officer) {
         await request("patch", `/officers/${officer.id}`, formDataToSend, {
