@@ -26,7 +26,27 @@ const formatDate = (dateString) => {
     month: "long",
     day: "numeric",
   };
-  return new Date(dateString).toLocaleDateString("en-US", options); // Format date with given options
+  
+  // Create a date object and ensure it's treated as a local date
+  // by parsing the YYYY-MM-DD part only
+  const dateParts = dateString.split('T')[0].split('-');
+  const year = parseInt(dateParts[0], 10);
+  const month = parseInt(dateParts[1], 10) - 1; // Months are 0-indexed in JS
+  const day = parseInt(dateParts[2], 10);
+  
+  const date = new Date(year, month, day);
+  return date.toLocaleDateString("en-US", options);
+};
+
+// Utility function to create a date object from a date string without timezone issues
+const createLocalDate = (dateString) => {
+  // Parse the YYYY-MM-DD part only to avoid timezone issues
+  const dateParts = dateString.split('T')[0].split('-');
+  const year = parseInt(dateParts[0], 10);
+  const month = parseInt(dateParts[1], 10) - 1; // Months are 0-indexed in JS
+  const day = parseInt(dateParts[2], 10);
+  
+  return new Date(year, month, day);
 };
 
 const Events = () => {
@@ -48,8 +68,8 @@ const Events = () => {
 
       // Filter events to get only future events based on event date and time
       const futureEvents = data.filter((event) => {
-        // Create a date object for the event date
-        const eventDate = new Date(event.event_date);
+        // Create a date object for the event date without timezone issues
+        const eventDate = createLocalDate(event.event_date);
         
         // Create a date object with just the date part (no time) for comparison
         const eventDateOnly = new Date(eventDate);
@@ -71,8 +91,8 @@ const Events = () => {
 
       // Filter events to get past events (those that occurred before the current date/time)
       const pastEventsData = data.filter((event) => {
-        // Create a date object for the event date
-        const eventDate = new Date(event.event_date);
+        // Create a date object for the event date without timezone issues
+        const eventDate = createLocalDate(event.event_date);
         
         // Create a date object with just the date part (no time) for comparison
         const eventDateOnly = new Date(eventDate);
@@ -94,15 +114,13 @@ const Events = () => {
 
       // Sort upcoming events chronologically
       const sortedUpcomingEvents = futureEvents.sort((a, b) => {
-        const dateA = new Date(a.event_date);
+        const dateA = createLocalDate(a.event_date);
         const [hoursA, minutesA] = a.event_time.split(":");
-        dateA.setHours(hoursA);
-        dateA.setMinutes(minutesA);
+        dateA.setHours(parseInt(hoursA, 10), parseInt(minutesA, 10), 0, 0);
 
-        const dateB = new Date(b.event_date);
+        const dateB = createLocalDate(b.event_date);
         const [hoursB, minutesB] = b.event_time.split(":");
-        dateB.setHours(hoursB);
-        dateB.setMinutes(minutesB);
+        dateB.setHours(parseInt(hoursB, 10), parseInt(minutesB, 10), 0, 0);
         return dateA - dateB;
       });
 
