@@ -45,6 +45,17 @@ const features = [
   },
 ];
 
+// Utility function to create a date object from a date string without timezone issues
+const createLocalDate = (dateString) => {
+  // Parse the YYYY-MM-DD part only to avoid timezone issues
+  const dateParts = dateString.split('T')[0].split('-');
+  const year = parseInt(dateParts[0], 10);
+  const month = parseInt(dateParts[1], 10) - 1; // Months are 0-indexed in JS
+  const day = parseInt(dateParts[2], 10);
+  
+  return new Date(year, month, day);
+};
+
 // Utility function to format a date string into a readable format
 const formatDate = (dateString) => {
   const options = {
@@ -53,7 +64,28 @@ const formatDate = (dateString) => {
     month: "long",
     day: "numeric",
   };
-  return new Date(dateString).toLocaleDateString("en-US", options);
+  
+  // Create a date object and ensure it's treated as a local date
+  // by parsing the YYYY-MM-DD part only
+  const dateParts = dateString.split('T')[0].split('-');
+  const year = parseInt(dateParts[0], 10);
+  const month = parseInt(dateParts[1], 10) - 1; // Months are 0-indexed in JS
+  const day = parseInt(dateParts[2], 10);
+  
+  const date = new Date(year, month, day);
+  return date.toLocaleDateString("en-US", options);
+};
+
+// Convert time from 24-hour format to 12-hour format with AM/PM
+const convertTo12HourFormat = (time24) => {
+  const [hours, minutes] = time24.split(":");
+  let hour = parseInt(hours, 10);
+  const ampm = hour >= 12 ? "PM" : "AM";
+
+  hour = hour % 12;
+  if (hour === 0) hour = 12;
+
+  return `${hour}:${minutes} ${ampm}`;
 };
 
 // Home component for the IEEE Spokane homepage
@@ -68,28 +100,43 @@ const Home = () => {
       const data = await request("get", "/events");
 
       const now = new Date();
+      
+      // Set hours, minutes, seconds, and milliseconds to 0 for today's date comparison
+      const today = new Date(now);
+      today.setHours(0, 0, 0, 0);
 
       // Filter out events that occur in the future
       const futureEvents = data.filter((event) => {
-        const eventDate = new Date(event.event_date);
-        // Extract hours and minutes from the event time and set on eventDate
-        const [hours, minutes] = event.event_time.split(":");
-        eventDate.setHours(hours);
-        eventDate.setMinutes(minutes);
-        return eventDate >= now;
+        // Create a date object for the event date without timezone issues
+        const eventDate = createLocalDate(event.event_date);
+        
+        // Create a date object with just the date part (no time) for comparison
+        const eventDateOnly = new Date(eventDate);
+        eventDateOnly.setHours(0, 0, 0, 0);
+        
+        // If the event is today, compare with the time
+        if (eventDateOnly.getTime() === today.getTime()) {
+          // Extract hours and minutes from the event time
+          const [hours, minutes] = event.event_time.split(":");
+          const eventDateTime = new Date(eventDate);
+          eventDateTime.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
+          
+          return eventDateTime >= now; // Include events that occur after current time
+        }
+        
+        // For other dates, just compare the dates
+        return eventDateOnly >= today; // Include events that occur on or after today
       });
 
       // Sort upcoming events chronologically
       const sortedUpcomingEvents = futureEvents.sort((a, b) => {
-        const dateA = new Date(a.event_date);
+        const dateA = createLocalDate(a.event_date);
         const [hoursA, minutesA] = a.event_time.split(":");
-        dateA.setHours(hoursA);
-        dateA.setMinutes(minutesA);
+        dateA.setHours(parseInt(hoursA, 10), parseInt(minutesA, 10), 0, 0);
 
-        const dateB = new Date(b.event_date);
+        const dateB = createLocalDate(b.event_date);
         const [hoursB, minutesB] = b.event_time.split(":");
-        dateB.setHours(hoursB);
-        dateB.setMinutes(minutesB);
+        dateB.setHours(parseInt(hoursB, 10), parseInt(minutesB, 10), 0, 0);
         return dateA - dateB;
       });
 
@@ -126,7 +173,7 @@ const Home = () => {
       <div className="event-banner-home">
         <img
           src={`${event.banner}`}
-          alt={event.title}
+          alt={event.title2}
           style={{
             height: "400px",
             objectFit: "cover",
@@ -135,7 +182,7 @@ const Home = () => {
         />
       </div>
       <div className="event-content-home">
-        <h3 className="event-title-home">{event.title}</h3>
+        <h3 className="event-title-home">{event.title2}</h3>
         <p className="event-description-home">
           {event.description}
         </p>
@@ -147,7 +194,7 @@ const Home = () => {
           </div>
           <div className="detail-item-home">
             <FaClock className="detail-icon" />
-            <span>{event.event_time}</span>
+            <span>{convertTo12HourFormat(event.event_time.substring(0, 5))}</span>
           </div>
           <div className="detail-item-home">
             <FaMapMarkerAlt className="detail-icon" />
