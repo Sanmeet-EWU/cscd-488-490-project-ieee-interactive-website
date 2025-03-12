@@ -41,24 +41,55 @@ const Events = () => {
       // Fetch event data from the API
       const data = await request("get", "/events");
       const now = new Date(); // Get current date and time
+      
+      // Set hours, minutes, seconds, and milliseconds to 0 for today's date comparison
+      const today = new Date(now);
+      today.setHours(0, 0, 0, 0);
 
       // Filter events to get only future events based on event date and time
       const futureEvents = data.filter((event) => {
+        // Create a date object for the event date
         const eventDate = new Date(event.event_date);
-        // Extract hours and minutes from the event time and set them on the eventDate
-        const [hours, minutes] = event.event_time.split(":");
-        eventDate.setHours(hours);
-        eventDate.setMinutes(minutes);
-        return eventDate >= now; // Include events that occur after now
+        
+        // Create a date object with just the date part (no time) for comparison
+        const eventDateOnly = new Date(eventDate);
+        eventDateOnly.setHours(0, 0, 0, 0);
+        
+        // If the event is today, compare with the time
+        if (eventDateOnly.getTime() === today.getTime()) {
+          // Extract hours and minutes from the event time
+          const [hours, minutes] = event.event_time.split(":");
+          const eventDateTime = new Date(eventDate);
+          eventDateTime.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
+          
+          return eventDateTime >= now; // Include events that occur after current time
+        }
+        
+        // For other dates, just compare the dates
+        return eventDateOnly >= today; // Include events that occur on or after today
       });
 
       // Filter events to get past events (those that occurred before the current date/time)
       const pastEventsData = data.filter((event) => {
+        // Create a date object for the event date
         const eventDate = new Date(event.event_date);
-        const [hours, minutes] = event.event_time.split(":");
-        eventDate.setHours(hours);
-        eventDate.setMinutes(minutes);
-        return eventDate < now; // Include events that occurred before now
+        
+        // Create a date object with just the date part (no time) for comparison
+        const eventDateOnly = new Date(eventDate);
+        eventDateOnly.setHours(0, 0, 0, 0);
+        
+        // If the event is today, compare with the time
+        if (eventDateOnly.getTime() === today.getTime()) {
+          // Extract hours and minutes from the event time
+          const [hours, minutes] = event.event_time.split(":");
+          const eventDateTime = new Date(eventDate);
+          eventDateTime.setHours(parseInt(hours, 10), parseInt(minutes, 10), 0, 0);
+          
+          return eventDateTime < now; // Include events that occurred before current time
+        }
+        
+        // For other dates, just compare the dates
+        return eventDateOnly < today; // Include events that occurred before today
       });
 
       // Sort upcoming events chronologically
