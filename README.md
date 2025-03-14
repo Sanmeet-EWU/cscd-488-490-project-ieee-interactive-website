@@ -3,6 +3,10 @@
 
 # Project IEEE Interactive Website
 
+## Overview
+IEEE Spokane Section Interactive Website project developed in a modern, user-friendly web platform to replace an outdated site that lacked functionality and design coherence using frameworks React.js, Node.js/Express and a backend database. 
+
+
 ## Table of Contents
 
 - [IEEE Interactive Website](#project)
