@@ -11,17 +11,37 @@ IEEE Spokane Section Interactive Website project developed in a modern, user-fri
 
 - [IEEE Interactive Website](#project)
   - [Prerequisites](#prerequisites)
+  - [System Modules](#system-modules)
   - [Deployment](#deployment)
   - [Installation](#installation)
   - [Backend](#backend)
   - [Web](#web)
-  - [Contributing](#contributing)
+  - [Contributing Guidelines](#contributing-guidelines)
 
 ### Prerequisites
 
 - React
 - Node
 - MySQL Database
+
+### System Modules
+
+## Backend Modules (Node.js/Express)
+- Routes: Defines API endpoints (e.g., /events, /officers).
+- Controllers: Handles business logic for API requests.
+- Database Models: Defines how data is structured and stored in MySQL.
+- Middleware: Manages authentication, logging, and error handling.
+
+## Frontend Modules (React.js)
+- Pages: Different UI pages like the homepage, events page, and admin dashboard.
+- Components: Reusable UI components and generalizing the entire website (e.g., buttons, forms, modals).
+- API Integration: Handles requests to the backend (e.g., fetching events and officer details).
+- State Management: Manages application state using React Context.
+
+## Database Modules (MySQL)
+- Tables: Stores data for events, officers, and other site functionalities.
+- Queries: SQL scripts for inserting, updating, deleting, and retrieving data.
+
 
 ### Deployment
 
@@ -90,7 +110,7 @@ You can exit application by ctlr c
 
 Note: Saving the file will update the webpage of what you did
 
-## Contributing
+## Contributing Guidelines
 
 1. **Switching to your branch**: Avoid pushing it to the main branch, switch to your branch:
 
