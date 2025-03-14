@@ -119,6 +119,8 @@ You can exit application by ctlr c
 
 Note: Saving the file will update the webpage of what you did
 
+Note: Deployed website is on local host 3000. When running development server, please use different local host
+
 3. **Firebase**: Contact IEEE Spokane Administrator to give you access to the firebase
 
 ### Backend
