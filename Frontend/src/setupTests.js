@@ -4,12 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import "@testing-library/jest-dom";
 
-// Add a unit test
-test("adds 1 + 2 to equal 3", () => {
-  expect(1 + 2).toBe(3);
-});
-
-/*import React, { Component } from 'react';
+import React, { Component } from 'react';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -35,27 +30,3 @@ class ErrorBoundary extends Component {
 }
 
 export default ErrorBoundary;
-*/
-
-/*// src/components/Button.test.js
-import { render, screen, fireEvent } from '@testing-library/react';
-import Button from './Button';
-
-// Test case 1: Component renders correctly
-test('renders button with label', () => {
-  render(<Button label="Click me" />);
-  const buttonElement = screen.getByText(/Click me/i);
-  expect(buttonElement).toBeInTheDocument();
-});
-
-// Test case 2: Button click triggers the callback function
-test('calls onClick callback when clicked', () => {
-  const handleClick = jest.fn();
-  render(<Button label="Click me" onClick={handleClick} />);
-  
-  const buttonElement = screen.getByText(/Click me/i);
-  fireEvent.click(buttonElement);
-
-  expect(handleClick).toHaveBeenCalledTimes(1);
-});
-*/

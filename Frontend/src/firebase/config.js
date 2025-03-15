@@ -2,27 +2,6 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
-// Earls
-/*const firebaseConfig = {
-  apiKey: "AIzaSyBmrHC7VtY3jeyE_NgvqwOOKP-8uhijcgY",
-  authDomain: "spokane-login.firebaseapp.com",
-  projectId: "spokane-login",
-  storageBucket: "spokane-login.firebasestorage.app",
-  messagingSenderId: "33643930536",
-  appId: "1:33643930536:web:7d479fb27c050904ce339d"
-};*/
-
-// Travis firebase
-/*const firebaseConfig = {
-  apiKey: "AIzaSyBH4OKWelcTHdgy4CTd-Q8AgewOsRVuAP4",
-  authDomain: "ieee-394dc.firebaseapp.com",
-  projectId: "ieee-394dc",
-  storageBucket: "ieee-394dc.firebasestorage.app",
-  messagingSenderId: "122697645580",
-  appId: "1:122697645580:web:d3ee0377ac385af09d7829",
-  measurementId: "G-GGH814GLWE"
-};*/
-
 // IEEE Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyAnO2tK-276urwxYfismE_FUP_lPXhZG4Q",
