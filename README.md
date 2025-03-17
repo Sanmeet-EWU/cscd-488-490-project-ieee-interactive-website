@@ -125,10 +125,10 @@ Note: Deployed website is on local host 3000. When running development server, p
 
 ### Backend
 
-1. Make sure you are on the right directory before running it:
+1. Make sure you have installed cloudinary before running it in the Backend directory:
 
 ```powershell
-cd ./Backend
+npm install cloudinary
 ```
 
 2. **Running server**:
