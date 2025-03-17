@@ -26,6 +26,7 @@ IEEE Spokane Section Interactive Website project developed in a modern, user-fri
 - Express
 - Firebase
 - MySQL Database
+- Prettier
 
 ## System Architecture
 
@@ -178,30 +179,35 @@ git checkout <branch-name>
 Or use VS code bottom left theres main, click and change it to your branch
 ```
 
-3. **Make Your Changes**: Push your changes to your forked repository
+3. **Formatting Code**: Please use Prettier to format all of the code before pushing your changes
+```powershell
+npx prettier --write .
+```
+
+4. **Make Your Changes**: Push your changes to your forked repository
 
 ```powershell
 git commit -m "<commit-message>"
 Or use VS code source
 ```
 
-4. **Push Your Changes**: Push your changes to your forked repository
+5. **Push Your Changes**: Push your changes to your forked repository
 
 ```powershell
 git push origin <branch-name> # name format for your branch: development_firstName_lastName
 Or use VS code source
 ```
 
-5. **Pulling Someones Branch**: Pull someones change to your branch
+6. **Pulling Someones Branch**: Pull someones change to your branch
 
 ```powershell
 git pull <branch-name>
 ```
 
-6. **Create a Pull Request**: Go to your forked repository on GitHub and create a new pull request from your branch.
+7. **Create a Pull Request**: Go to your forked repository on GitHub and create a new pull request from your branch.
 
 If the pull request is approved, it will be merged into the main codebase. Please ensure that your code passes your tests and works properly before submitting a pull request
 
-7. **Updating Website**: Create a pull request from your branch to main
+8. **Updating Website**: Create a pull request from your branch to main
 
 Merging changes to main will update the website. Please ensure that no errors occur before merging
